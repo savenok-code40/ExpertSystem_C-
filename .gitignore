@@ -1,0 +1,18 @@
+# Visual Studio files
+.vs/
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+*.suo
+*.user
+*.sln.docstates
+
+# NuGet packages
+*.nupkg
+**/packages/
+!**/packages/build/
+
+# Windows
+Thumbs.db
+Desktop.ini
