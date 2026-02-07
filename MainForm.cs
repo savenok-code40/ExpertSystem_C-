@@ -4,8 +4,7 @@ namespace ExpertBase_v1
 {
     public partial class MainForm : Form
     {
-        private DataBase dataBase = new DataBase(); // единый экземпляр базы данных 
-        private ModbusPollingService modbusPollingService;
+        private DataBase dataBase = new DataBase(); // единый экземпляр базы данных         
 
         // Конструктор класса
         public MainForm()
@@ -13,26 +12,9 @@ namespace ExpertBase_v1
             InitializeComponent();            
 
             factsControl1.InitializeDatabase(dataBase); // инициализирует экземпляр DataBase в FactsControl
-            rulesControl1.InitializeData(dataBase); // Инициализация RulesControl
-
-            InitializeModbusService();
-            modbusPollingService.StartPolling();
-        }
-
-        private void InitializeModbusService()
-        {
-            modbusPollingService = new ModbusPollingService(dataBase);
-            // Подписываемся на событие обновления данных, чтобы обновить UI
-            modbusPollingService.DataUpdated += PollingService_DataUpdated;
-        }
-
-        // Обработчик обновления UI (вызывается сервисом Modbus)
-        private void PollingService_DataUpdated(object sender, EventArgs e)
-        {
-            // Обновляем привязку данных на экране пользователя
-            //factsControl1.RefreshDataBinding();
-        }
-
+            rulesControl1.InitializeData(dataBase); // Инициализация RulesControl 
+        } 
+        
         // Обработчик пункта меню Загрузить
         private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -77,11 +59,9 @@ namespace ExpertBase_v1
 
         private void modbusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // При открытии формы настроек можно временно остановить фоновый опрос
-            modbusPollingService.StopPolling();
-            FormModbus settingsForm = new FormModbus();
-            settingsForm.ShowDialog();
-            modbusPollingService.StartPolling(); // Возобновляем опрос после закрытия формы
+            FormModbus modbusForm = new FormModbus(); // создаем форму модбас
+
+            modbusForm.ShowDialog(); // отображаем форму как диалог
         }
     }
 }
