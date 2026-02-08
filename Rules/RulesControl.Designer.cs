@@ -33,15 +33,23 @@
             dataGridRules = new DataGridView();
             btnDeleteRules = new Button();
             btnAddRules = new Button();
+            splitContainer1 = new SplitContainer();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dataGridRules).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // btnEditRules
             // 
             btnEditRules.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnEditRules.Location = new Point(1073, 75);
+            btnEditRules.Location = new Point(13, 38);
+            btnEditRules.Margin = new Padding(3, 2, 3, 2);
             btnEditRules.Name = "btnEditRules";
-            btnEditRules.Size = new Size(120, 30);
+            btnEditRules.Size = new Size(105, 22);
             btnEditRules.TabIndex = 14;
             btnEditRules.Text = "Редактировать";
             btnEditRules.UseVisualStyleBackColor = true;
@@ -50,7 +58,6 @@
             // dataGridRules
             // 
             dataGridRules.AllowUserToAddRows = false;
-            dataGridRules.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridRules.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridRules.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridRules.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -62,19 +69,22 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridRules.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridRules.Location = new Point(8, 3);
+            dataGridRules.Dock = DockStyle.Fill;
+            dataGridRules.Location = new Point(0, 0);
+            dataGridRules.Margin = new Padding(3, 2, 3, 2);
             dataGridRules.Name = "dataGridRules";
             dataGridRules.RowHeadersWidth = 51;
             dataGridRules.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridRules.Size = new Size(1050, 794);
+            dataGridRules.Size = new Size(915, 600);
             dataGridRules.TabIndex = 9;
             // 
             // btnDeleteRules
             // 
             btnDeleteRules.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnDeleteRules.Location = new Point(1073, 39);
+            btnDeleteRules.Location = new Point(13, 64);
+            btnDeleteRules.Margin = new Padding(3, 2, 3, 2);
             btnDeleteRules.Name = "btnDeleteRules";
-            btnDeleteRules.Size = new Size(120, 30);
+            btnDeleteRules.Size = new Size(105, 22);
             btnDeleteRules.TabIndex = 11;
             btnDeleteRules.Text = "Удалить";
             btnDeleteRules.UseVisualStyleBackColor = true;
@@ -83,26 +93,60 @@
             // btnAddRules
             // 
             btnAddRules.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAddRules.Location = new Point(1073, 3);
+            btnAddRules.Location = new Point(13, 12);
+            btnAddRules.Margin = new Padding(3, 2, 3, 2);
             btnAddRules.Name = "btnAddRules";
-            btnAddRules.Size = new Size(120, 30);
+            btnAddRules.Size = new Size(105, 22);
             btnAddRules.TabIndex = 10;
             btnAddRules.Text = "Добавить";
             btnAddRules.UseVisualStyleBackColor = true;
             btnAddRules.Click += btnAddRules_Click;
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.FixedPanel = FixedPanel.Panel2;
+            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(dataGridRules);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(flowLayoutPanel1);
+            splitContainer1.Size = new Size(1050, 600);
+            splitContainer1.SplitterDistance = 915;
+            splitContainer1.TabIndex = 15;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(btnAddRules);
+            flowLayoutPanel1.Controls.Add(btnEditRules);
+            flowLayoutPanel1.Controls.Add(btnDeleteRules);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Padding = new Padding(10);
+            flowLayoutPanel1.Size = new Size(131, 600);
+            flowLayoutPanel1.TabIndex = 0;
+            // 
             // RulesControl
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
-            Controls.Add(btnEditRules);
-            Controls.Add(dataGridRules);
-            Controls.Add(btnDeleteRules);
-            Controls.Add(btnAddRules);
+            Controls.Add(splitContainer1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "RulesControl";
-            Size = new Size(1200, 800);
+            Size = new Size(1050, 600);
             ((System.ComponentModel.ISupportInitialize)dataGridRules).EndInit();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -112,5 +156,7 @@
         private DataGridView dataGridRules;
         private Button btnDeleteRules;
         private Button btnAddRules;
+        private SplitContainer splitContainer1;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

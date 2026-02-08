@@ -37,8 +37,8 @@ namespace ExpertBase_v1
         public string FactUnit => cmbUnit.Text;
         public double Truth => (double)numTruth.Value;
 
-        // ?? проверяет левую часть: если результат == null, то берем значение Intermediate
-        public Fact.enTypeFact FactType => (Fact.enTypeFact?)cmbType.SelectedItem ?? Fact.enTypeFact.Intermediate; 
+        // ?? проверяет левую часть: если результат == null, то берем значение Internal
+        public Fact.enTypeFact FactType => (Fact.enTypeFact?)cmbType.SelectedItem ?? Fact.enTypeFact.Internal; 
         
         public Fact.enFunModbus FunModbus => (Fact.enFunModbus?)cmbModbusFun.SelectedItem ?? Fact.enFunModbus.ReadAO_03Fun;
         public int AddrReg => (int)numModbusReg.Value;

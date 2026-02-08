@@ -13,7 +13,7 @@ namespace ExpertBase_v1
         {
             Static,
             Dinamic_IN,
-            Intermediate,
+            Internal,
             Dinamic_OUT
         }
         // Перечисление функции Modbus
