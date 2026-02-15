@@ -1,0 +1,3 @@
+[submodule "AppModbus_C-"]
+	path = AppModbus_C-
+	url = https://github.com/savenok-code40/AppModbus_C-.git
