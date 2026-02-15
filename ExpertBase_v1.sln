@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertBase_v1", "ExpertBase_v1.csproj", "{FFCD936B-354E-488E-9739-136797433933}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppModbus", "..\AppModbus\AppModbus.csproj", "{BE860CF8-3AF5-4A42-9431-4B5E116EA3E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppModbus", "AppModbus_C-\AppModbus.csproj", "{971E7F93-C366-0655-0D28-5BA06D43F3D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{FFCD936B-354E-488E-9739-136797433933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFCD936B-354E-488E-9739-136797433933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFCD936B-354E-488E-9739-136797433933}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE860CF8-3AF5-4A42-9431-4B5E116EA3E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE860CF8-3AF5-4A42-9431-4B5E116EA3E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE860CF8-3AF5-4A42-9431-4B5E116EA3E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE860CF8-3AF5-4A42-9431-4B5E116EA3E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971E7F93-C366-0655-0D28-5BA06D43F3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971E7F93-C366-0655-0D28-5BA06D43F3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971E7F93-C366-0655-0D28-5BA06D43F3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971E7F93-C366-0655-0D28-5BA06D43F3D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

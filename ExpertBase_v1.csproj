@@ -9,8 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyModbusTCP" Version="5.6.0" />
-    <PackageReference Include="System.IO.Ports" Version="10.0.2" />
+    <Compile Remove="AppModbus_C-\**" />
+    <EmbeddedResource Remove="AppModbus_C-\**" />
+    <None Remove="AppModbus_C-\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="AppModbus_C-\AppModbus.csproj" />
   </ItemGroup>
 
 </Project>
