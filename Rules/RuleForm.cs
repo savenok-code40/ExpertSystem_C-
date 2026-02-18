@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace ExpertBase_v1.Правила
+namespace ExpertBase.Правила
 {
     public partial class RuleForm : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace ExpertBase_v1.Правила
+﻿namespace ExpertBase.Правила
 {
     partial class RuleForm
     {

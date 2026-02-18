@@ -1,4 +1,4 @@
-﻿namespace ExpertBase_v1
+﻿namespace ExpertBase
 {
     partial class FactsControl
     {

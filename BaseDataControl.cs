@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpertBase_v1
+namespace ExpertBase
 {
     // Абстрактный базовый класс для FactsControl и RulesControl
     // T - это тип данных (Fact или Rule)

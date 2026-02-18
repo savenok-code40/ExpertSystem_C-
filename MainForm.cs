@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
+using AppModbus;
 
-namespace ExpertBase_v1
+namespace ExpertBase
 {
     public partial class MainForm : Form
     {

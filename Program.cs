@@ -1,4 +1,4 @@
-﻿namespace ExpertBase_v1
+﻿namespace ExpertBase
 {
     internal static class Program
     {

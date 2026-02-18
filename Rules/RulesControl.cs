@@ -1,4 +1,4 @@
-﻿using ExpertBase_v1.Правила;
+﻿using ExpertBase.Правила;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ExpertBase_v1
+namespace ExpertBase
 {
     public partial class RulesControl : UserControl
     {
