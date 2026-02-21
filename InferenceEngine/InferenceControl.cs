@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ExpertBase.InferenceEngine
 {
-    public partial class InferenceEngineControl : UserControl
+    public partial class InferenceControl : UserControl
     {
-        public InferenceEngineControl()
+        public InferenceControl()
         {
             InitializeComponent();
         } 

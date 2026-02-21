@@ -36,23 +36,25 @@
             modbusToolStripMenuItem = new ToolStripMenuItem();
             помощьToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
-            tabControl2 = new TabControl();
+            tabControl_General = new TabControl();
+            tabPage1_Edit = new TabPage();
+            tabControl_Edit = new TabControl();
             tabPage3 = new TabPage();
             factsControl1 = new FactsControl();
             tabPage4 = new TabPage();
             rulesControl1 = new RulesControl();
             tabPage5 = new TabPage();
-            tabPage2 = new TabPage();
+            tabPage2_Work = new TabPage();
+            inferenceControl1 = new ExpertBase.InferenceEngine.InferenceControl();
             panel1 = new Panel();
             fileSystemWatcher1 = new FileSystemWatcher();
             menuStrip1.SuspendLayout();
-            tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
-            tabControl2.SuspendLayout();
+            tabControl_General.SuspendLayout();
+            tabPage1_Edit.SuspendLayout();
+            tabControl_Edit.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
+            tabPage2_Work.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
@@ -69,7 +71,7 @@
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { загрузитьToolStripMenuItem, сохранитьToolStripMenuItem });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { сохранитьToolStripMenuItem, загрузитьToolStripMenuItem });
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(48, 20);
             файлToolStripMenuItem.Text = "Файл";
@@ -84,8 +86,8 @@
             // сохранитьToolStripMenuItem
             // 
             сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            сохранитьToolStripMenuItem.Size = new Size(133, 22);
-            сохранитьToolStripMenuItem.Text = "Сохранить";
+            сохранитьToolStripMenuItem.Size = new Size(163, 22);
+            сохранитьToolStripMenuItem.Text = "Сохранить как...";
             сохранитьToolStripMenuItem.Click += сохранитьToolStripMenuItem_Click;
             // 
             // настройкиToolStripMenuItem
@@ -115,42 +117,42 @@
             оПрограммеToolStripMenuItem.Size = new Size(149, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
             // 
-            // tabControl1
+            // tabControl_General
             // 
-            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(10, 59);
-            tabControl1.Margin = new Padding(3, 2, 3, 2);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(962, 488);
-            tabControl1.TabIndex = 1;
+            tabControl_General.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl_General.Controls.Add(tabPage1_Edit);
+            tabControl_General.Controls.Add(tabPage2_Work);
+            tabControl_General.Location = new Point(10, 59);
+            tabControl_General.Margin = new Padding(3, 2, 3, 2);
+            tabControl_General.Name = "tabControl_General";
+            tabControl_General.SelectedIndex = 0;
+            tabControl_General.Size = new Size(962, 488);
+            tabControl_General.TabIndex = 1;
             // 
-            // tabPage1
+            // tabPage1_Edit
             // 
-            tabPage1.Controls.Add(tabControl2);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Margin = new Padding(3, 2, 3, 2);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 2, 3, 2);
-            tabPage1.Size = new Size(954, 460);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Редактирование";
-            tabPage1.UseVisualStyleBackColor = true;
+            tabPage1_Edit.Controls.Add(tabControl_Edit);
+            tabPage1_Edit.Location = new Point(4, 24);
+            tabPage1_Edit.Margin = new Padding(3, 2, 3, 2);
+            tabPage1_Edit.Name = "tabPage1_Edit";
+            tabPage1_Edit.Padding = new Padding(3, 2, 3, 2);
+            tabPage1_Edit.Size = new Size(954, 460);
+            tabPage1_Edit.TabIndex = 0;
+            tabPage1_Edit.Text = "Редактирование";
+            tabPage1_Edit.UseVisualStyleBackColor = true;
             // 
-            // tabControl2
+            // tabControl_Edit
             // 
-            tabControl2.Controls.Add(tabPage3);
-            tabControl2.Controls.Add(tabPage4);
-            tabControl2.Controls.Add(tabPage5);
-            tabControl2.Dock = DockStyle.Fill;
-            tabControl2.Location = new Point(3, 2);
-            tabControl2.Margin = new Padding(3, 2, 3, 2);
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(948, 456);
-            tabControl2.TabIndex = 0;
+            tabControl_Edit.Controls.Add(tabPage3);
+            tabControl_Edit.Controls.Add(tabPage4);
+            tabControl_Edit.Controls.Add(tabPage5);
+            tabControl_Edit.Dock = DockStyle.Fill;
+            tabControl_Edit.Location = new Point(3, 2);
+            tabControl_Edit.Margin = new Padding(3, 2, 3, 2);
+            tabControl_Edit.Name = "tabControl_Edit";
+            tabControl_Edit.SelectedIndex = 0;
+            tabControl_Edit.Size = new Size(948, 456);
+            tabControl_Edit.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -208,16 +210,25 @@
             tabPage5.Text = "Вопросы";
             tabPage5.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabPage2_Work
             // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(3, 2, 3, 2);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 2, 3, 2);
-            tabPage2.Size = new Size(954, 460);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Работа";
-            tabPage2.UseVisualStyleBackColor = true;
+            tabPage2_Work.Controls.Add(inferenceControl1);
+            tabPage2_Work.Location = new Point(4, 24);
+            tabPage2_Work.Margin = new Padding(0);
+            tabPage2_Work.Name = "tabPage2_Work";
+            tabPage2_Work.Size = new Size(954, 460);
+            tabPage2_Work.TabIndex = 1;
+            tabPage2_Work.Text = "Работа";
+            tabPage2_Work.UseVisualStyleBackColor = true;
+            // 
+            // inferenceControl1
+            // 
+            inferenceControl1.BackColor = SystemColors.ActiveCaption;
+            inferenceControl1.Dock = DockStyle.Fill;
+            inferenceControl1.Location = new Point(0, 0);
+            inferenceControl1.Name = "inferenceControl1";
+            inferenceControl1.Size = new Size(954, 460);
+            inferenceControl1.TabIndex = 0;
             // 
             // panel1
             // 
@@ -239,7 +250,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonFace;
             ClientSize = new Size(1034, 565);
-            Controls.Add(tabControl1);
+            Controls.Add(tabControl_General);
             Controls.Add(menuStrip1);
             Controls.Add(panel1);
             MainMenuStrip = menuStrip1;
@@ -248,11 +259,12 @@
             Text = "Экспертная база системы вентиляции";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabControl2.ResumeLayout(false);
+            tabControl_General.ResumeLayout(false);
+            tabPage1_Edit.ResumeLayout(false);
+            tabControl_Edit.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
+            tabPage2_Work.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -267,10 +279,10 @@
         private ToolStripMenuItem настройкиToolStripMenuItem;
         private ToolStripMenuItem помощьToolStripMenuItem;
         private ToolStripMenuItem оПрограммеToolStripMenuItem;
-        private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
-        private TabControl tabControl2;
+        private TabControl tabControl_General;
+        private TabPage tabPage1_Edit;
+        private TabPage tabPage2_Work;
+        private TabControl tabControl_Edit;
         private TabPage tabPage3;
         private TabPage tabPage4;
         private TabPage tabPage5;
@@ -279,5 +291,6 @@
         private FactsControl factsControl1;
         private RulesControl rulesControl1;
         private ToolStripMenuItem modbusToolStripMenuItem;
+        private InferenceEngine.InferenceControl inferenceControl1;
     }
 }
