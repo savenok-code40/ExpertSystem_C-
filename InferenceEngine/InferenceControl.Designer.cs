@@ -53,7 +53,7 @@
             // btnCheckTarget
             // 
             btnCheckTarget.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCheckTarget.Location = new Point(336, 8);
+            btnCheckTarget.Location = new Point(3, 37);
             btnCheckTarget.Name = "btnCheckTarget";
             btnCheckTarget.Size = new Size(164, 37);
             btnCheckTarget.TabIndex = 0;
@@ -85,7 +85,7 @@
             listBoxFactsInit.ItemHeight = 15;
             listBoxFactsInit.Location = new Point(3, 169);
             listBoxFactsInit.Name = "listBoxFactsInit";
-            listBoxFactsInit.Size = new Size(506, 193);
+            listBoxFactsInit.Size = new Size(458, 123);
             listBoxFactsInit.TabIndex = 3;
             // 
             // lbFactsInit
@@ -94,7 +94,7 @@
             lbFactsInit.AutoSize = true;
             lbFactsInit.Location = new Point(3, 151);
             lbFactsInit.Name = "lbFactsInit";
-            lbFactsInit.Size = new Size(133, 15);
+            lbFactsInit.Size = new Size(131, 15);
             lbFactsInit.TabIndex = 4;
             lbFactsInit.Text = "База исходных фактов:";
             // 
@@ -102,7 +102,7 @@
             // 
             lbFactsWork.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lbFactsWork.AutoSize = true;
-            lbFactsWork.Location = new Point(3, 380);
+            lbFactsWork.Location = new Point(3, 310);
             lbFactsWork.Name = "lbFactsWork";
             lbFactsWork.Size = new Size(147, 15);
             lbFactsWork.TabIndex = 6;
@@ -113,9 +113,9 @@
             listBoxFactsWork.Dock = DockStyle.Fill;
             listBoxFactsWork.FormattingEnabled = true;
             listBoxFactsWork.ItemHeight = 15;
-            listBoxFactsWork.Location = new Point(3, 398);
+            listBoxFactsWork.Location = new Point(3, 328);
             listBoxFactsWork.Name = "listBoxFactsWork";
-            listBoxFactsWork.Size = new Size(506, 194);
+            listBoxFactsWork.Size = new Size(458, 124);
             listBoxFactsWork.TabIndex = 5;
             // 
             // ritchBoxOutputChain
@@ -124,7 +124,7 @@
             ritchBoxOutputChain.Location = new Point(3, 33);
             ritchBoxOutputChain.Name = "ritchBoxOutputChain";
             ritchBoxOutputChain.ScrollBars = RichTextBoxScrollBars.Vertical;
-            ritchBoxOutputChain.Size = new Size(518, 559);
+            ritchBoxOutputChain.Size = new Size(470, 419);
             ritchBoxOutputChain.TabIndex = 7;
             ritchBoxOutputChain.Text = "";
             // 
@@ -135,7 +135,7 @@
             lbOutputChain.Location = new Point(3, 0);
             lbOutputChain.Name = "lbOutputChain";
             lbOutputChain.Padding = new Padding(8);
-            lbOutputChain.Size = new Size(518, 30);
+            lbOutputChain.Size = new Size(470, 30);
             lbOutputChain.TabIndex = 8;
             lbOutputChain.Text = "Цепочка вывода:";
             // 
@@ -143,7 +143,6 @@
             // 
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 0);
-            splitContainer1.MinimumSize = new Size(1050, 600);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -155,8 +154,8 @@
             // 
             splitContainer1.Panel2.Controls.Add(tableLayoutPanel1);
             splitContainer1.Panel2.Padding = new Padding(0, 0, 5, 5);
-            splitContainer1.Size = new Size(1050, 600);
-            splitContainer1.SplitterDistance = 517;
+            splitContainer1.Size = new Size(954, 460);
+            splitContainer1.SplitterDistance = 469;
             splitContainer1.TabIndex = 9;
             // 
             // tableLayoutPanel2
@@ -179,7 +178,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(512, 595);
+            tableLayoutPanel2.Size = new Size(464, 455);
             tableLayoutPanel2.TabIndex = 7;
             // 
             // flowLayoutPanel1
@@ -190,7 +189,7 @@
             flowLayoutPanel1.Location = new Point(3, 33);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(0, 5, 0, 0);
-            flowLayoutPanel1.Size = new Size(506, 100);
+            flowLayoutPanel1.Size = new Size(458, 100);
             flowLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -206,7 +205,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(524, 595);
+            tableLayoutPanel1.Size = new Size(476, 455);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // InferenceControl
@@ -216,7 +215,7 @@
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(splitContainer1);
             Name = "InferenceControl";
-            Size = new Size(1050, 600);
+            Size = new Size(954, 460);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();

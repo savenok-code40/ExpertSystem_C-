@@ -30,8 +30,8 @@
         {
             menuStrip1 = new MenuStrip();
             файлToolStripMenuItem = new ToolStripMenuItem();
-            загрузитьToolStripMenuItem = new ToolStripMenuItem();
             сохранитьToolStripMenuItem = new ToolStripMenuItem();
+            загрузитьToolStripMenuItem = new ToolStripMenuItem();
             настройкиToolStripMenuItem = new ToolStripMenuItem();
             modbusToolStripMenuItem = new ToolStripMenuItem();
             помощьToolStripMenuItem = new ToolStripMenuItem();
@@ -76,19 +76,19 @@
             файлToolStripMenuItem.Size = new Size(48, 20);
             файлToolStripMenuItem.Text = "Файл";
             // 
-            // загрузитьToolStripMenuItem
-            // 
-            загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            загрузитьToolStripMenuItem.Size = new Size(133, 22);
-            загрузитьToolStripMenuItem.Text = "Загрузить";
-            загрузитьToolStripMenuItem.Click += загрузитьToolStripMenuItem_Click;
-            // 
             // сохранитьToolStripMenuItem
             // 
             сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            сохранитьToolStripMenuItem.Size = new Size(163, 22);
+            сохранитьToolStripMenuItem.Size = new Size(162, 22);
             сохранитьToolStripMenuItem.Text = "Сохранить как...";
             сохранитьToolStripMenuItem.Click += сохранитьToolStripMenuItem_Click;
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            загрузитьToolStripMenuItem.Size = new Size(162, 22);
+            загрузитьToolStripMenuItem.Text = "Загрузить";
+            загрузитьToolStripMenuItem.Click += загрузитьToolStripMenuItem_Click;
             // 
             // настройкиToolStripMenuItem
             // 
