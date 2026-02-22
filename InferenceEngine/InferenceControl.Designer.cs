@@ -88,6 +88,7 @@
             listBoxFactsInit.Name = "listBoxFactsInit";
             listBoxFactsInit.Size = new Size(458, 123);
             listBoxFactsInit.TabIndex = 3;
+            listBoxFactsInit.MouseDoubleClick += listBoxFactsInit_MouseDoubleClick;
             // 
             // lbFactsInit
             // 
@@ -118,6 +119,7 @@
             listBoxFactsWork.Name = "listBoxFactsWork";
             listBoxFactsWork.Size = new Size(458, 124);
             listBoxFactsWork.TabIndex = 5;
+            listBoxFactsWork.MouseDoubleClick += listBoxFactsWork_MouseDoubleClick;
             // 
             // ritchBoxOutputChain
             // 

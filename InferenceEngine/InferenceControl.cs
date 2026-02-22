@@ -33,20 +33,21 @@ namespace ExpertBase.InferenceEngine
                 MessageBox.Show($"Проверяем цель: {selectedFact.ToString()}");
             }
 
-                DateTime startTime = DateTime.Now;
+            DateTime startTime = DateTime.Now;
             ritchBoxOutputChain.Clear();
-            StringBuilder sb = new StringBuilder();                 
+            StringBuilder sb = new StringBuilder();
         }
 
         public void UpdateFacts(Dictionary<int, Fact> facts)
         {
+            // Обновляем комбо бокс
             cmbChooseTarget.Items.Clear(); // очищаем комбобокс
 
             foreach (Fact f in facts.Values)
             {
-                if(f.Type == Fact.enTypeFact.Dinamic_OUT)
+                if (f.Type == Fact.enTypeFact.Dinamic_OUT)
                 {
-                    cmbChooseTarget.Items.Add(f);    
+                    cmbChooseTarget.Items.Add(f);
                 }
             }
 
@@ -54,6 +55,40 @@ namespace ExpertBase.InferenceEngine
             {
                 cmbChooseTarget.SelectedIndex = 0;
             }
+
+            // Обновляем ListBox исходных фактов
+            listBoxFactsInit.Items.Clear(); // очищаем
+
+            foreach (Fact f in facts.Values)
+            {
+                if (f.Type == Fact.enTypeFact.Static || f.Type == Fact.enTypeFact.Dinamic_IN)
+                {
+                    listBoxFactsInit.Items.Add(f);
+                }
+            }
         }
+
+        // Двойной клик по факту в поле Исходные добавляет факт в рабочую память и удаляет из исходных
+        private void listBoxFactsInit_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBoxFactsInit.SelectedIndex >= 0)
+            {
+                listBoxFactsWork.Items.Add(listBoxFactsInit.Items[listBoxFactsInit.SelectedIndex]); // добавить в рабочую память
+                listBoxFactsInit.Items.Remove(listBoxFactsInit.Items[listBoxFactsInit.SelectedIndex]); // удалить из исходных
+            }
+        }
+
+        // Обратное действие - из рабочей памяти в список исходные
+        private void listBoxFactsWork_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if(listBoxFactsWork.SelectedIndex >= 0)
+            {
+                listBoxFactsInit.Items.Add(listBoxFactsWork.Items[listBoxFactsWork.SelectedIndex]); // добавить в исходные
+                listBoxFactsWork.Items.Remove(listBoxFactsWork.Items[listBoxFactsWork.SelectedIndex]); // удалить из рабочей памяти
+            }
+
+        }
+
+        
     }
 }

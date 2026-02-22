@@ -23,6 +23,9 @@ namespace ExpertBase
 
             sb.AppendLine("--- Начало прямого вывода ---");
 
+
+
+
             sb.AppendLine("\n--- Поиск завершен ---\n");
 
             if (achievedTarget)
