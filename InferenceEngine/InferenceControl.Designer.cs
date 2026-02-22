@@ -53,19 +53,20 @@
             // btnCheckTarget
             // 
             btnCheckTarget.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCheckTarget.Location = new Point(3, 37);
+            btnCheckTarget.Location = new Point(289, 8);
             btnCheckTarget.Name = "btnCheckTarget";
             btnCheckTarget.Size = new Size(164, 37);
             btnCheckTarget.TabIndex = 0;
             btnCheckTarget.Text = "Проверить цель";
             btnCheckTarget.UseVisualStyleBackColor = true;
+            btnCheckTarget.Click += btnCheckTarget_Click;
             // 
             // cmbChooseTarget
             // 
             cmbChooseTarget.FormattingEnabled = true;
             cmbChooseTarget.Location = new Point(3, 8);
             cmbChooseTarget.Name = "cmbChooseTarget";
-            cmbChooseTarget.Size = new Size(327, 23);
+            cmbChooseTarget.Size = new Size(280, 23);
             cmbChooseTarget.TabIndex = 1;
             // 
             // lbChooseBox

@@ -35,6 +35,8 @@ namespace ExpertBase
                     // Обновляем таблицу правил в FactsControl
                     rulesControl1.RefreshDataBinding();
 
+                    // Обновляем InfernceControl
+
                     MessageBox.Show("База данных успешно загружена.");
                 }
             }
