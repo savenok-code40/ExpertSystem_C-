@@ -27,8 +27,13 @@ namespace ExpertBase.InferenceEngine
                 MessageBox.Show("Пожалуйста, выберите целевой факт.");
                 return;
             }
+            else
+            {
+                Fact selectedFact = (Fact)cmbChooseTarget.SelectedItem;
+                MessageBox.Show($"Проверяем цель: {selectedFact.ToString()}");
+            }
 
-            DateTime startTime = DateTime.Now;
+                DateTime startTime = DateTime.Now;
             ritchBoxOutputChain.Clear();
             StringBuilder sb = new StringBuilder();                 
         }

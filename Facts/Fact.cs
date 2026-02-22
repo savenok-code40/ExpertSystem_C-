@@ -60,9 +60,8 @@ namespace ExpertBase
 
         // переопределяем метод ToString - вывод объекта типа Факт
         public override string ToString()
-        {
-            //return $"{Group}_{Unit}_{Atribute}_{Value}_{Type}";
-            return $"{Group}.{Unit}.{Atribute}.{Value}.{Type}";
+        {            
+            return $"{Group}.{Unit}.{Atribute}.{Value}"; //.{Type}
         }
 
         // переопределяем метод Equals - сравнения объектов типа Факт

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using AppModbus;
+using ExpertBase.InferenceEngine;
 
 namespace ExpertBase
 {
@@ -36,6 +37,7 @@ namespace ExpertBase
                     rulesControl1.RefreshDataBinding();
 
                     // Обновляем InfernceControl
+                    inferenceControl1.UpdateFacts(dataBase.dictionaryFacts);
 
                     MessageBox.Show("База данных успешно загружена.");
                 }
