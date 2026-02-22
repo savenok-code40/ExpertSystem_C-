@@ -12,13 +12,20 @@ namespace ExpertBase.InferenceEngine
 {
     public partial class InferenceControl : UserControl
     {
-        //DataBase db = new DataBase();   
+        DataBase db = new DataBase();   
 
         public InferenceControl()
         {
             InitializeComponent();
         }
 
+        // Метод получения базы знаний. Вызываю в коде главной формы
+        public void InitializeDataBase(DataBase db)
+        {
+            this.db = db;   
+        }
+
+        // Кнопка запуска прямого вывода
         private void btnCheckTarget_Click(object sender, EventArgs e)
         {
             // 1. Проверка и подготовка данных
@@ -36,6 +43,9 @@ namespace ExpertBase.InferenceEngine
             DateTime startTime = DateTime.Now;
             ritchBoxOutputChain.Clear();
             StringBuilder sb = new StringBuilder();
+
+            // 2. Запуск прямого вывода
+            ForwardChain forwardChain = new ForwardChain(db);
         }
 
         public void UpdateFacts(Dictionary<int, Fact> facts)

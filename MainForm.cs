@@ -13,8 +13,9 @@ namespace ExpertBase
         {
             InitializeComponent();            
 
-            factsControl1.InitializeDatabase(dataBase); // инициализирует экземпляр DataBase в FactsControl
-            rulesControl1.InitializeData(dataBase); // Инициализация RulesControl 
+            factsControl1.InitializeDatabase(dataBase); // factsControl1 получает ссылку на загруженную базу
+            rulesControl1.InitializeData(dataBase); // тоже rulesControl1
+            inferenceControl1.InitializeDataBase(dataBase); // и inferenceControl1
         } 
         
         // Обработчик пункта меню Загрузить
