@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnClearConclusion = new Button();
+            btnClearPremise = new Button();
+            label1 = new Label();
             btnCancel = new Button();
             cmbValue = new ComboBox();
             labelValue = new Label();
@@ -38,30 +41,35 @@
             labelAtribute = new Label();
             labelUnit = new Label();
             labelObject = new Label();
-            btnAddConsequence = new Button();
-            richBoxConsequence = new RichTextBox();
-            labelConsequence = new Label();
+            richBoxConclusion = new RichTextBox();
+            labelConclusion = new Label();
             btnEqual = new Button();
             btnLess = new Button();
             btnMore = new Button();
             btnNot = new Button();
             btnOr = new Button();
             btnAnd = new Button();
-            btnAddCondition = new Button();
+            panel2 = new Panel();
+            btnAddConclusion = new Button();
+            btnAddPremises = new Button();
             richBoxCondition = new RichTextBox();
             numTruth = new NumericUpDown();
             textBoxDescription = new TextBox();
             btnOkRule = new Button();
             labelFact = new Label();
-            labelCondition = new Label();
+            labelPremise = new Label();
             labelTruth = new Label();
             labelDescription = new Label();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numTruth).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnClearConclusion);
+            panel1.Controls.Add(btnClearPremise);
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnCancel);
             panel1.Controls.Add(cmbValue);
             panel1.Controls.Add(labelValue);
@@ -71,36 +79,66 @@
             panel1.Controls.Add(labelAtribute);
             panel1.Controls.Add(labelUnit);
             panel1.Controls.Add(labelObject);
-            panel1.Controls.Add(btnAddConsequence);
-            panel1.Controls.Add(richBoxConsequence);
-            panel1.Controls.Add(labelConsequence);
+            panel1.Controls.Add(richBoxConclusion);
+            panel1.Controls.Add(labelConclusion);
             panel1.Controls.Add(btnEqual);
             panel1.Controls.Add(btnLess);
             panel1.Controls.Add(btnMore);
             panel1.Controls.Add(btnNot);
             panel1.Controls.Add(btnOr);
             panel1.Controls.Add(btnAnd);
-            panel1.Controls.Add(btnAddCondition);
+            panel1.Controls.Add(panel2);
             panel1.Controls.Add(richBoxCondition);
             panel1.Controls.Add(numTruth);
             panel1.Controls.Add(textBoxDescription);
             panel1.Controls.Add(btnOkRule);
             panel1.Controls.Add(labelFact);
-            panel1.Controls.Add(labelCondition);
+            panel1.Controls.Add(labelPremise);
             panel1.Controls.Add(labelTruth);
             panel1.Controls.Add(labelDescription);
             panel1.Location = new Point(10, 9);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(665, 548);
+            panel1.Size = new Size(660, 641);
             panel1.TabIndex = 3;
+            // 
+            // btnClearConclusion
+            // 
+            btnClearConclusion.Location = new Point(544, 314);
+            btnClearConclusion.Margin = new Padding(3, 2, 3, 2);
+            btnClearConclusion.Name = "btnClearConclusion";
+            btnClearConclusion.Size = new Size(100, 30);
+            btnClearConclusion.TabIndex = 41;
+            btnClearConclusion.Text = "Очистить";
+            btnClearConclusion.UseVisualStyleBackColor = true;
+            btnClearConclusion.Click += btnClearConclusion_Click;
+            // 
+            // btnClearPremise
+            // 
+            btnClearPremise.Location = new Point(542, 211);
+            btnClearPremise.Margin = new Padding(3, 2, 3, 2);
+            btnClearPremise.Name = "btnClearPremise";
+            btnClearPremise.Size = new Size(100, 30);
+            btnClearPremise.TabIndex = 29;
+            btnClearPremise.Text = "Очистить";
+            btnClearPremise.UseVisualStyleBackColor = true;
+            btnClearPremise.Click += btnClearPremise_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(424, 374);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 15);
+            label1.TabIndex = 40;
+            label1.Text = "Добавить факт:";
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(542, 278);
+            btnCancel.Location = new Point(353, 573);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(105, 22);
+            btnCancel.Size = new Size(105, 45);
             btnCancel.TabIndex = 38;
             btnCancel.Text = "Закрыть";
             btnCancel.UseVisualStyleBackColor = true;
@@ -109,7 +147,7 @@
             // cmbValue
             // 
             cmbValue.FormattingEnabled = true;
-            cmbValue.Location = new Point(13, 484);
+            cmbValue.Location = new Point(13, 526);
             cmbValue.Margin = new Padding(3, 2, 3, 2);
             cmbValue.Name = "cmbValue";
             cmbValue.Size = new Size(391, 23);
@@ -118,7 +156,7 @@
             // labelValue
             // 
             labelValue.AutoSize = true;
-            labelValue.Location = new Point(13, 467);
+            labelValue.Location = new Point(13, 509);
             labelValue.Name = "labelValue";
             labelValue.Size = new Size(63, 15);
             labelValue.TabIndex = 36;
@@ -127,7 +165,7 @@
             // cmbAttribute
             // 
             cmbAttribute.FormattingEnabled = true;
-            cmbAttribute.Location = new Point(12, 439);
+            cmbAttribute.Location = new Point(12, 481);
             cmbAttribute.Margin = new Padding(3, 2, 3, 2);
             cmbAttribute.Name = "cmbAttribute";
             cmbAttribute.Size = new Size(391, 23);
@@ -136,7 +174,7 @@
             // cmbUnit
             // 
             cmbUnit.FormattingEnabled = true;
-            cmbUnit.Location = new Point(12, 394);
+            cmbUnit.Location = new Point(12, 436);
             cmbUnit.Margin = new Padding(3, 2, 3, 2);
             cmbUnit.Name = "cmbUnit";
             cmbUnit.Size = new Size(391, 23);
@@ -145,7 +183,7 @@
             // cmbObject
             // 
             cmbObject.FormattingEnabled = true;
-            cmbObject.Location = new Point(12, 349);
+            cmbObject.Location = new Point(12, 391);
             cmbObject.Margin = new Padding(3, 2, 3, 2);
             cmbObject.Name = "cmbObject";
             cmbObject.Size = new Size(391, 23);
@@ -154,7 +192,7 @@
             // labelAtribute
             // 
             labelAtribute.AutoSize = true;
-            labelAtribute.Location = new Point(12, 422);
+            labelAtribute.Location = new Point(12, 464);
             labelAtribute.Name = "labelAtribute";
             labelAtribute.Size = new Size(55, 15);
             labelAtribute.TabIndex = 34;
@@ -163,7 +201,7 @@
             // labelUnit
             // 
             labelUnit.AutoSize = true;
-            labelUnit.Location = new Point(12, 376);
+            labelUnit.Location = new Point(12, 418);
             labelUnit.Name = "labelUnit";
             labelUnit.Size = new Size(35, 15);
             labelUnit.TabIndex = 31;
@@ -172,40 +210,30 @@
             // labelObject
             // 
             labelObject.AutoSize = true;
-            labelObject.Location = new Point(12, 332);
+            labelObject.Location = new Point(12, 374);
             labelObject.Name = "labelObject";
             labelObject.Size = new Size(50, 15);
             labelObject.TabIndex = 29;
             labelObject.Text = "Объект:";
             // 
-            // btnAddConsequence
+            // richBoxConclusion
             // 
-            btnAddConsequence.Location = new Point(424, 410);
-            btnAddConsequence.Margin = new Padding(3, 2, 3, 2);
-            btnAddConsequence.Name = "btnAddConsequence";
-            btnAddConsequence.Size = new Size(114, 39);
-            btnAddConsequence.TabIndex = 28;
-            btnAddConsequence.Text = "Заключение";
-            btnAddConsequence.UseVisualStyleBackColor = true;
-            btnAddConsequence.Click += btnAddConsequence_Click;
+            richBoxConclusion.Location = new Point(12, 283);
+            richBoxConclusion.Margin = new Padding(3, 2, 3, 2);
+            richBoxConclusion.Name = "richBoxConclusion";
+            richBoxConclusion.ReadOnly = true;
+            richBoxConclusion.Size = new Size(526, 61);
+            richBoxConclusion.TabIndex = 27;
+            richBoxConclusion.Text = "";
             // 
-            // richBoxConsequence
+            // labelConclusion
             // 
-            richBoxConsequence.Location = new Point(12, 241);
-            richBoxConsequence.Margin = new Padding(3, 2, 3, 2);
-            richBoxConsequence.Name = "richBoxConsequence";
-            richBoxConsequence.Size = new Size(526, 61);
-            richBoxConsequence.TabIndex = 27;
-            richBoxConsequence.Text = "";
-            // 
-            // labelConsequence
-            // 
-            labelConsequence.AutoSize = true;
-            labelConsequence.Location = new Point(12, 224);
-            labelConsequence.Name = "labelConsequence";
-            labelConsequence.Size = new Size(79, 15);
-            labelConsequence.TabIndex = 26;
-            labelConsequence.Text = "Заключение:";
+            labelConclusion.AutoSize = true;
+            labelConclusion.Location = new Point(12, 266);
+            labelConclusion.Name = "labelConclusion";
+            labelConclusion.Size = new Size(79, 15);
+            labelConclusion.TabIndex = 26;
+            labelConclusion.Text = "Заключение:";
             // 
             // btnEqual
             // 
@@ -273,23 +301,44 @@
             btnAnd.UseVisualStyleBackColor = true;
             btnAnd.Click += btnAnd_Click;
             // 
-            // btnAddCondition
+            // panel2
             // 
-            btnAddCondition.Location = new Point(424, 349);
-            btnAddCondition.Margin = new Padding(3, 2, 3, 2);
-            btnAddCondition.Name = "btnAddCondition";
-            btnAddCondition.Size = new Size(114, 39);
-            btnAddCondition.TabIndex = 19;
-            btnAddCondition.Text = "Посылка";
-            btnAddCondition.UseVisualStyleBackColor = true;
-            btnAddCondition.Click += btnAddCondition_Click;
+            panel2.Controls.Add(btnAddConclusion);
+            panel2.Controls.Add(btnAddPremises);
+            panel2.Location = new Point(424, 391);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(228, 113);
+            panel2.TabIndex = 39;
+            // 
+            // btnAddConclusion
+            // 
+            btnAddConclusion.Location = new Point(70, 64);
+            btnAddConclusion.Margin = new Padding(3, 2, 3, 2);
+            btnAddConclusion.Name = "btnAddConclusion";
+            btnAddConclusion.Size = new Size(100, 30);
+            btnAddConclusion.TabIndex = 28;
+            btnAddConclusion.Text = "Заключение";
+            btnAddConclusion.UseVisualStyleBackColor = true;
+            btnAddConclusion.Click += btnAddConsequence_Click;
+            // 
+            // btnAddPremises
+            // 
+            btnAddPremises.Location = new Point(70, 18);
+            btnAddPremises.Margin = new Padding(3, 2, 3, 2);
+            btnAddPremises.Name = "btnAddPremises";
+            btnAddPremises.Size = new Size(100, 30);
+            btnAddPremises.TabIndex = 19;
+            btnAddPremises.Text = "Посылка";
+            btnAddPremises.UseVisualStyleBackColor = true;
+            btnAddPremises.Click += btnAddCondition_Click;
             // 
             // richBoxCondition
             // 
             richBoxCondition.Location = new Point(12, 112);
             richBoxCondition.Margin = new Padding(3, 2, 3, 2);
             richBoxCondition.Name = "richBoxCondition";
-            richBoxCondition.Size = new Size(526, 106);
+            richBoxCondition.ReadOnly = true;
+            richBoxCondition.Size = new Size(520, 140);
             richBoxCondition.TabIndex = 18;
             richBoxCondition.Text = "";
             // 
@@ -311,32 +360,32 @@
             // 
             // btnOkRule
             // 
-            btnOkRule.Location = new Point(542, 239);
+            btnOkRule.Location = new Point(211, 573);
             btnOkRule.Margin = new Padding(3, 2, 3, 2);
             btnOkRule.Name = "btnOkRule";
-            btnOkRule.Size = new Size(105, 22);
+            btnOkRule.Size = new Size(105, 45);
             btnOkRule.TabIndex = 13;
-            btnOkRule.Text = "Сохранить";
+            btnOkRule.Text = "Сохранить праило";
             btnOkRule.UseVisualStyleBackColor = true;
             btnOkRule.Click += btnOkRule_Click;
             // 
             // labelFact
             // 
             labelFact.AutoSize = true;
-            labelFact.Location = new Point(12, 310);
+            labelFact.Location = new Point(12, 352);
             labelFact.Name = "labelFact";
             labelFact.Size = new Size(36, 15);
             labelFact.TabIndex = 12;
             labelFact.Text = "Факт:";
             // 
-            // labelCondition
+            // labelPremise
             // 
-            labelCondition.AutoSize = true;
-            labelCondition.Location = new Point(12, 94);
-            labelCondition.Name = "labelCondition";
-            labelCondition.Size = new Size(60, 15);
-            labelCondition.TabIndex = 5;
-            labelCondition.Text = "Посылка:";
+            labelPremise.AutoSize = true;
+            labelPremise.Location = new Point(12, 94);
+            labelPremise.Name = "labelPremise";
+            labelPremise.Size = new Size(60, 15);
+            labelPremise.TabIndex = 5;
+            labelPremise.Text = "Посылка:";
             // 
             // labelTruth
             // 
@@ -360,13 +409,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 565);
+            ClientSize = new Size(684, 661);
             Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "RuleForm";
             Text = "Добавление правил";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numTruth).EndInit();
             ResumeLayout(false);
         }
@@ -376,22 +426,22 @@
         private Panel panel1;
         private Button btnOkRule;
         private Label labelFact;
-        private Label labelCondition;
+        private Label labelPremise;
         private Label labelTruth;
         private Label labelDescription;
         private NumericUpDown numTruth;
         private TextBox textBoxDescription;
         private Button btnAnd;
-        private Button btnAddCondition;
+        private Button btnAddPremises;
         private RichTextBox richBoxCondition;
         private Button btnEqual;
         private Button btnLess;
         private Button btnMore;
         private Button btnNot;
         private Button btnOr;
-        private RichTextBox richBoxConsequence;
-        private Label labelConsequence;
-        private Button btnAddConsequence;
+        private RichTextBox richBoxConclusion;
+        private Label labelConclusion;
+        private Button btnAddConclusion;
         private ComboBox cmbAttribute;
         private ComboBox cmbUnit;
         private ComboBox cmbObject;
@@ -401,5 +451,9 @@
         private Label labelValue;
         private ComboBox cmbValue;
         private Button btnCancel;
+        private Panel panel2;
+        private Button btnClearPremise;
+        private Label label1;
+        private Button btnClearConclusion;
     }
 }

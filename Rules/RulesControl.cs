@@ -24,14 +24,14 @@ namespace ExpertBase
             InitializeComponent();
         }
 
-        // Вызываем в MainForm, после создания контрола правил
+        //Метод вызываем в MainForm, после создания контрола правил
         public void InitializeData(DataBase db)
         {
             dataBaseRC = db; //получаем ссылку на базу из MainForm 
             SetupDataGridRules(); // аналогично как для фактов заполняем DataGrid
         }
 
-        // Заполняем таблицу DataGrid правилами
+        //Метод заполняет таблицу DataGrid правилами
         private void SetupDataGridRules()
         {            
             rulesList = new BindingList<Rule>(dataBaseRC.dictionaryRules.Values.ToList()); // Инициализируем BindingList из текущего списка правил в БД (словаре)
@@ -56,7 +56,7 @@ namespace ExpertBase
             }    
         }
 
-        // Обработчик кнопки Добавить правило
+        // Кнопка - Добавить правило
         private void btnAddRules_Click(object sender, EventArgs e)
         {
             // Получаем списки для автозаполнения ComboBox из текущих фактов, хранящихся в базе
@@ -65,20 +65,21 @@ namespace ExpertBase
             var attributes = dataBaseRC.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
             var values = dataBaseRC.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
 
-            // Создаем экземпляр RuleForm с конструктором без параметров (Fix CS1729)
+            // Создаем экземпляр RuleForm с конструктором без параметров
             using (var ruleForm = new RuleForm())
             {
+                ruleForm.InitializeData(dataBaseRC); // передаем базу в форму
+
                 // Вызываем новый метод для передачи подсказок
                 ruleForm.LoadSuggestionsForRules(objects, units, attributes, values);
 
                 if (ruleForm.ShowDialog() == DialogResult.OK)
-                {
-                    // Используем публичные свойства-геттеры (Fix CS1061)
+                {                   
                     var newRule = new Rule
                     {
                         Description = ruleForm.RuleDescription,
-                        Condition = ruleForm.RuleCondition,
-                        Consequence = ruleForm.RuleConsequence,
+                        listPremise = new List<Fact>(ruleForm.listCurrentPremises),
+                        listConclusion = new List<Fact>(ruleForm.listCurrentConclusions),
                         Truth = ruleForm.RuleTruth
                     };
 
@@ -88,7 +89,48 @@ namespace ExpertBase
             }
         }
 
-        // Обработчик кнопки УДАЛИТЬ ПРАВИЛО
+        // Кнопка - РЕДАКТИРОВАТЬ ПРАВИЛО
+        private void btnEditRules_Click(object sender, EventArgs e)
+        {
+            if (dataGridRules.SelectedRows.Count == 0 || dataGridRules.CurrentRow.DataBoundItem is not Rule selectedRule)
+            {
+                MessageBox.Show("Пожалуйста, выберите правило для редактирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var objects = dataBaseRC.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
+            var units = dataBaseRC.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
+            var attributes = dataBaseRC.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
+            var values = dataBaseRC.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
+
+            using (var editForm = new RuleForm())
+            {
+                editForm.InitializeData(dataBaseRC); // передаем базу в форму
+
+                editForm.LoadSuggestionsForRules(objects, units, attributes, values);
+                editForm.LoadRuleData(selectedRule); // Загружаем данные в форму для редактирования
+
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    // 1. Обновляем простые поля
+                    selectedRule.Description = editForm.RuleDescription;
+                    selectedRule.Truth = editForm.RuleTruth;
+
+                    // 2. ОБНОВЛЯЕМ СПИСКИ ОБЪЕКТОВ (Вместо strPremise и strConclusion)
+                    // Мы очищаем текущие списки правила и копируем в них то, что насобирали в форме
+                    selectedRule.listPremise.Clear();
+                    selectedRule.listPremise.AddRange(editForm.listCurrentPremises);
+
+                    selectedRule.listConclusion.Clear();
+                    selectedRule.listConclusion.AddRange(editForm.listCurrentConclusions);
+
+                    // Обновляем UI
+                    rulesList.ResetBindings(); 
+                }
+            }
+        }
+
+        // Кнопка - УДАЛИТЬ ПРАВИЛО
         private void btnDeleteRules_Click(object sender, EventArgs e)
         {
             if (dataGridRules.SelectedRows.Count > 0)
@@ -106,38 +148,6 @@ namespace ExpertBase
 
                     // Удаляем правило из привязанного списка. BindingList обновит UI автоматически.
                     rulesList.Remove(ruleToRemove);
-                }
-            }
-        }
-
-        // Обработчик кнопки РЕДАКТИРОВАТЬ ПРАВИЛО
-        private void btnEditRules_Click(object sender, EventArgs e)
-        {
-            if (dataGridRules.SelectedRows.Count == 0 || dataGridRules.CurrentRow.DataBoundItem is not Rule selectedRule)
-            {
-                MessageBox.Show("Пожалуйста, выберите правило для редактирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var objects = dataBaseRC.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
-            var units = dataBaseRC.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
-            var attributes = dataBaseRC.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
-            var values = dataBaseRC.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
-
-            using (var editForm = new RuleForm())
-            {
-                editForm.LoadSuggestionsForRules(objects, units, attributes, values);
-                editForm.LoadRuleData(selectedRule); // Загружаем данные в форму для редактирования
-
-                if (editForm.ShowDialog() == DialogResult.OK)
-                {
-                    // Обновляем существующий объект selectedRule новыми данными из формы
-                    selectedRule.Description = editForm.RuleDescription;
-                    selectedRule.Condition = editForm.RuleCondition;
-                    selectedRule.Consequence = editForm.RuleConsequence;
-                    selectedRule.Truth = editForm.RuleTruth;
-
-                    rulesList.ResetBindings(); // Обновляем UI
                 }
             }
         }
