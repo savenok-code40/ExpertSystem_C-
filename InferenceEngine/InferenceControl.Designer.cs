@@ -96,9 +96,9 @@
             lbFactsInit.AutoSize = true;
             lbFactsInit.Location = new Point(3, 151);
             lbFactsInit.Name = "lbFactsInit";
-            lbFactsInit.Size = new Size(131, 15);
+            lbFactsInit.Size = new Size(204, 15);
             lbFactsInit.TabIndex = 4;
-            lbFactsInit.Text = "База исходных фактов:";
+            lbFactsInit.Text = "Добавить факты в рабочую память:";
             // 
             // lbFactsWork
             // 
