@@ -72,7 +72,7 @@ namespace ExpertBase
                 // сравниваем факты по трем полям
                 return Group == other.Group &&
                     Unit == other.Unit &&
-                    Atribute == other.Atribute &&;
+                    Atribute == other.Atribute;
                     //Value == other.Value; 
             }
             return false;

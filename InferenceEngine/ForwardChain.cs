@@ -23,6 +23,30 @@ namespace ExpertBase
 
             sb.AppendLine("--- Начало прямого вывода ---");
 
+            if (!achievedTarget && copyRules.Count > 0)
+            {
+                sb.AppendLine($"\n--- Итерация №{i} ---\n");
+                sb.AppendLine("Факты в памяти:");
+
+                foreach (Fact f in factsInMemory)
+                {
+                    sb.AppendLine($" {f.ToString()}");
+                }
+
+                // конфликтный набор
+                var conflictSet = (from rule in copyRules.Values
+                                   where rule.listPremise.All(factInPremise => factsInMemory.Contains(factInPremise))
+                                   select rule).ToList();
+
+                if (conflictSet.Count == 0)
+                {
+                    sb.AppendLine("Конфликтный набор пуст");
+                    //break;
+                }
+
+                sb.AppendLine($"  Конфликтный набор: {conflictSet.Count} правил");
+
+            }
 
 
 

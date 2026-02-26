@@ -16,7 +16,7 @@ namespace ExpertBase.Правила
     {
         private DataBase dataBaseRF; // хранит ссылку на базу данных (RF - rule form)
 
-        // Списки, которыми управляет логика
+        // Списки, которые наполняются локально при создании правила или редактировании (т.е. открытии формы)
         public List<Fact> listCurrentPremises { get; set; } = new List<Fact>();
         public List<Fact> listCurrentConclusions { get; set; } = new List<Fact>();
 

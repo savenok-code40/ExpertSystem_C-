@@ -28,7 +28,11 @@ namespace ExpertBase.InferenceEngine
         // Кнопка запуска прямого вывода
         private void btnCheckTarget_Click(object sender, EventArgs e)
         {
-            // 1. Проверка и подготовка данных
+            // 1. Проверка и подготовка данных        
+            Fact targetFact = new Fact(); // цель
+            List<Fact> factsInMemory = new List<Fact>(); // рабочая память
+            StringBuilder sb = new StringBuilder(); // сообщения в рич бокс
+
             if (cmbChooseTarget.SelectedItem == null) // если не выбрана цель
             {
                 MessageBox.Show("Пожалуйста, выберите целевой факт.");
@@ -36,16 +40,29 @@ namespace ExpertBase.InferenceEngine
             }
             else
             {
-                Fact selectedFact = (Fact)cmbChooseTarget.SelectedItem;
-                MessageBox.Show($"Проверяем цель: {selectedFact.ToString()}");
+                targetFact = (Fact)cmbChooseTarget.SelectedItem;
+                MessageBox.Show($"Проверяем цель: {targetFact.ToString()}");
             }
 
             DateTime startTime = DateTime.Now;
             ritchBoxOutputChain.Clear();
-            StringBuilder sb = new StringBuilder();
+            
+            foreach (object item in listBoxFactsWork.Items)
+            {
+                factsInMemory.Add((Fact)item);
+            }
 
             // 2. Запуск прямого вывода
             ForwardChain forwardChain = new ForwardChain(db);
+            forwardChain.ComputeForwardChain(factsInMemory, targetFact, sb);  
+            
+            // 3. Расчет времени выполнения и вывод сообщений в рич бокс
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime - startTime;
+
+            ritchBoxOutputChain.AppendText(sb.ToString());
+            ritchBoxOutputChain.AppendText("\n--- --- ---\n");
+            ritchBoxOutputChain.AppendText($"Время выполнения: {timeSpan.TotalMilliseconds:F0} мс");
         }
 
         public void UpdateFacts(Dictionary<int, Fact> facts)
