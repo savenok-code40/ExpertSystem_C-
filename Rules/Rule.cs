@@ -22,11 +22,11 @@ namespace ExpertBase
 
         // Посылка
         [DisplayName("Посылка")]
-        public string strPremise => string.Join(" &&", listPremise.Select(f => f.ToString()));
+        public string strPremise => string.Join(" && ", listPremise.Select(f => f.ToString()));
 
         // Заключение
         [DisplayName("Заключение")]
-        public string strConclusion => string.Join(" &&", listConclusion.Select(f => f.ToString()));
+        public string strConclusion => string.Join(" && ", listConclusion.Select(f => f.ToString()));
 
         // Достоверность от 0.0 до 1.0
         [DisplayName("Достоверность")]

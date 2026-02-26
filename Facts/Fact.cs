@@ -69,10 +69,11 @@ namespace ExpertBase
         {
             if (obj is Fact other)
             {
+                // сравниваем факты по трем полям
                 return Group == other.Group &&
                     Unit == other.Unit &&
-                    Atribute == other.Atribute &&
-                    Value == other.Value;
+                    Atribute == other.Atribute &&;
+                    //Value == other.Value; 
             }
             return false;
         }

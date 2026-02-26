@@ -37,7 +37,7 @@ namespace ExpertBase.Правила
         // Метод добавления в посылку (теперь это метод формы)
         public void AddPremise(Fact fact)
         {
-            if (fact != null && !listCurrentPremises.Contains(fact))
+            if (fact != null && !listCurrentPremises.Contains(fact)) // если объект не пустой и его нет в списке
             {
                 listCurrentPremises.Add(fact);
             }
