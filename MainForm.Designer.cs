@@ -44,6 +44,7 @@
             tabPage4 = new TabPage();
             rulesControl1 = new RulesControl();
             tabPage5 = new TabPage();
+            recommendControl1 = new RecommendControl();
             tabPage2_Work = new TabPage();
             inferenceControl1 = new ExpertBase.InferenceEngine.InferenceControl();
             panel1 = new Panel();
@@ -54,6 +55,7 @@
             tabControl_Edit.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
+            tabPage5.SuspendLayout();
             tabPage2_Work.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
@@ -201,14 +203,24 @@
             // 
             // tabPage5
             // 
+            tabPage5.Controls.Add(recommendControl1);
             tabPage5.Location = new Point(4, 24);
             tabPage5.Margin = new Padding(3, 2, 3, 2);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3, 2, 3, 2);
             tabPage5.Size = new Size(940, 428);
             tabPage5.TabIndex = 2;
-            tabPage5.Text = "Вопросы";
+            tabPage5.Text = "Рекомендации";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // recommendControl1
+            // 
+            recommendControl1.BackColor = SystemColors.ActiveCaption;
+            recommendControl1.Dock = DockStyle.Fill;
+            recommendControl1.Location = new Point(3, 2);
+            recommendControl1.Name = "recommendControl1";
+            recommendControl1.Size = new Size(934, 424);
+            recommendControl1.TabIndex = 0;
             // 
             // tabPage2_Work
             // 
@@ -264,6 +276,7 @@
             tabControl_Edit.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
             tabPage2_Work.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
@@ -292,5 +305,6 @@
         private RulesControl rulesControl1;
         private ToolStripMenuItem modbusToolStripMenuItem;
         private InferenceEngine.InferenceControl inferenceControl1;
+        private RecommendControl recommendControl1;
     }
 }

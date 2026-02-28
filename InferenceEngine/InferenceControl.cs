@@ -54,9 +54,16 @@ namespace ExpertBase.InferenceEngine
 
             // 2. Запуск прямого вывода
             ForwardChain forwardChain = new ForwardChain(db);
-            forwardChain.ComputeForwardChain(factsInMemory, targetFact, sb);  
-            
-            // 3. Расчет времени выполнения и вывод сообщений в рич бокс
+            forwardChain.ComputeForwardChain(factsInMemory, targetFact, sb);
+
+            // 3. Поиск и вывод рекомендаций
+            var relevantAdvices = db.listRecommendations
+                .Where(rec => factsInMemory.Any(f => f.Equals(rec.TargetFact)))
+                .ToList();
+
+            this.DisplayRecommendations(relevantAdvices); // метод отрисовки советов
+
+            // 4. Расчет времени выполнения и вывод сообщений в рич бокс
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime - startTime;
 
@@ -116,6 +123,44 @@ namespace ExpertBase.InferenceEngine
 
         }
 
-        
+        public void DisplayRecommendations(List<FactRecommend> foundAdvices)
+        {
+            richBoxRecommend.Clear(); // Очищаем старые советы
+
+            if (foundAdvices.Count == 0)
+            {
+                richBoxRecommend.SelectionColor = Color.Gray;
+                richBoxRecommend.AppendText("Рекомендаций для текущего состояния нет.");
+                return;
+            }
+
+            // Сортируем: сначала критические (5), потом остальные
+            var sorted = foundAdvices.OrderByDescending(a => a.Priority).ToList();
+
+            foreach (var adv in sorted)
+            {
+                // 1. Ставим время и заголовок
+                richBoxRecommend.SelectionFont = new Font(richBoxRecommend.Font, FontStyle.Bold);
+
+                // Красим заголовок в зависимости от приоритета
+                richBoxRecommend.SelectionColor = adv.Priority switch
+                {
+                    5 => Color.Red,        // КРИТИЧНО
+                    4 => Color.OrangeRed,  // ВАЖНО
+                    3 => Color.DarkOrange, // ПРЕДУПРЕЖДЕНИЕ
+                    _ => Color.Blue        // ИНФО
+                };
+
+                richBoxRecommend.AppendText($"[{DateTime.Now:HH:mm:ss}] ПРИОРИТЕТ {adv.Priority}:\n");
+
+                // 2. Выводим текст рекомендации обычным шрифтом
+                richBoxRecommend.SelectionFont = new Font(richBoxRecommend.Font, FontStyle.Regular);
+                richBoxRecommend.SelectionColor = Color.Black;
+                richBoxRecommend.AppendText($"{adv.AdviceText}\n");
+
+                // Разделитель между советами
+                richBoxRecommend.AppendText("----------------------------------\n");
+            }
+        }
     }
 }

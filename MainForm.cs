@@ -16,6 +16,7 @@ namespace ExpertBase
             factsControl1.InitializeDatabase(dataBase); // factsControl1 получает ссылку на загруженную базу
             rulesControl1.InitializeData(dataBase); // тоже rulesControl1
             inferenceControl1.InitializeDataBase(dataBase); // и inferenceControl1
+            recommendControl1.InitializeData(dataBase); // тоже для контрола рекомендаций
         } 
         
         // Обработчик пункта меню Загрузить
@@ -39,6 +40,9 @@ namespace ExpertBase
 
                     // Обновляем InfernceControl
                     inferenceControl1.UpdateFacts(dataBase.dictionaryFacts);
+
+                    // Обновляем таблицу рекомендаций
+                    recommendControl1.RefreshDataBinding(); 
 
                     MessageBox.Show("База данных успешно загружена.");
                 }

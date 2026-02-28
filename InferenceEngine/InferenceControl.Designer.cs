@@ -41,6 +41,7 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             tableLayoutPanel1 = new TableLayoutPanel();
+            richBoxRecommend = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -127,7 +128,7 @@
             ritchBoxOutputChain.Location = new Point(3, 33);
             ritchBoxOutputChain.Name = "ritchBoxOutputChain";
             ritchBoxOutputChain.ScrollBars = RichTextBoxScrollBars.Vertical;
-            ritchBoxOutputChain.Size = new Size(470, 419);
+            ritchBoxOutputChain.Size = new Size(470, 206);
             ritchBoxOutputChain.TabIndex = 7;
             ritchBoxOutputChain.Text = "";
             // 
@@ -199,17 +200,29 @@
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(richBoxRecommend, 0, 2);
             tableLayoutPanel1.Controls.Add(ritchBoxOutputChain, 1, 0);
             tableLayoutPanel1.Controls.Add(lbOutputChain, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Size = new Size(476, 455);
             tableLayoutPanel1.TabIndex = 9;
+            // 
+            // richBoxRecommend
+            // 
+            richBoxRecommend.Dock = DockStyle.Fill;
+            richBoxRecommend.Location = new Point(3, 245);
+            richBoxRecommend.Name = "richBoxRecommend";
+            richBoxRecommend.ScrollBars = RichTextBoxScrollBars.Vertical;
+            richBoxRecommend.Size = new Size(470, 207);
+            richBoxRecommend.TabIndex = 9;
+            richBoxRecommend.Text = "";
             // 
             // InferenceControl
             // 
@@ -246,5 +259,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private FlowLayoutPanel flowLayoutPanel1;
+        private RichTextBox richBoxRecommend;
     }
 }

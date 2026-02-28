@@ -20,6 +20,15 @@ namespace ExpertBase
         public Dictionary<int, Fact> dictionaryFacts { get; set; } = new Dictionary<int, Fact>();
         public Dictionary<int, Rule> dictionaryRules { get; set; } = new Dictionary<int, Rule>();
 
+        // Список с рекомендациями
+        public List<FactRecommend> listRecommendations { get; set; } = new List<FactRecommend>();
+
+        // Метод для регистрации рекомендации
+        public void AddRecommendation(FactRecommend newRec)
+        {
+            listRecommendations.Add(newRec); // просто добавляем в список. JsonSerializer сам позаботится о вложенном объекте TargetFact   
+        }
+
         // Метод добавления факта (присваивает ID)
         public void AddFact(Fact newFact)
         {
@@ -66,9 +75,13 @@ namespace ExpertBase
                 var deserializeBase = JsonSerializer.Deserialize<DataBase>(jsonString);
 
                 // Копируем загруженные данные в текущий рабочий экземпляр DataBase
-                dictionaryFacts = deserializeBase.dictionaryFacts;
-                dictionaryRules = deserializeBase.dictionaryRules;
-
+                if (deserializeBase != null)
+                {
+                    dictionaryFacts = deserializeBase.dictionaryFacts;
+                    dictionaryRules = deserializeBase.dictionaryRules;
+                    listRecommendations = deserializeBase.listRecommendations; // Копируем рекомендации
+                }              
+                
                 // если в словаре больше 0 элементов, то ищем max индекс и счетчик устанавливаем на max+1, иначе 1
                 nextFactId = dictionaryFacts.Count > 0 ? dictionaryFacts.Keys.Max() + 1 : 1; 
                 nextRuleId = dictionaryRules.Count > 0 ? dictionaryRules.Keys.Max() + 1 : 1;             

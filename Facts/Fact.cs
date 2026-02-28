@@ -61,7 +61,7 @@ namespace ExpertBase
         // переопределяем метод ToString - вывод объекта типа Факт
         public override string ToString()
         {            
-            return $"{Group}.{Unit}.{Atribute}"; // .{Value}.{Type}
+            return $"{Group}.{Unit}.{Atribute}.{Value}"; // .{Value}.{Type}
         }
 
         // переопределяем метод Equals - сравнения объектов типа Факт
@@ -72,8 +72,8 @@ namespace ExpertBase
                 // сравниваем факты по трем полям
                 return Group == other.Group &&
                     Unit == other.Unit &&
-                    Atribute == other.Atribute;
-                    //Value == other.Value; 
+                    Atribute == other.Atribute &&
+                    Value == other.Value; 
             }
             return false;
         }

@@ -86,9 +86,7 @@ namespace ExpertBase
                     copyRules.Remove(SelectRuleMaxTruth.Id); // Удаляем сработавшее правило из копии правил ,чтобы не зациклиться
 
                     i++;
-                }
-
-                
+                }                
             } 
 
             sb.AppendLine("\n--- Поиск завершен ---\n");
