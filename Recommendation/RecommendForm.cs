@@ -35,7 +35,34 @@ namespace ExpertBase
         {
             // Здесь можно добавить базовую валидацию на пустоту полей перед закрытием
             this.DialogResult = DialogResult.OK; // Устанавливаем результат OK
-            this.Close(); // Закрываем форму
+            //this.Close(); // Закрываем форму
+
+            // 1. Валидация (копируем из вашего AddFactToBox)
+            if (cmbObject.SelectedItem == null || cmbUnit.SelectedItem == null ||
+                cmbAttribute.SelectedItem == null || string.IsNullOrWhiteSpace(cmbValue.Text))
+            {
+                MessageBox.Show("Заполните все поля факта для поиска.");
+                return;
+            }
+
+            // 2. Поиск реального факта через FirstOrDefault
+            Fact foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
+                f.Group == cmbObject.Text &&
+                f.Unit == cmbUnit.Text &&
+                f.Atribute == cmbAttribute.Text &&
+                f.Value == cmbValue.Text.Trim());
+
+            // 3. Результат
+            if (foundFact != null)
+            {
+                SelectedFact = foundFact;
+                MessageBox.Show($"Рекомендация сохранена!");
+            }
+            else
+            {
+                MessageBox.Show("Факт не найден в базе данных!");
+                SelectedFact = null;
+            }
         }
 
         // Кнопка - Закрыть форму
@@ -86,40 +113,6 @@ namespace ExpertBase
             }
         }
 
-        private void btnSelectFact_Click(object sender, EventArgs e)
-        {
-            // 1. Валидация (копируем из вашего AddFactToBox)
-            if (cmbObject.SelectedItem == null || cmbUnit.SelectedItem == null ||
-                cmbAttribute.SelectedItem == null || string.IsNullOrWhiteSpace(cmbValue.Text))
-            {
-                MessageBox.Show("Заполните все поля факта для поиска.");
-                return;
-            }
-
-            // 2. Поиск реального факта через FirstOrDefault
-            Fact foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
-                f.Group == cmbObject.Text &&
-                f.Unit == cmbUnit.Text &&
-                f.Atribute == cmbAttribute.Text &&
-                f.Value == cmbValue.Text.Trim());
-
-            // 3. Результат
-            if (foundFact != null)
-            {
-                SelectedFact = foundFact;
-                // Можно вывести подтверждение, например, в заголовок кнопки или Label
-                btnSelectFact.Text = "Выбрано: " + foundFact.Atribute;
-                btnSelectFact.ForeColor = Color.Green;
-            }
-            else
-            {
-                MessageBox.Show("Факт не найден в базе данных!");
-                SelectedFact = null;
-                btnSelectFact.Text = "Выбрать";
-                btnSelectFact.ForeColor = Color.Black;
-            }
-
-        }
         public FactRecommend CreateRecommendation()
         {
             // Возвращаем объект нашего нового класса

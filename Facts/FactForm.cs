@@ -27,7 +27,8 @@ namespace ExpertBase
             cmbAtribute.Text = existingFact.Atribute;
             txtValue.Text = existingFact.Value;
             numTruth.Value = (decimal)existingFact.Truth;
-            cmbType.SelectedItem = existingFact.Type;           
+            cmbType.SelectedItem = existingFact.Type;
+            cmbModbusFun.SelectedItem = existingFact.FunModbus;
         }
 
         // Публичные свойства для доступа к данным извне
@@ -92,7 +93,7 @@ namespace ExpertBase
             if (cmbModbusFun.Items.Count > 0)
             {
                 // Устанавливаем по умолчанию ReadAO_03Fun
-                cmbModbusFun.SelectedItem = Fact.enFunModbus.ReadAO_03Fun;
+                cmbModbusFun.SelectedItem = Fact.enFunModbus.ReadDI_02Fun;
             }
         }
 

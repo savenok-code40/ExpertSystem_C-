@@ -48,7 +48,7 @@
             // btnMoveDownFact
             // 
             btnMoveDownFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMoveDownFact.Location = new Point(13, 64);
+            btnMoveDownFact.Location = new Point(13, 90);
             btnMoveDownFact.Margin = new Padding(3, 2, 3, 2);
             btnMoveDownFact.Name = "btnMoveDownFact";
             btnMoveDownFact.Size = new Size(105, 22);
@@ -60,7 +60,7 @@
             // btnMoveUpFact
             // 
             btnMoveUpFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMoveUpFact.Location = new Point(13, 90);
+            btnMoveUpFact.Location = new Point(13, 64);
             btnMoveUpFact.Margin = new Padding(3, 2, 3, 2);
             btnMoveUpFact.Name = "btnMoveUpFact";
             btnMoveUpFact.Size = new Size(105, 22);
@@ -86,7 +86,7 @@
             // 
             btnAddFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAddFact.BackColor = SystemColors.ButtonFace;
-            btnAddFact.Location = new Point(13, 38);
+            btnAddFact.Location = new Point(13, 12);
             btnAddFact.Margin = new Padding(3, 2, 3, 2);
             btnAddFact.Name = "btnAddFact";
             btnAddFact.Size = new Size(105, 22);
@@ -121,7 +121,7 @@
             // btnEditFact
             // 
             btnEditFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnEditFact.Location = new Point(13, 12);
+            btnEditFact.Location = new Point(13, 38);
             btnEditFact.Margin = new Padding(3, 2, 3, 2);
             btnEditFact.Name = "btnEditFact";
             btnEditFact.Size = new Size(105, 22);
@@ -150,10 +150,10 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(btnEditFact);
             flowLayoutPanel1.Controls.Add(btnAddFact);
-            flowLayoutPanel1.Controls.Add(btnMoveDownFact);
+            flowLayoutPanel1.Controls.Add(btnEditFact);
             flowLayoutPanel1.Controls.Add(btnMoveUpFact);
+            flowLayoutPanel1.Controls.Add(btnMoveDownFact);
             flowLayoutPanel1.Controls.Add(btnDeleteFact);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;

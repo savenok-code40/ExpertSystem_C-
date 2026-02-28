@@ -46,14 +46,13 @@
             labelTruth = new Label();
             labelDescription = new Label();
             panel1 = new Panel();
-            btnSelectFact = new Button();
             ((System.ComponentModel.ISupportInitialize)numPriority).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(245, 573);
+            btnCancel.Location = new Point(210, 579);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(105, 45);
@@ -161,7 +160,7 @@
             // 
             // btnSaveRecommend
             // 
-            btnSaveRecommend.Location = new Point(103, 573);
+            btnSaveRecommend.Location = new Point(88, 579);
             btnSaveRecommend.Margin = new Padding(3, 2, 3, 2);
             btnSaveRecommend.Name = "btnSaveRecommend";
             btnSaveRecommend.Size = new Size(105, 45);
@@ -208,7 +207,6 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(btnSelectFact);
             panel1.Controls.Add(btnCancel);
             panel1.Controls.Add(cmbValue);
             panel1.Controls.Add(labelValue);
@@ -231,17 +229,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(420, 641);
             panel1.TabIndex = 4;
-            // 
-            // btnSelectFact
-            // 
-            btnSelectFact.Location = new Point(189, 363);
-            btnSelectFact.Margin = new Padding(3, 2, 3, 2);
-            btnSelectFact.Name = "btnSelectFact";
-            btnSelectFact.Size = new Size(105, 27);
-            btnSelectFact.TabIndex = 39;
-            btnSelectFact.Text = "Выбрать";
-            btnSelectFact.UseVisualStyleBackColor = true;
-            btnSelectFact.Click += btnSelectFact_Click;
             // 
             // RecommendForm
             // 
@@ -276,6 +263,5 @@
         private Label labelTruth;
         private Label labelDescription;
         private Panel panel1;
-        private Button btnSelectFact;
     }
 }

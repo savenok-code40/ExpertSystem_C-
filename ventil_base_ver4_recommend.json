@@ -131,6 +131,303 @@
       "Type": 1,
       "FunModbus": 1,
       "RegAddr": 0
+    },
+    "17": {
+      "ID": 17,
+      "Group": "приточка",
+      "Unit": "датчики",
+      "Atribute": "отказ Т наружного воздуха",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "18": {
+      "ID": 18,
+      "Group": "приточка",
+      "Unit": "датчики",
+      "Atribute": "отказ Т обратной воды",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "19": {
+      "ID": 19,
+      "Group": "приточка",
+      "Unit": "датчики",
+      "Atribute": "отказ Т приточного воздуха",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "20": {
+      "ID": 20,
+      "Group": "приточка",
+      "Unit": "заслонка",
+      "Atribute": "открыта",
+      "Value": "0",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "21": {
+      "ID": 21,
+      "Group": "приточка",
+      "Unit": "заслонка",
+      "Atribute": "зкрыта",
+      "Value": "0",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "22": {
+      "ID": 22,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "сигнал работа",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "23": {
+      "ID": 23,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "сигнал перепад давления",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "24": {
+      "ID": 24,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "авария преобразователя частоты",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "25": {
+      "ID": 25,
+      "Group": "приточка",
+      "Unit": "насос",
+      "Atribute": "сигнал работа насоса",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "26": {
+      "ID": 26,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "автоматический режим",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "27": {
+      "ID": 27,
+      "Group": "приточка",
+      "Unit": "насос",
+      "Atribute": "автоматический режим",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "28": {
+      "ID": 28,
+      "Group": "приточка",
+      "Unit": "верхний уровень",
+      "Atribute": "автоматический режим",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "29": {
+      "ID": 29,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "пуск",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "30": {
+      "ID": 30,
+      "Group": "приточка",
+      "Unit": "насос",
+      "Atribute": "пуск",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "31": {
+      "ID": 31,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "авария нет перепада давления",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "32": {
+      "ID": 32,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "авария нет сигнала работа",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "33": {
+      "ID": 33,
+      "Group": "приточка",
+      "Unit": "насос",
+      "Atribute": "авария нет сигнала работа",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "34": {
+      "ID": 34,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "сигнал Err ПЧ",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "35": {
+      "ID": 35,
+      "Group": "приточка",
+      "Unit": "общие",
+      "Atribute": "сезон лето",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "36": {
+      "ID": 36,
+      "Group": "приточка",
+      "Unit": "общие",
+      "Atribute": "Пожар!!!",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "37": {
+      "ID": 37,
+      "Group": "приточка",
+      "Unit": "общие",
+      "Atribute": "авария питания",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "38": {
+      "ID": 38,
+      "Group": "приточка",
+      "Unit": "нагреватель",
+      "Atribute": "прогрев",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "39": {
+      "ID": 39,
+      "Group": "приточка",
+      "Unit": "расчетные",
+      "Atribute": "авария датчиков",
+      "Value": "1",
+      "Truth": 1,
+      "Type": 3,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "40": {
+      "ID": 40,
+      "Group": "приточка",
+      "Unit": "датчики",
+      "Atribute": "отказ Т наружного воздуха",
+      "Value": "0",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "41": {
+      "ID": 41,
+      "Group": "приточка",
+      "Unit": "датчики",
+      "Atribute": "отказ Т обратной воды",
+      "Value": "0",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "42": {
+      "ID": 42,
+      "Group": "приточка",
+      "Unit": "датчики",
+      "Atribute": "отказ Т приточного воздуха",
+      "Value": "0",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "43": {
+      "ID": 43,
+      "Group": "приточка",
+      "Unit": "расчетные",
+      "Atribute": "авария датчиков",
+      "Value": "0",
+      "Truth": 1,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
     }
   },
   "dictionaryRules": {
@@ -309,23 +606,192 @@
       "strPremise": "приточка.заслонка.сработал таймер вр хода.1 \u0026\u0026 приточка.заслонка.открыта.1",
       "strConclusion": "приточка.заслонка.дистанционный пуск.1",
       "Truth": 0.9
+    },
+    "6": {
+      "listPremise": [
+        {
+          "ID": 17,
+          "Group": "приточка",
+          "Unit": "датчики",
+          "Atribute": "отказ Т наружного воздуха",
+          "Value": "1",
+          "Truth": 1,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 39,
+          "Group": "приточка",
+          "Unit": "расчетные",
+          "Atribute": "авария датчиков",
+          "Value": "1",
+          "Truth": 1,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 6,
+      "Description": "Авария датчиков",
+      "strPremise": "приточка.датчики.отказ Т наружного воздуха.1",
+      "strConclusion": "приточка.расчетные.авария датчиков.1",
+      "Truth": 1
+    },
+    "7": {
+      "listPremise": [
+        {
+          "ID": 18,
+          "Group": "приточка",
+          "Unit": "датчики",
+          "Atribute": "отказ Т обратной воды",
+          "Value": "1",
+          "Truth": 1,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 39,
+          "Group": "приточка",
+          "Unit": "расчетные",
+          "Atribute": "авария датчиков",
+          "Value": "1",
+          "Truth": 1,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 7,
+      "Description": "Авария датчиков",
+      "strPremise": "приточка.датчики.отказ Т обратной воды.1",
+      "strConclusion": "приточка.расчетные.авария датчиков.1",
+      "Truth": 1
+    },
+    "8": {
+      "listPremise": [
+        {
+          "ID": 19,
+          "Group": "приточка",
+          "Unit": "датчики",
+          "Atribute": "отказ Т приточного воздуха",
+          "Value": "1",
+          "Truth": 1,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 39,
+          "Group": "приточка",
+          "Unit": "расчетные",
+          "Atribute": "авария датчиков",
+          "Value": "1",
+          "Truth": 1,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 8,
+      "Description": "Авария датчиков",
+      "strPremise": "приточка.датчики.отказ Т приточного воздуха.1",
+      "strConclusion": "приточка.расчетные.авария датчиков.1",
+      "Truth": 1
+    },
+    "9": {
+      "listPremise": [
+        {
+          "ID": 40,
+          "Group": "приточка",
+          "Unit": "датчики",
+          "Atribute": "отказ Т наружного воздуха",
+          "Value": "0",
+          "Truth": 1,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 41,
+          "Group": "приточка",
+          "Unit": "датчики",
+          "Atribute": "отказ Т обратной воды",
+          "Value": "0",
+          "Truth": 1,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 42,
+          "Group": "приточка",
+          "Unit": "датчики",
+          "Atribute": "отказ Т приточного воздуха",
+          "Value": "0",
+          "Truth": 1,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 43,
+          "Group": "приточка",
+          "Unit": "расчетные",
+          "Atribute": "авария датчиков",
+          "Value": "0",
+          "Truth": 1,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 9,
+      "Description": "Нет аварии датчиков",
+      "strPremise": "приточка.датчики.отказ Т наружного воздуха.0 \u0026\u0026 приточка.датчики.отказ Т обратной воды.0 \u0026\u0026 приточка.датчики.отказ Т приточного воздуха.0",
+      "strConclusion": "приточка.расчетные.авария датчиков.0",
+      "Truth": 1
     }
   },
   "listRecommendations": [
     {
       "TargetFact": {
-        "ID": 9,
+        "ID": 39,
         "Group": "приточка",
-        "Unit": "заслонка",
-        "Atribute": "пуск",
+        "Unit": "расчетные",
+        "Atribute": "авария датчиков",
         "Value": "1",
         "Truth": 1,
         "Type": 3,
-        "FunModbus": 0,
+        "FunModbus": 1,
         "RegAddr": 0
       },
-      "AdviceText": "Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1 Тест рекомендации_1",
+      "AdviceText": "Устраните неисправность датчиков",
       "Priority": 1
+    },
+    {
+      "TargetFact": {
+        "ID": 43,
+        "Group": "приточка",
+        "Unit": "расчетные",
+        "Atribute": "авария датчиков",
+        "Value": "0",
+        "Truth": 1,
+        "Type": 1,
+        "FunModbus": 1,
+        "RegAddr": 0
+      },
+      "AdviceText": "Отлично: авария датчиков устранена",
+      "Priority": 11
     }
   ]
 }

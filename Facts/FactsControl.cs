@@ -80,8 +80,8 @@ namespace ExpertBase
                     bool existsFact = factsBindingList.Any(f =>
                         f.Group == newFact.Group &&
                         f.Unit == newFact.Unit &&
-                        f.Atribute == newFact.Atribute); 
-                        //f.Value == newFact.Value // Проверка на совпадение всех 4 полей
+                        f.Atribute == newFact.Atribute && 
+                        f.Value == newFact.Value); // Проверка на совпадение всех 4 полей
 
                     if (existsFact)
                     {
