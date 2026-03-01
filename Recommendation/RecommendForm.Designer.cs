@@ -46,6 +46,9 @@
             labelTruth = new Label();
             labelDescription = new Label();
             panel1 = new Panel();
+            btnConfirm = new Button();
+            txtTargetFact = new TextBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)numPriority).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -67,7 +70,7 @@
             cmbValue.Location = new Point(13, 537);
             cmbValue.Margin = new Padding(3, 2, 3, 2);
             cmbValue.Name = "cmbValue";
-            cmbValue.Size = new Size(391, 23);
+            cmbValue.Size = new Size(258, 23);
             cmbValue.TabIndex = 37;
             // 
             // labelValue
@@ -85,7 +88,7 @@
             cmbAttribute.Location = new Point(12, 492);
             cmbAttribute.Margin = new Padding(3, 2, 3, 2);
             cmbAttribute.Name = "cmbAttribute";
-            cmbAttribute.Size = new Size(391, 23);
+            cmbAttribute.Size = new Size(259, 23);
             cmbAttribute.TabIndex = 33;
             // 
             // cmbUnit
@@ -94,7 +97,7 @@
             cmbUnit.Location = new Point(12, 447);
             cmbUnit.Margin = new Padding(3, 2, 3, 2);
             cmbUnit.Name = "cmbUnit";
-            cmbUnit.Size = new Size(391, 23);
+            cmbUnit.Size = new Size(259, 23);
             cmbUnit.TabIndex = 32;
             // 
             // cmbObject
@@ -103,7 +106,7 @@
             cmbObject.Location = new Point(12, 402);
             cmbObject.Margin = new Padding(3, 2, 3, 2);
             cmbObject.Name = "cmbObject";
-            cmbObject.Size = new Size(391, 23);
+            cmbObject.Size = new Size(259, 23);
             cmbObject.TabIndex = 30;
             // 
             // labelAtribute
@@ -138,7 +141,7 @@
             richTextRecommendation.Location = new Point(12, 112);
             richTextRecommendation.Margin = new Padding(3, 2, 3, 2);
             richTextRecommendation.Name = "richTextRecommendation";
-            richTextRecommendation.Size = new Size(392, 230);
+            richTextRecommendation.Size = new Size(392, 168);
             richTextRecommendation.TabIndex = 18;
             richTextRecommendation.Text = "";
             // 
@@ -174,9 +177,9 @@
             labelFact.AutoSize = true;
             labelFact.Location = new Point(12, 363);
             labelFact.Name = "labelFact";
-            labelFact.Size = new Size(171, 15);
+            labelFact.Size = new Size(241, 15);
             labelFact.TabIndex = 12;
-            labelFact.Text = "Целевой факт рекомендации:";
+            labelFact.Text = "Выбрать факт связанный с рекомендации:";
             // 
             // labelPremise
             // 
@@ -207,6 +210,9 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnConfirm);
+            panel1.Controls.Add(txtTargetFact);
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnCancel);
             panel1.Controls.Add(cmbValue);
             panel1.Controls.Add(labelValue);
@@ -230,10 +236,40 @@
             panel1.Size = new Size(420, 641);
             panel1.TabIndex = 4;
             // 
+            // btnConfirm
+            // 
+            btnConfirm.Location = new Point(298, 402);
+            btnConfirm.Margin = new Padding(3, 2, 3, 2);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.Size = new Size(105, 45);
+            btnConfirm.TabIndex = 41;
+            btnConfirm.Text = "Подтвердить факт";
+            btnConfirm.UseVisualStyleBackColor = true;
+            btnConfirm.Click += btnConfirm_Click;
+            // 
+            // txtTargetFact
+            // 
+            txtTargetFact.Location = new Point(15, 318);
+            txtTargetFact.Margin = new Padding(3, 2, 3, 2);
+            txtTargetFact.Name = "txtTargetFact";
+            txtTargetFact.ReadOnly = true;
+            txtTargetFact.Size = new Size(391, 23);
+            txtTargetFact.TabIndex = 40;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(15, 300);
+            label1.Name = "label1";
+            label1.Size = new Size(100, 15);
+            label1.TabIndex = 39;
+            label1.Text = "Связанный факт:";
+            // 
             // RecommendForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnCancel;
             ClientSize = new Size(446, 661);
             Controls.Add(panel1);
             Name = "RecommendForm";
@@ -263,5 +299,8 @@
         private Label labelTruth;
         private Label labelDescription;
         private Panel panel1;
+        private TextBox txtTargetFact;
+        private Label label1;
+        private Button btnConfirm;
     }
 }

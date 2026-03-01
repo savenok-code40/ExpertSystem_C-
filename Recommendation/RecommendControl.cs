@@ -35,6 +35,14 @@ namespace ExpertBase
 
             if (dataGridRecommend.Columns["TargetFact"] != null)
                 dataGridRecommend.Columns["TargetFact"].Visible = false;
+
+            // Настраиваем колонку с текстом факта (FactDisplay)
+            if (dataGridRecommend.Columns["FactDisplay"] != null)
+            {
+                dataGridRecommend.Columns["FactDisplay"].HeaderText = "Связанный факт";
+                dataGridRecommend.Columns["FactDisplay"].DisplayIndex = 0; // Ставим первой
+                dataGridRecommend.Columns["FactDisplay"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
         }
 
         public void RefreshDataBinding()
@@ -47,6 +55,8 @@ namespace ExpertBase
                 {
                     recommendsList.Add(rec);
                 }
+
+                recommendsList.ResetBindings(); // сообщаем UI, что список полностью изменился
             }
         }
 

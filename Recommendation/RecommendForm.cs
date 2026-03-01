@@ -33,36 +33,23 @@ namespace ExpertBase
         // Ккнопка - Сохранить рекомендацию
         private void btnSaveRecommend_Click(object sender, EventArgs e)
         {
-            // Здесь можно добавить базовую валидацию на пустоту полей перед закрытием
-            this.DialogResult = DialogResult.OK; // Устанавливаем результат OK
-            //this.Close(); // Закрываем форму
-
-            // 1. Валидация (копируем из вашего AddFactToBox)
-            if (cmbObject.SelectedItem == null || cmbUnit.SelectedItem == null ||
-                cmbAttribute.SelectedItem == null || string.IsNullOrWhiteSpace(cmbValue.Text))
+            // Проверяем, что факт БЫЛ выбран и подтвержден кнопкой выше
+            if (this.SelectedFact == null)
             {
-                MessageBox.Show("Заполните все поля факта для поиска.");
+                MessageBox.Show("Сначала выберите и подтвердите факт из базы!");
                 return;
             }
 
-            // 2. Поиск реального факта через FirstOrDefault
-            Fact foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
-                f.Group == cmbObject.Text &&
-                f.Unit == cmbUnit.Text &&
-                f.Atribute == cmbAttribute.Text &&
-                f.Value == cmbValue.Text.Trim());
+            // Проверяем, что заполнены название и текст рекомендации
+            if (string.IsNullOrWhiteSpace(textBoxName.Text) || string.IsNullOrWhiteSpace(richTextRecommendation.Text))
+            {
+                MessageBox.Show("Заполните название и текст рекомендации.");
+                return;
+            }
 
-            // 3. Результат
-            if (foundFact != null)
-            {
-                SelectedFact = foundFact;
-                MessageBox.Show($"Рекомендация сохранена!");
-            }
-            else
-            {
-                MessageBox.Show("Факт не найден в базе данных!");
-                SelectedFact = null;
-            }
+            // Если всё Ок - закрываем форму
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         // Кнопка - Закрыть форму
@@ -103,13 +90,14 @@ namespace ExpertBase
             // Устанавливаем значения в ComboBox для целевого факта
             if (rec.TargetFact != null)
             {
+                this.SelectedFact = rec.TargetFact; // запоминаем объект
+                txtTargetFact.Text = rec.TargetFact.ToString(); 
+                txtTargetFact.BackColor = Color.LightGreen;
+
                 cmbObject.Text = rec.TargetFact.Group;
                 cmbUnit.Text = rec.TargetFact.Unit;
                 cmbAttribute.Text = rec.TargetFact.Atribute;
                 cmbValue.Text = rec.TargetFact.Value;
-
-                // Помечаем факт как выбранный (чтобы метод CreateRecommendation его увидел)
-                this.SelectedFact = rec.TargetFact;
             }
         }
 
@@ -117,6 +105,41 @@ namespace ExpertBase
         {
             // Возвращаем объект нашего нового класса
             return new FactRecommend(SelectedFact!, AdviceText, Priority);
+        }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            // 1. Валидация выбора в комбобоксах
+            if (cmbObject.SelectedItem == null || cmbUnit.SelectedItem == null ||
+                cmbAttribute.SelectedItem == null || string.IsNullOrWhiteSpace(cmbValue.Text))
+            {
+                MessageBox.Show("Заполните все поля для поиска факта.");
+                return;
+            }
+
+            // 2. Поиск реального факта через FirstOrDefault
+            Fact foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
+                f.Group == cmbObject.Text &&
+                f.Unit == cmbUnit.Text &&
+                f.Atribute == cmbAttribute.Text &&
+                f.Value == cmbValue.Text.Trim());
+
+            // 3. Результат поиска
+            if (foundFact != null)
+            {
+                this.SelectedFact = foundFact;
+                // Выводим результат в textBoxTargetFact (тот самый ReadOnly текстбокс)
+                txtTargetFact.Text = foundFact.ToString();
+                txtTargetFact.BackColor = Color.LightGreen; // Визуальное подтверждение успеха
+            }
+            else
+            {
+                MessageBox.Show("Такой факт не найден в базе данных!");
+                txtTargetFact.Text = "ФАКТ НЕ НАЙДЕН";
+                txtTargetFact.BackColor = Color.MistyRose;
+                this.SelectedFact = null;
+            }
+
         }
     }
 }

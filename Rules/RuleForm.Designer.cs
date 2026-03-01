@@ -409,6 +409,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnCancel;
             ClientSize = new Size(684, 661);
             Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);

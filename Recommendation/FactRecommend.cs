@@ -9,19 +9,23 @@ namespace ExpertBase
 {
     public class FactRecommend
     {
-        // Ссылка на объект-клон факта из вашей базы
-        public Fact TargetFact { get; set; } = new Fact();  
+        // Скрываем сам объект, так как он не может быть отрисован в ячейке адекватно
+        [Browsable(false)] // атрибут нужен , чтобы в датаГрид не создал колонку
+        public Fact TargetFact { get; set; } = new Fact();
 
+        [DisplayName("Рекомендация")]
         public string AdviceText { get; set; } = string.Empty;
 
+        [DisplayName("Приоритет")]
         public int Priority { get; set; }
 
-        // Пустой конструктор для JSON
+        [DisplayName("Связанный факт")]  // Это свойство "вытягивает" актуальную строку из объекта Fact
+        public string TargetFactDisplay => TargetFact?.ToString() ?? "Не выбран";
+
         public FactRecommend() { }
 
         public FactRecommend(Fact targetFact, string adviceText, int priority)
         {
-            // При создании рекомендации мы сохраняем ссылку на клон факта
             TargetFact = targetFact;
             AdviceText = adviceText;
             Priority = priority;
