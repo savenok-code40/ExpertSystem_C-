@@ -42,7 +42,7 @@ namespace ExpertBase
         // Метод обновления списка правил, как у фактов:
         public void RefreshDataBinding()
         {
-            // Проверка на null для dataBaseRC и rulesList
+            // Проверка на null для dataBaseThis и rulesList
             if (dataBaseRC != null && rulesList != null)
             {                
                 rulesList.Clear(); // Очищаем существующий список

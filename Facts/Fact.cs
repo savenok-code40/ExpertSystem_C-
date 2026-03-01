@@ -19,7 +19,7 @@ namespace ExpertBase
         [DisplayName("ID")]
         public int ID { get; set; }
 
-        [DisplayName("Объект (Группа)")]
+        [DisplayName("Объект (группа)")]
         public string Group { get; set; } = string.Empty;
 
         [DisplayName("Узел (подгруппа)")]

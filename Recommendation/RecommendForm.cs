@@ -13,6 +13,8 @@ namespace ExpertBase
     public partial class RecommendForm : Form
     {
         private DataBase dataBaseThis; // хранит ссылку на базу данных
+
+        private string initialFactString = string.Empty; // Нужно при проверке на дубликат. Запоминает при редактировании какой факт был.
         public Fact? SelectedFact { get; private set; }
 
         // Свойства для новых полей UI
@@ -33,14 +35,28 @@ namespace ExpertBase
         // Ккнопка - Сохранить рекомендацию
         private void btnSaveRecommend_Click(object sender, EventArgs e)
         {
-            // Проверяем, что факт БЫЛ выбран и подтвержден кнопкой выше
+            // 1. Проверяем, что факт выбран
             if (this.SelectedFact == null)
             {
                 MessageBox.Show("Сначала выберите и подтвердите факт из базы!");
                 return;
             }
 
-            // Проверяем, что заполнены название и текст рекомендации
+            // 2. ЗАЩИТА ОТ ДУБЛЕЙ
+            if (txtTargetFact.Text != initialFactString)
+            {
+                bool isDuplicate = dataBaseThis.listRecommendations // Проверяем, есть ли в базе рекомендация для ТАКОГО ЖЕ факта
+                    .Any(r => r.TargetFact.Equals(this.SelectedFact)); // Используем .Any и .Equals
+
+                if (isDuplicate)
+                {
+                    MessageBox.Show("Для факта уже существует рекомендация в базе!",
+                                    "Дубликат", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; // Не даем сохранить, выходим из метода
+                }
+            }
+
+            // 3. Проверяем, что заполнены название и текст рекомендации
             if (string.IsNullOrWhiteSpace(textBoxName.Text) || string.IsNullOrWhiteSpace(richTextRecommendation.Text))
             {
                 MessageBox.Show("Заполните название и текст рекомендации.");
@@ -59,8 +75,8 @@ namespace ExpertBase
             this.Close();
         }
 
-        // Метод для передачи списка существующих фактов в форму, чтобы для автозаполнения ComboBox'ов
-        public void LoadSuggestionsForRules(List<string> objects, List<string> units, List<string> attributes, List<string> values)
+        // Метод для передачи списка существующих фактов в форму для автозаполнения ComboBox'ов
+        public void AutoCompleteFact(List<string> objects, List<string> units, List<string> attributes, List<string> values)
         {
             // Предполагая, что имена ваших ComboBox'ов: cmbObject, cmbUnit, cmbAttribute
             cmbObject.DataSource = objects;
@@ -93,6 +109,7 @@ namespace ExpertBase
                 this.SelectedFact = rec.TargetFact; // запоминаем объект
                 txtTargetFact.Text = rec.TargetFact.ToString(); 
                 txtTargetFact.BackColor = Color.LightGreen;
+                initialFactString = txtTargetFact.Text; // запоминаем что было в поле при открытии
 
                 cmbObject.Text = rec.TargetFact.Group;
                 cmbUnit.Text = rec.TargetFact.Unit;

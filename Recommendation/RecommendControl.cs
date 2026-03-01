@@ -14,7 +14,7 @@ namespace ExpertBase
 {
     public partial class RecommendControl : UserControl
     {
-        private DataBase dataBaseRC; // Поле класса
+        private DataBase dataBaseThis; // Поле класса
         private BindingList<FactRecommend> recommendsList; // Поле класса
 
         public RecommendControl()
@@ -24,22 +24,18 @@ namespace ExpertBase
 
         public void InitializeData(DataBase db)
         {
-            dataBaseRC = db;
+            dataBaseThis = db;
             SetupDataGrid();
         }
 
         private void SetupDataGrid()
         {
-            recommendsList = new BindingList<FactRecommend>(dataBaseRC.listRecommendations);
+            recommendsList = new BindingList<FactRecommend>(dataBaseThis.listRecommendations);
             dataGridRecommend.DataSource = recommendsList;
-
-            if (dataGridRecommend.Columns["TargetFact"] != null)
-                dataGridRecommend.Columns["TargetFact"].Visible = false;
 
             // Настраиваем колонку с текстом факта (FactDisplay)
             if (dataGridRecommend.Columns["FactDisplay"] != null)
-            {
-                dataGridRecommend.Columns["FactDisplay"].HeaderText = "Связанный факт";
+            {   
                 dataGridRecommend.Columns["FactDisplay"].DisplayIndex = 0; // Ставим первой
                 dataGridRecommend.Columns["FactDisplay"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
@@ -48,10 +44,10 @@ namespace ExpertBase
         public void RefreshDataBinding()
         {
             // Исправлено: имена полей класса
-            if (dataBaseRC != null && recommendsList != null)
+            if (dataBaseThis != null && recommendsList != null)
             {
                 recommendsList.Clear();
-                foreach (var rec in dataBaseRC.listRecommendations)
+                foreach (var rec in dataBaseThis.listRecommendations)
                 {
                     recommendsList.Add(rec);
                 }
@@ -63,27 +59,29 @@ namespace ExpertBase
         private void btnAddRecommend_Click_1(object sender, EventArgs e)
         {
             // Списки для автозаполнения
-            var objects = dataBaseRC.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
-            var units = dataBaseRC.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
-            var attributes = dataBaseRC.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
-            var values = dataBaseRC.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
-
-            using (var recForm = new RecommendForm())
+            var objects = dataBaseThis.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
+            var units = dataBaseThis.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
+            var attributes = dataBaseThis.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
+            var values = dataBaseThis.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
+                       
+            using (var recForm = new RecommendForm()) // Создаем новый объект в памяти - пустую форму
             {
-                recForm.InitializeData(dataBaseRC);
-                recForm.LoadSuggestionsForRules(objects, units, attributes, values);
+                recForm.InitializeData(dataBaseThis);
+                recForm.AutoCompleteFact(objects, units, attributes, values); // передаем факты из базы
 
-                if (recForm.ShowDialog() == DialogResult.OK)
+                // здесь программа замирает, пока не нажата Сохранить или Закрыть
+                if (recForm.ShowDialog() == DialogResult.OK) // если нажата Сохранить или Закрыть
                 {
-                    var newRec = recForm.CreateRecommendation();
-                    dataBaseRC.listRecommendations.Add(newRec);
-                    recommendsList.Add(newRec);
+                    var newRec = recForm.CreateRecommendation(); // просим собрать из своих тестБоксов новый объект
+                    dataBaseThis.listRecommendations.Add(newRec); // кладем в базу 
+                    recommendsList.Add(newRec); // кладем в BindingList, чтобы появился на экране
                 }
             }
         }
 
         private void btnEditRecommend_Click(object sender, EventArgs e)
         {
+            // берем из таблицы объект, на котором стоит курсор
             if (dataGridRecommend.CurrentRow?.DataBoundItem is not FactRecommend selectedRec)
             {
                 MessageBox.Show("Выберите рекомендацию для редактирования.");
@@ -91,26 +89,27 @@ namespace ExpertBase
             }
 
             // Исправлено: получение списков внутри метода редактирования
-            var objects = dataBaseRC.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
-            var units = dataBaseRC.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
-            var attributes = dataBaseRC.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
-            var values = dataBaseRC.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
+            var objects = dataBaseThis.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
+            var units = dataBaseThis.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
+            var attributes = dataBaseThis.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
+            var values = dataBaseThis.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
 
             using (var editForm = new RecommendForm())
             {
-                editForm.InitializeData(dataBaseRC); // Исправлено: dataBaseRC
-                editForm.LoadSuggestionsForRules(objects, units, attributes, values);
-                editForm.LoadRecommendData(selectedRec); // Убедитесь, что метод в RecommendForm есть
+                editForm.InitializeData(dataBaseThis); // 
+                editForm.AutoCompleteFact(objects, units, attributes, values);
+                editForm.LoadRecommendData(selectedRec); // копируем данные из объекта, который редактируем в текстовые поля
 
-                if (editForm.ShowDialog() == DialogResult.OK)
+                if (editForm.ShowDialog() == DialogResult.OK) // когда нажата Ок
                 {
-                    var updated = editForm.CreateRecommendation();
+                    var updated = editForm.CreateRecommendation(); // создаем временный объект
 
+                    // переносим данные из него в selectedRec
                     selectedRec.TargetFact = updated.TargetFact;
                     selectedRec.AdviceText = updated.AdviceText;
                     selectedRec.Priority = updated.Priority;
 
-                    recommendsList.ResetBindings(); // Исправлено: recommendsList
+                    recommendsList.ResetBindings(); // Таблице говорим перерисовать объекты
                 }
             }
         }
@@ -123,8 +122,8 @@ namespace ExpertBase
 
                 if (recToRemove != null)
                 {
-                    dataBaseRC.listRecommendations.Remove(recToRemove);
-                    recommendsList.Remove(recToRemove);
+                    dataBaseThis.listRecommendations.Remove(recToRemove); // удаляем из базы
+                    recommendsList.Remove(recToRemove); // кдаляем с экрана
                 }
             }
         }
