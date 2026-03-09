@@ -152,21 +152,22 @@ namespace ExpertBase.InferenceEngine
         {
             if (dataBaseThis == null) return;
 
-            var facts = dataBaseThis.dictionaryFacts.Values.ToList();
+            // Берем все уникальные Группы (Объекты) из базы
+            var groups = dataBaseThis.dictionaryFacts.Values
+                .Select(f => f.Group)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToList();
 
-            // Наполняем комбобоксы уникальными значениями из базы
-            cmbObject.DataSource = facts.Select(f => f.Group).Distinct().ToList();
-            cmbUnit.DataSource = facts.Select(f => f.Unit).Distinct().ToList();
-            cmbAttribute.DataSource = facts.Select(f => f.Atribute).Distinct().ToList();
-            cmbValue.DataSource = facts.Select(f => f.Value).Distinct().ToList();
-
-            // Настраиваем режим автодополнения (как в форме правил)
-            foreach (var cb in new[] { cmbObject, cmbUnit, cmbAttribute, cmbValue })
+            // Настраиваем режим для всех ComboBox
+            foreach (var cb in new[] { cmbObject, cmbUnit, cmbAtribute, cmbValue })
             {
                 cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cb.SelectedIndex = -1; // Чтобы изначально были пустыми
             }
+
+            // Загружаем первый уровень. Это вызовет цепочку событий SelectedIndexChanged
+            cmbObject.DataSource = groups;
         }
 
         // Метод обновленния обновленния данных базы знаний
@@ -180,11 +181,12 @@ namespace ExpertBase.InferenceEngine
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Кнопка - добавить факт в рабочую память
+        private void btnAddFact_Click(object sender, EventArgs e)
         {
             // 1. Проверяем, что во всех комбобоксах что-то выбрано
             if (string.IsNullOrWhiteSpace(cmbObject.Text) || string.IsNullOrWhiteSpace(cmbUnit.Text) ||
-                string.IsNullOrWhiteSpace(cmbAttribute.Text) || string.IsNullOrWhiteSpace(cmbValue.Text))
+                string.IsNullOrWhiteSpace(cmbAtribute.Text) || string.IsNullOrWhiteSpace(cmbValue.Text))
             {
                 MessageBox.Show("Пожалуйста, выберите все параметры факта.");
                 return;
@@ -195,7 +197,7 @@ namespace ExpertBase.InferenceEngine
             var foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
                 f.Group == cmbObject.Text &&
                 f.Unit == cmbUnit.Text &&
-                f.Atribute == cmbAttribute.Text &&
+                f.Atribute == cmbAtribute.Text &&
                 f.Value == cmbValue.Text.Trim());
 
             // 3. Если нашли - добавляем в рабочую память
@@ -214,6 +216,54 @@ namespace ExpertBase.InferenceEngine
             {
                 MessageBox.Show("Такой факт не найден в базе знаний! Проверьте правильность выбора.");
             }
+        }
+
+        // Обработчик события - Выбрали Объект -> Фильтруем Узлы
+        private void cmbObject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedGroup = cmbObject.Text;
+
+            var units = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup)
+                .Select(f => f.Unit)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToList();
+
+            cmbUnit.DataSource = units; // Это автоматически вызовет cmbUnit_SelectedIndexChanged
+        }
+
+        // Выбрали Узел -> Фильтруем Атрибуты
+        private void cmbUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedGroup = cmbObject.Text;
+            string selectedUnit = cmbUnit.Text;
+
+            var attributes = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup && f.Unit == selectedUnit)
+                .Select(f => f.Atribute)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToList();
+
+            cmbAtribute.DataSource = attributes;
+        }
+
+        // Выбрали Атрибут -> Фильтруем Значения
+        private void cmbAttribute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedGroup = cmbObject.Text;
+            string selectedUnit = cmbUnit.Text;
+            string selectedAttr = cmbAtribute.Text;
+
+            var values = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup && f.Unit == selectedUnit && f.Atribute == selectedAttr)
+                .Select(f => f.Value)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToList();
+
+            cmbValue.DataSource = values;
         }
     }
 }
