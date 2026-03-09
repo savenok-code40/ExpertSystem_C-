@@ -218,7 +218,7 @@ namespace ExpertBase.InferenceEngine
             }
         }
 
-        // Обработчик события - Выбрали Объект -> Фильтруем Узлы
+        // Обработчик события изменния значения - Выбрали Объект -> Фильтруем Узлы
         private void cmbObject_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedGroup = cmbObject.Text;
@@ -233,7 +233,7 @@ namespace ExpertBase.InferenceEngine
             cmbUnit.DataSource = units; // Это автоматически вызовет cmbUnit_SelectedIndexChanged
         }
 
-        // Выбрали Узел -> Фильтруем Атрибуты
+        // Обработчик события изменния значения - Выбрали Узел -> Фильтруем Атрибуты
         private void cmbUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedGroup = cmbObject.Text;
@@ -249,7 +249,7 @@ namespace ExpertBase.InferenceEngine
             cmbAtribute.DataSource = attributes;
         }
 
-        // Выбрали Атрибут -> Фильтруем Значения
+        // Обработчик события изменния значения - Выбрали Атрибут -> Фильтруем Значения
         private void cmbAttribute_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedGroup = cmbObject.Text;

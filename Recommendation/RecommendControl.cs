@@ -105,6 +105,7 @@ namespace ExpertBase
                     var updated = editForm.CreateRecommendation(); // создаем временный объект
 
                     // переносим данные из него в selectedRec
+                    selectedRec.Name = updated.Name; // Теперь название не пропадет!
                     selectedRec.TargetFact = updated.TargetFact;
                     selectedRec.AdviceText = updated.AdviceText;
                     selectedRec.Priority = updated.Priority;

@@ -9,8 +9,10 @@ namespace ExpertBase
 {
     public class FactRecommend
     {
-        // Скрываем сам объект, так как он не может быть отрисован в ячейке адекватно
-        [Browsable(false)] // атрибут нужен , чтобы в датаГрид не создал колонку
+        [DisplayName("Название")] // Это будет видно в таблице
+        public string Name { get; set; } = string.Empty;
+
+        [Browsable(false)]
         public Fact TargetFact { get; set; } = new Fact();
 
         [DisplayName("Рекомендация")]
@@ -19,14 +21,16 @@ namespace ExpertBase
         [DisplayName("Приоритет")]
         public int Priority { get; set; }
 
-        [DisplayName("Связанный факт")]  // Это свойство "вытягивает" актуальную строку из объекта Fact
+        [DisplayName("Связанный факт")]
         public string TargetFactDisplay => TargetFact?.ToString() ?? "Не выбран";
 
         public FactRecommend() { }
 
-        public FactRecommend(Fact targetFact, string adviceText, int priority)
+        // Обновленный конструктор
+        public FactRecommend(Fact targetFact, string name, string adviceText, int priority)
         {
             TargetFact = targetFact;
+            Name = name;
             AdviceText = adviceText;
             Priority = priority;
         }

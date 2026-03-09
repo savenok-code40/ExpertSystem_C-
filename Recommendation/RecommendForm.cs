@@ -15,6 +15,8 @@ namespace ExpertBase
         private DataBase dataBaseThis; // хранит ссылку на базу данных
 
         private string initialFactString = string.Empty; // Нужно при проверке на дубликат. Запоминает при редактировании какой факт был.
+
+        private bool _isLoading = false; // флаг, предахронитель, чтобы события фильтрации при открытии формы редактирования сразу не сработали 
         public Fact? SelectedFact { get; private set; }
 
         // Свойства для новых полей UI
@@ -42,17 +44,17 @@ namespace ExpertBase
                 return;
             }
 
-            // 2. ЗАЩИТА ОТ ДУБЛЕЙ
+            // 2. Защита от создания нескольких рекомендаций для одного факта
+            // Проверяем, изменился ли факт вообще
             if (txtTargetFact.Text != initialFactString)
             {
-                bool isDuplicate = dataBaseThis.listRecommendations // Проверяем, есть ли в базе рекомендация для ТАКОГО ЖЕ факта
-                    .Any(r => r.TargetFact.Equals(this.SelectedFact)); // Используем .Any и .Equals
+                bool isDuplicate = dataBaseThis.listRecommendations
+                    .Any(r => r.TargetFact.Equals(this.SelectedFact));
 
                 if (isDuplicate)
                 {
-                    MessageBox.Show("Для факта уже существует рекомендация в базе!",
-                                    "Дубликат", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Не даем сохранить, выходим из метода
+                    MessageBox.Show("Для этого факта уже существует рекомендация!", "Дубликат");
+                    return;
                 }
             }
 
@@ -78,57 +80,80 @@ namespace ExpertBase
         // Метод для передачи списка существующих фактов в форму для автозаполнения ComboBox'ов
         public void AutoCompleteFact(List<string> objects, List<string> units, List<string> attributes, List<string> values)
         {
-            // Предполагая, что имена ваших ComboBox'ов: cmbObject, cmbUnit, cmbAttribute
+            _isLoading = true;
             cmbObject.DataSource = objects;
-            cmbUnit.DataSource = units;
-            cmbAttribute.DataSource = attributes;
-            cmbValue.DataSource = values;
 
-            // Включение режима автозаполнения
-            cmbObject.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbObject.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbUnit.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbUnit.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbAttribute.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbAttribute.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbValue.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbValue.AutoCompleteSource = AutoCompleteSource.ListItems;
-        }
-
-        //Метод загружает данные существующей рекомендации
-        public void LoadRecommendData(FactRecommend rec)
-        {
-            // Заполняем текстовые поля из объекта рекомендации
-            textBoxName.Text = "Рекомендация"; // Или другое поле, если оно есть
-            numPriority.Value = rec.Priority;
-            richTextRecommendation.Text = rec.AdviceText;
-
-            // Устанавливаем значения в ComboBox для целевого факта
-            if (rec.TargetFact != null)
+            foreach (var cb in new[] { cmbObject, cmbUnit, cmbAtribute, cmbValue })
             {
-                this.SelectedFact = rec.TargetFact; // запоминаем объект
-                txtTargetFact.Text = rec.TargetFact.ToString(); 
-                txtTargetFact.BackColor = Color.LightGreen;
-                initialFactString = txtTargetFact.Text; // запоминаем что было в поле при открытии
+                cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
 
-                cmbObject.Text = rec.TargetFact.Group;
-                cmbUnit.Text = rec.TargetFact.Unit;
-                cmbAttribute.Text = rec.TargetFact.Atribute;
-                cmbValue.Text = rec.TargetFact.Value;
+            _isLoading = false;
+
+            // Если в базе есть данные, принудительно вызываем фильтр для первого элемента
+            if (cmbObject.Items.Count > 0)
+            {
+                cmbObject_SelectedIndexChanged(cmbObject, EventArgs.Empty);
             }
         }
 
+        //Метод загружает данные существующей рекомендации для редактирования
+        public void LoadRecommendData(FactRecommend recommendation)
+        {
+            if (recommendation.TargetFact == null) return;
+
+            // 1. Загружаем простые текстовые поля и приоритет
+            _isLoading = true; // Блокируем фильтры на время первичной записи
+            richTextRecommendation.Text = recommendation.AdviceText;
+            textBoxName.Text = recommendation.Name;
+            numPriority.Value = (decimal)recommendation.Priority;
+
+            // 2. КАСКАДНАЯ ЗАГРУЗКА ФАКТА (устанавливаем по цепочке)
+
+            // Шаг 2.1: ОБЪЕКТ
+            cmbObject.Text = recommendation.TargetFact.Group;
+            _isLoading = false;
+            cmbObject_SelectedIndexChanged(cmbObject, EventArgs.Empty); // Наполнили cmbUnit
+
+            // Шаг 2.2: УЗЕЛ
+            _isLoading = true;
+            cmbUnit.Text = recommendation.TargetFact.Unit;
+            _isLoading = false;
+            cmbUnit_SelectedIndexChanged(cmbUnit, EventArgs.Empty); // Наполнили cmbAtribute
+
+            // Шаг 2.3: АТРИБУТ
+            _isLoading = true;
+            cmbAtribute.Text = recommendation.TargetFact.Atribute;
+            _isLoading = false;
+            cmbAtribute_SelectedIndexChanged(cmbAtribute, EventArgs.Empty); // Наполнили cmbValue
+
+            // Шаг 2.4: ЗНАЧЕНИЕ
+            _isLoading = true;
+            cmbValue.Text = recommendation.TargetFact.Value;
+            _isLoading = false;
+
+            // 3. ФИНАЛИЗАЦИЯ (для защиты от дублей и визуализации)
+            this.SelectedFact = recommendation.TargetFact;
+            this.initialFactString = recommendation.TargetFact.ToString();
+
+            txtTargetFact.Text = initialFactString;
+            txtTargetFact.BackColor = Color.LightGreen;
+        }
+
+        // Метод создает объект - рекомендация
         public FactRecommend CreateRecommendation()
         {
             // Возвращаем объект нашего нового класса
-            return new FactRecommend(SelectedFact!, AdviceText, Priority);
+            return new FactRecommend(SelectedFact!, RecName, AdviceText, Priority);
         }
-
+        
+        // Кнопка - подтвердить факт
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             // 1. Валидация выбора в комбобоксах
             if (cmbObject.SelectedItem == null || cmbUnit.SelectedItem == null ||
-                cmbAttribute.SelectedItem == null || string.IsNullOrWhiteSpace(cmbValue.Text))
+                cmbAtribute.SelectedItem == null || string.IsNullOrWhiteSpace(cmbValue.Text))
             {
                 MessageBox.Show("Заполните все поля для поиска факта.");
                 return;
@@ -138,7 +163,7 @@ namespace ExpertBase
             Fact foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
                 f.Group == cmbObject.Text &&
                 f.Unit == cmbUnit.Text &&
-                f.Atribute == cmbAttribute.Text &&
+                f.Atribute == cmbAtribute.Text &&
                 f.Value == cmbValue.Text.Trim());
 
             // 3. Результат поиска
@@ -157,6 +182,50 @@ namespace ExpertBase
                 this.SelectedFact = null;
             }
 
+        }
+
+        // Обработчик события изменния значения - Выбрали Объект -> Фильтруем Узлы
+        private void cmbObject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isLoading || dataBaseThis == null) return;
+
+            string selectedGroup = cmbObject.Text;
+            var filteredUnits = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup)
+                .Select(f => f.Unit).Distinct().OrderBy(s => s).ToList();
+
+            cmbUnit.DataSource = filteredUnits;
+        }
+
+        // Обработчик события изменния значения - Выбрали Узел -> Фильтруем Атрибуты
+        private void cmbUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isLoading || dataBaseThis == null) return;
+
+            string selectedGroup = cmbObject.Text;
+            string selectedUnit = cmbUnit.Text;
+
+            var filteredAttributes = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup && f.Unit == selectedUnit)
+                .Select(f => f.Atribute).Distinct().OrderBy(s => s).ToList();
+
+            cmbAtribute.DataSource = filteredAttributes;
+        }
+
+        // Обработчик события изменния значения - Выбрали Атрибут -> Фильтруем Значения
+        private void cmbAtribute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isLoading || dataBaseThis == null) return;
+
+            string selectedGroup = cmbObject.Text;
+            string selectedUnit = cmbUnit.Text;
+            string selectedAttr = cmbAtribute.Text;
+
+            var filteredValues = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup && f.Unit == selectedUnit && f.Atribute == selectedAttr)
+                .Select(f => f.Value).Distinct().OrderBy(s => s).ToList();
+
+            cmbValue.DataSource = filteredValues;
         }
     }
 }
