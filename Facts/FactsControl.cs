@@ -165,9 +165,23 @@ namespace ExpertBase
 
                 factForm.LoadFactData(selectedFact); // Передаем в форму данные выделенного факта для отображения
 
-                if (factForm.ShowDialog() == DialogResult.OK) // нажимаем ОК после редактирования
+                if (factForm.ShowDialog() == DialogResult.OK)
                 {
-                    // обновляем факт selectedFact новыми данными из формы                     
+                    // 1. СНАЧАЛА ПРОВЕРЯЕМ данные из формы, не трогая selectedFact
+                    bool isDuplicate = factsBindingList.Any(f =>
+                        f != selectedFact &&
+                        f.Group == factForm.FactObject &&
+                        f.Unit == factForm.FactUnit &&
+                        f.Atribute == factForm.FactAttribute &&
+                        f.Value == factForm.FactValue);
+
+                    if (isDuplicate)
+                    {
+                        MessageBox.Show("Такой факт уже существует в базе!", "Дубликат", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Теперь выходим ДО того, как испортили данные в selectedFact
+                    }
+
+                    // 2. И ТОЛЬКО ЕСЛИ ВСЁ ОК, обновляем поля существующего объекта
                     selectedFact.Group = factForm.FactObject;
                     selectedFact.Unit = factForm.FactUnit;
                     selectedFact.Atribute = factForm.FactAttribute;
@@ -177,10 +191,7 @@ namespace ExpertBase
                     selectedFact.FunModbus = factForm.FunModbus;
                     selectedFact.RegAddr = factForm.AddrReg;
 
-                    // Так как мы изменили свойства объекта, который уже находится в factsBindingList и dataBaseThis.dictionaryFacts, UI обновится автоматически                  
-                    
-                    factsBindingList!.ResetBindings(); // Иногда требуется для гарантии обновления UI. Вызываем с проверкой на null
-                                                       // использование !, говорит компилятору "довериться мне" по риску пустой ссылки
+                    factsBindingList!.ResetBindings();
                 }
             }
 
