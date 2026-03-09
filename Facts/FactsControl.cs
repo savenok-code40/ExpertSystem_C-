@@ -190,15 +190,7 @@ namespace ExpertBase
                     selectedFact.Type = factForm.FactType;
                     selectedFact.FunModbus = factForm.FunModbus;
                     selectedFact.RegAddr = factForm.AddrReg;
-
-                    factsBindingList!.ResetBindings();
                 }
-            }
-
-            // Обновляем в правилах и рекомендациях 
-            if (this.ParentForm is MainForm main)
-            {
-                main.RefreshAllGrids(); // Даем команду главной форме обновить всё
             }
         }
 

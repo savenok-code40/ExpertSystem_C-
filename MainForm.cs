@@ -86,15 +86,5 @@ namespace ExpertBase
                 inferenceControl1.RefreshData(); // обновляем базу знаний в ней
             }
         }
-
-        // Обновляем все таблица при правке фактов
-        public void RefreshAllGrids()
-        {
-            // Проверяем на null, чтобы программа не упала при старте
-            factsControl1.RefreshDataBinding();
-            rulesControl1.RefreshDataBinding();
-            recommendControl1.RefreshDataBinding();
-            inferenceControl1.RefreshData();
-        }
     }
 }
