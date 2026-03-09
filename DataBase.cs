@@ -20,10 +20,10 @@ namespace ExpertBase
         public Dictionary<int, Fact> dictionaryFacts { get; set; } = new Dictionary<int, Fact>();
         public Dictionary<int, Rule> dictionaryRules { get; set; } = new Dictionary<int, Rule>();
 
-        // Список с рекомендациями
+        // Список для хранения рекомендаций
         public List<FactRecommend> listRecommendations { get; set; } = new List<FactRecommend>();
 
-        // Метод для регистрации рекомендации
+        // Метод для добавления рекомендации
         public void AddRecommendation(FactRecommend newRec)
         {
             listRecommendations.Add(newRec); // просто добавляем в список. JsonSerializer сам позаботится о вложенном объекте TargetFact   
@@ -70,21 +70,51 @@ namespace ExpertBase
             if (File.Exists(filePath))
             {
                 string jsonString = File.ReadAllText(filePath);
-
-                // Десериализуем данные обратно в новый временный экземпляр DataBase
                 var deserializeBase = JsonSerializer.Deserialize<DataBase>(jsonString);
 
-                // Копируем загруженные данные в текущий рабочий экземпляр DataBase
                 if (deserializeBase != null)
                 {
+                    // 1. Загружаем основные коллекции
                     dictionaryFacts = deserializeBase.dictionaryFacts;
                     dictionaryRules = deserializeBase.dictionaryRules;
-                    listRecommendations = deserializeBase.listRecommendations; // Копируем рекомендации
-                }              
-                
+                    listRecommendations = deserializeBase.listRecommendations;
+
+                    // 2. РЕАНИМАЦИЯ: Сшиваем ссылки в Правилах
+                    foreach (var rule in dictionaryRules.Values)
+                    {
+                        // Исправляем посылки (Premises)
+                        for (int i = 0; i < rule.listPremise.Count; i++)
+                        {
+                            // Ищем оригинал в словаре по ID (самый надежный способ)
+                            if (dictionaryFacts.TryGetValue(rule.listPremise[i].ID, out var originalFact))
+                            {
+                                rule.listPremise[i] = originalFact; // Заменяем клон на оригинал
+                            }
+                        }
+
+                        // Исправляем заключения (Conclusions)
+                        for (int i = 0; i < rule.listConclusion.Count; i++)
+                        {
+                            if (dictionaryFacts.TryGetValue(rule.listConclusion[i].ID, out var originalFact))
+                            {
+                                rule.listConclusion[i] = originalFact;
+                            }
+                        }
+                    }
+
+                    // 3. РЕАНИМАЦИЯ: Сшиваем ссылки в Рекомендациях
+                    foreach (var rec in listRecommendations)
+                    {
+                        if (rec.TargetFact != null && dictionaryFacts.TryGetValue(rec.TargetFact.ID, out var originalFact))
+                        {
+                            rec.TargetFact = originalFact;
+                        }
+                    }
+                }
+
                 // если в словаре больше 0 элементов, то ищем max индекс и счетчик устанавливаем на max+1, иначе 1
-                nextFactId = dictionaryFacts.Count > 0 ? dictionaryFacts.Keys.Max() + 1 : 1; 
-                nextRuleId = dictionaryRules.Count > 0 ? dictionaryRules.Keys.Max() + 1 : 1;             
+                nextFactId = dictionaryFacts.Count > 0 ? dictionaryFacts.Keys.Max() + 1 : 1;
+                nextRuleId = dictionaryRules.Count > 0 ? dictionaryRules.Keys.Max() + 1 : 1;
             }
         }
     }        

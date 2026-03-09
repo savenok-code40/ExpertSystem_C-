@@ -14,10 +14,11 @@ namespace ExpertBase
         {
             InitializeComponent();
 
-            factsControl1.InitializeDatabase(dataBase); // factsControl1 получает ссылку на загруженную базу
-            rulesControl1.InitializeData(dataBase); // тоже rulesControl1
-            inferenceControl1.InitializeDataBase(dataBase); // и inferenceControl1
-            recommendControl1.InitializeData(dataBase); // тоже для контрола рекомендаций
+            // Контролы получают ссылки на актуальную базу
+            factsControl1.InitializeDatabase(dataBase); 
+            rulesControl1.InitializeData(dataBase); 
+            inferenceControl1.InitializeDataBase(dataBase); 
+            recommendControl1.InitializeData(dataBase); 
         }
 
         // Обработчик пункта меню Загрузить
@@ -68,6 +69,7 @@ namespace ExpertBase
             }
         }
 
+        // Обработчик пункта меню - Modbus
         private void modbusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormModbus modbusForm = new FormModbus(); // создаем форму модбас
@@ -75,7 +77,7 @@ namespace ExpertBase
             modbusForm.ShowDialog(); // отображаем форму как диалог
         }
 
-        // обработчик события перехода на вкладку Работа - обновляет базу 
+        // Обработчик события перехода на вкладку Работа - обновляет базу 
         private void tabControl_General_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Если выбрали вкладку "Работа" 
