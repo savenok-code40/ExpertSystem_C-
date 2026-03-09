@@ -13,7 +13,7 @@ namespace ExpertBase
     public partial class FactsControl : UserControl
     {
         // Знак ? говорит компилятору, что поля при создании FactsControl могут быть Null
-        private DataBase? dataBaseFC; // поле, которое будет инициализировано извне (FC - facts control)
+        private DataBase? dataBaseThis; // получает (хранит) ссылку на базу знаний
 
         private BindingList<Fact>? factsBindingList; // закрытая переменная для хранения базы фактов и наполения DataGrid                                                   
         public BindingList<Fact>? FactsBindingList => factsBindingList; // Публичное свойство закрытой factsBindingList
@@ -27,20 +27,20 @@ namespace ExpertBase
         // Методы для получения экземпляра DataBase и отображения его в таблице DataGrid
         public void InitializeDatabase(DataBase db)
         {
-            dataBaseFC = db;
-            factsBindingList = new BindingList<Fact>(dataBaseFC.dictionaryFacts.Values.ToList()); // Инициализируем BindingList текущим списком фактов в БД 
+            dataBaseThis = db;
+            factsBindingList = new BindingList<Fact>(dataBaseThis.dictionaryFacts.Values.ToList()); // Инициализируем BindingList текущим списком фактов в БД 
             dataGridFacts.DataSource = factsBindingList; // Устанавливаем источник данных для DataGridView             
         }   
 
         // Метод для обновления таблицы DataGrid после загрузки базы из файла
         public void RefreshDataBinding()
         {
-            if (dataBaseFC != null && factsBindingList != null)
+            if (dataBaseThis != null && factsBindingList != null)
             {                
                 factsBindingList.Clear(); // Очищаем существующий список
 
                 // Добавляем все актуальные элементы из базы данных в существующий список
-                foreach (var fact in dataBaseFC.dictionaryFacts.Values.ToList())
+                foreach (var fact in dataBaseThis.dictionaryFacts.Values.ToList())
                 {
                     factsBindingList.Add(fact);
                 }
@@ -89,43 +89,59 @@ namespace ExpertBase
                         return; // Прерываем добавление
                     }
 
-                    // Добавьте проверку для dataBaseFC здесь:
-                    if (dataBaseFC != null && factsBindingList != null)
+                    // Добавьте проверку для dataBaseThis здесь:
+                    if (dataBaseThis != null && factsBindingList != null)
                     {
                         // Теперь безопасно добавляем факт в базу данных (в словарь с генерацией ID) и  в BindingList
-                        dataBaseFC.AddFact(newFact); 
+                        dataBaseThis.AddFact(newFact); 
                         factsBindingList.Add(newFact); 
                     }
                     else
                     {
-                        MessageBox.Show("Невозможно добавить факт: Не инициализирована  dataBaseFC", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Невозможно добавить факт: Не инициализирована  dataBaseThis", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }                   
                 }
             }
         }
 
-        // Обработчик кнопки "Удалить"
+        // Обработчик кнопки "Удалить" с защитой, если применен в правилах и рекомендациях, то удалить нельзя
         private void btnDeleteFact_Click(object sender, EventArgs e)
         {
-            // Добавляем проверку инициализации полей, как мы делали ранее
-            if (dataBaseFC == null || factsBindingList == null)
+            // 1. Защита от Null (ваша проверка инициализации)
+            if (dataBaseThis == null || factsBindingList == null)
             {
                 MessageBox.Show("База данных не инициализирована.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (dataGridFacts.SelectedRows.Count > 0)
+            // 2. Проверка, что в таблице что-то выбрано
+            if (dataGridFacts.SelectedRows.Count > 0 && dataGridFacts.CurrentRow.DataBoundItem is Fact factToRemove)
             {
-                // Используем сопоставление с образцом: if (выражение is (есть) Тип имя_переменной)                
-                if (dataGridFacts.CurrentRow.DataBoundItem is Fact factToRemove)
-                {                 
-                    dataBaseFC.dictionaryFacts.Remove(factToRemove.ID);
-                    factsBindingList.Remove(factToRemove);
-                }
-                else
+                // 3. ПРОВЕРКА ЦЕЛОСТНОСТИ (Новый блок)
+                // Проверяем, не используется ли этот объект в правилах
+                bool isUsedInRules = dataBaseThis.dictionaryRules.Values
+                    .Any(r => r.listPremise.Contains(factToRemove) ||
+                              r.listConclusion.Contains(factToRemove));
+
+                // Проверяем использование в рекомендациях
+                bool isUsedInRecs = dataBaseThis.listRecommendations
+                    .Any(rec => rec.TargetFact.Equals(factToRemove));
+
+                if (isUsedInRules || isUsedInRecs)
                 {
-                    MessageBox.Show("Не выбран factToRemove ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Нельзя удалить факт! Он используется в правилах или рекомендациях.\n" +
+                                    "Сначала удалите или отредактируйте связанные с ним правила/советы.",
+                                    "Ошибка целостности", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return; // Прерываем удаление
                 }
+
+                // 4. Если всё чисто — удаляем (ваш проверенный код)
+                dataBaseThis.dictionaryFacts.Remove(factToRemove.ID);
+                factsBindingList.Remove(factToRemove);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите факт для удаления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -142,6 +158,11 @@ namespace ExpertBase
             // открываем окно (форму создания/редактирования факта) 
             using (var factForm = new FactForm())
             {                
+                if (factsBindingList != null)
+                {
+                    factForm.AutoFillComboBoxes(factsBindingList.ToList()); // автозаполнения comboBox
+                } 
+
                 factForm.LoadFactData(selectedFact); // Передаем в форму данные выделенного факта для отображения
 
                 if (factForm.ShowDialog() == DialogResult.OK) // нажимаем ОК после редактирования
@@ -156,11 +177,17 @@ namespace ExpertBase
                     selectedFact.FunModbus = factForm.FunModbus;
                     selectedFact.RegAddr = factForm.AddrReg;
 
-                    // Так как мы изменили свойства объекта, который уже находится в factsBindingList и dataBaseFC.dictionaryFacts, UI обновится автоматически                  
+                    // Так как мы изменили свойства объекта, который уже находится в factsBindingList и dataBaseThis.dictionaryFacts, UI обновится автоматически                  
                     
                     factsBindingList!.ResetBindings(); // Иногда требуется для гарантии обновления UI. Вызываем с проверкой на null
                                                        // использование !, говорит компилятору "довериться мне" по риску пустой ссылки
                 }
+            }
+
+            // Обновляем в правилах и рекомендациях 
+            if (this.ParentForm is MainForm main)
+            {
+                main.RefreshAllGrids(); // Даем команду главной форме обновить всё
             }
         }
 

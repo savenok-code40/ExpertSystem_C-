@@ -130,6 +130,7 @@
             tabControl_General.SelectedIndex = 0;
             tabControl_General.Size = new Size(962, 488);
             tabControl_General.TabIndex = 1;
+            tabControl_General.SelectedIndexChanged += tabControl_General_SelectedIndexChanged;
             // 
             // tabPage1_Edit
             // 
@@ -301,10 +302,12 @@
         private TabPage tabPage5;
         private Panel panel1;
         private FileSystemWatcher fileSystemWatcher1;
-        private FactsControl factsControl1;
-        private RulesControl rulesControl1;
+        //private FactsControl factsControl1;
+        //private RulesControl rulesControl1;
         private ToolStripMenuItem modbusToolStripMenuItem;
         private InferenceEngine.InferenceControl inferenceControl1;
         private RecommendControl recommendControl1;
+        private FactsControl factsControl1;
+        private RulesControl rulesControl1;
     }
 }

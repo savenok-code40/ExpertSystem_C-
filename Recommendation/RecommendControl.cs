@@ -14,7 +14,7 @@ namespace ExpertBase
 {
     public partial class RecommendControl : UserControl
     {
-        private DataBase dataBaseThis; // Поле класса
+        private DataBase dataBaseThis; // получает (хранит) ссылку на базу знаний
         private BindingList<FactRecommend> recommendsList; // Поле класса
 
         public RecommendControl()

@@ -31,8 +31,6 @@
             btnCheckTarget = new Button();
             cmbChooseTarget = new ComboBox();
             lbChooseBox = new Label();
-            listBoxFactsInit = new ListBox();
-            lbFactsInit = new Label();
             lbFactsWork = new Label();
             listBoxFactsWork = new ListBox();
             ritchBoxOutputChain = new RichTextBox();
@@ -40,6 +38,18 @@
             splitContainer1 = new SplitContainer();
             tableLayoutPanel2 = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            labelObject = new Label();
+            labelUnit = new Label();
+            labelAtribute = new Label();
+            labelValue = new Label();
+            flowLayoutPanel3 = new FlowLayoutPanel();
+            cmbObject = new ComboBox();
+            cmbUnit = new ComboBox();
+            cmbAttribute = new ComboBox();
+            cmbValue = new ComboBox();
+            flowLayoutPanel4 = new FlowLayoutPanel();
+            button1 = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             richBoxRecommend = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -48,6 +58,9 @@
             splitContainer1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
+            flowLayoutPanel2.SuspendLayout();
+            flowLayoutPanel3.SuspendLayout();
+            flowLayoutPanel4.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -80,45 +93,25 @@
             lbChooseBox.TabIndex = 2;
             lbChooseBox.Text = "Выбрать цель:";
             // 
-            // listBoxFactsInit
-            // 
-            listBoxFactsInit.Dock = DockStyle.Fill;
-            listBoxFactsInit.FormattingEnabled = true;
-            listBoxFactsInit.ItemHeight = 15;
-            listBoxFactsInit.Location = new Point(3, 169);
-            listBoxFactsInit.Name = "listBoxFactsInit";
-            listBoxFactsInit.Size = new Size(458, 123);
-            listBoxFactsInit.TabIndex = 3;
-            listBoxFactsInit.MouseDoubleClick += listBoxFactsInit_MouseDoubleClick;
-            // 
-            // lbFactsInit
-            // 
-            lbFactsInit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lbFactsInit.AutoSize = true;
-            lbFactsInit.Location = new Point(3, 151);
-            lbFactsInit.Name = "lbFactsInit";
-            lbFactsInit.Size = new Size(204, 15);
-            lbFactsInit.TabIndex = 4;
-            lbFactsInit.Text = "Добавить факты в рабочую память:";
-            // 
             // lbFactsWork
             // 
-            lbFactsWork.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbFactsWork.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             lbFactsWork.AutoSize = true;
-            lbFactsWork.Location = new Point(3, 310);
+            lbFactsWork.Location = new Point(3, 0);
+            lbFactsWork.MinimumSize = new Size(300, 0);
             lbFactsWork.Name = "lbFactsWork";
-            lbFactsWork.Size = new Size(147, 15);
+            lbFactsWork.Size = new Size(300, 29);
             lbFactsWork.TabIndex = 6;
-            lbFactsWork.Text = "Факты в рабочей памяти:";
+            lbFactsWork.Text = "Рабочая памяти:";
             // 
             // listBoxFactsWork
             // 
             listBoxFactsWork.Dock = DockStyle.Fill;
             listBoxFactsWork.FormattingEnabled = true;
             listBoxFactsWork.ItemHeight = 15;
-            listBoxFactsWork.Location = new Point(3, 328);
+            listBoxFactsWork.Location = new Point(3, 279);
             listBoxFactsWork.Name = "listBoxFactsWork";
-            listBoxFactsWork.Size = new Size(458, 124);
+            listBoxFactsWork.Size = new Size(458, 173);
             listBoxFactsWork.TabIndex = 5;
             listBoxFactsWork.MouseDoubleClick += listBoxFactsWork_MouseDoubleClick;
             // 
@@ -168,20 +161,20 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Controls.Add(lbChooseBox, 0, 0);
             tableLayoutPanel2.Controls.Add(listBoxFactsWork, 0, 5);
-            tableLayoutPanel2.Controls.Add(lbFactsWork, 0, 4);
-            tableLayoutPanel2.Controls.Add(lbFactsInit, 0, 2);
-            tableLayoutPanel2.Controls.Add(listBoxFactsInit, 0, 3);
             tableLayoutPanel2.Controls.Add(flowLayoutPanel1, 0, 1);
+            tableLayoutPanel2.Controls.Add(flowLayoutPanel2, 0, 2);
+            tableLayoutPanel2.Controls.Add(flowLayoutPanel3, 0, 3);
+            tableLayoutPanel2.Controls.Add(flowLayoutPanel4, 0, 4);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(5, 0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 6;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle());
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 22.4299068F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 28.9719639F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 48.59813F));
             tableLayoutPanel2.Size = new Size(464, 455);
             tableLayoutPanel2.TabIndex = 7;
             // 
@@ -193,8 +186,129 @@
             flowLayoutPanel1.Location = new Point(3, 33);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(0, 5, 0, 0);
-            flowLayoutPanel1.Size = new Size(458, 100);
+            flowLayoutPanel1.Size = new Size(458, 75);
             flowLayoutPanel1.TabIndex = 3;
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Controls.Add(labelObject);
+            flowLayoutPanel2.Controls.Add(labelUnit);
+            flowLayoutPanel2.Controls.Add(labelAtribute);
+            flowLayoutPanel2.Controls.Add(labelValue);
+            flowLayoutPanel2.Dock = DockStyle.Fill;
+            flowLayoutPanel2.Location = new Point(3, 114);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(458, 24);
+            flowLayoutPanel2.TabIndex = 7;
+            // 
+            // labelObject
+            // 
+            labelObject.Anchor = AnchorStyles.Bottom;
+            labelObject.AutoSize = true;
+            labelObject.Location = new Point(3, 0);
+            labelObject.MinimumSize = new Size(110, 0);
+            labelObject.Name = "labelObject";
+            labelObject.Size = new Size(110, 15);
+            labelObject.TabIndex = 38;
+            labelObject.Text = "Объект:";
+            // 
+            // labelUnit
+            // 
+            labelUnit.AutoSize = true;
+            labelUnit.Location = new Point(119, 0);
+            labelUnit.MinimumSize = new Size(110, 0);
+            labelUnit.Name = "labelUnit";
+            labelUnit.Size = new Size(110, 15);
+            labelUnit.TabIndex = 40;
+            labelUnit.Text = "Узел:";
+            // 
+            // labelAtribute
+            // 
+            labelAtribute.AutoSize = true;
+            labelAtribute.Location = new Point(235, 0);
+            labelAtribute.MinimumSize = new Size(110, 0);
+            labelAtribute.Name = "labelAtribute";
+            labelAtribute.Size = new Size(110, 15);
+            labelAtribute.TabIndex = 43;
+            labelAtribute.Text = "Атрибут:";
+            // 
+            // labelValue
+            // 
+            labelValue.AutoSize = true;
+            labelValue.Location = new Point(351, 0);
+            labelValue.Name = "labelValue";
+            labelValue.Size = new Size(63, 15);
+            labelValue.TabIndex = 44;
+            labelValue.Text = "Значение:";
+            // 
+            // flowLayoutPanel3
+            // 
+            flowLayoutPanel3.Controls.Add(cmbObject);
+            flowLayoutPanel3.Controls.Add(cmbUnit);
+            flowLayoutPanel3.Controls.Add(cmbAttribute);
+            flowLayoutPanel3.Controls.Add(cmbValue);
+            flowLayoutPanel3.Dock = DockStyle.Fill;
+            flowLayoutPanel3.Location = new Point(3, 144);
+            flowLayoutPanel3.Name = "flowLayoutPanel3";
+            flowLayoutPanel3.Size = new Size(458, 99);
+            flowLayoutPanel3.TabIndex = 8;
+            // 
+            // cmbObject
+            // 
+            cmbObject.FormattingEnabled = true;
+            cmbObject.Location = new Point(3, 2);
+            cmbObject.Margin = new Padding(3, 2, 3, 2);
+            cmbObject.Name = "cmbObject";
+            cmbObject.Size = new Size(110, 23);
+            cmbObject.TabIndex = 39;
+            // 
+            // cmbUnit
+            // 
+            cmbUnit.FormattingEnabled = true;
+            cmbUnit.Location = new Point(119, 2);
+            cmbUnit.Margin = new Padding(3, 2, 3, 2);
+            cmbUnit.Name = "cmbUnit";
+            cmbUnit.Size = new Size(110, 23);
+            cmbUnit.TabIndex = 41;
+            // 
+            // cmbAttribute
+            // 
+            cmbAttribute.FormattingEnabled = true;
+            cmbAttribute.Location = new Point(235, 2);
+            cmbAttribute.Margin = new Padding(3, 2, 3, 2);
+            cmbAttribute.Name = "cmbAttribute";
+            cmbAttribute.Size = new Size(104, 23);
+            cmbAttribute.TabIndex = 42;
+            // 
+            // cmbValue
+            // 
+            cmbValue.FormattingEnabled = true;
+            cmbValue.Location = new Point(345, 2);
+            cmbValue.Margin = new Padding(3, 2, 3, 2);
+            cmbValue.Name = "cmbValue";
+            cmbValue.Size = new Size(110, 23);
+            cmbValue.TabIndex = 45;
+            // 
+            // flowLayoutPanel4
+            // 
+            flowLayoutPanel4.Controls.Add(lbFactsWork);
+            flowLayoutPanel4.Controls.Add(button1);
+            flowLayoutPanel4.Dock = DockStyle.Fill;
+            flowLayoutPanel4.Location = new Point(3, 249);
+            flowLayoutPanel4.Name = "flowLayoutPanel4";
+            flowLayoutPanel4.Size = new Size(458, 24);
+            flowLayoutPanel4.TabIndex = 9;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Location = new Point(309, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(105, 23);
+            button1.TabIndex = 46;
+            button1.Text = "Добавить факт";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -239,6 +353,11 @@
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel2.ResumeLayout(false);
+            flowLayoutPanel2.PerformLayout();
+            flowLayoutPanel3.ResumeLayout(false);
+            flowLayoutPanel4.ResumeLayout(false);
+            flowLayoutPanel4.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
@@ -249,8 +368,6 @@
         private Button btnCheckTarget;
         private ComboBox cmbChooseTarget;
         private Label lbChooseBox;
-        private ListBox listBoxFactsInit;
-        private Label lbFactsInit;
         private Label lbFactsWork;
         private ListBox listBoxFactsWork;
         private RichTextBox ritchBoxOutputChain;
@@ -260,5 +377,17 @@
         private TableLayoutPanel tableLayoutPanel2;
         private FlowLayoutPanel flowLayoutPanel1;
         private RichTextBox richBoxRecommend;
+        private Label labelAtribute;
+        private Label labelUnit;
+        private Label labelObject;
+        private Label labelValue;
+        private ComboBox cmbAttribute;
+        private ComboBox cmbValue;
+        private ComboBox cmbUnit;
+        private ComboBox cmbObject;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private Button button1;
+        private FlowLayoutPanel flowLayoutPanel3;
+        private FlowLayoutPanel flowLayoutPanel4;
     }
 }

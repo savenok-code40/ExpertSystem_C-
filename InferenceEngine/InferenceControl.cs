@@ -12,7 +12,7 @@ namespace ExpertBase.InferenceEngine
 {
     public partial class InferenceControl : UserControl
     {
-        DataBase db = new DataBase();   
+        private DataBase dataBaseThis; // получает (хранит) ссылку на базу знаний        
 
         public InferenceControl()
         {
@@ -22,7 +22,8 @@ namespace ExpertBase.InferenceEngine
         // Метод получения базы знаний. Вызываю в коде главной формы
         public void InitializeDataBase(DataBase db)
         {
-            this.db = db;   
+            this.dataBaseThis = db;
+            UpdateFacts(db.dictionaryFacts); // сразу заполняем списки
         }
 
         // Кнопка запуска прямого вывода
@@ -46,18 +47,18 @@ namespace ExpertBase.InferenceEngine
 
             DateTime startTime = DateTime.Now;
             ritchBoxOutputChain.Clear();
-            
+
             foreach (object item in listBoxFactsWork.Items)
             {
                 factsInMemory.Add((Fact)item);
             }
 
             // 2. Запуск прямого вывода
-            ForwardChain forwardChain = new ForwardChain(db);
+            ForwardChain forwardChain = new ForwardChain(dataBaseThis);
             forwardChain.ComputeForwardChain(factsInMemory, targetFact, sb);
 
             // 3. Поиск и вывод рекомендаций
-            var relevantAdvices = db.listRecommendations
+            var relevantAdvices = dataBaseThis.listRecommendations
                 .Where(rec => factsInMemory.Any(f => f.Equals(rec.TargetFact)))
                 .ToList();
 
@@ -72,14 +73,17 @@ namespace ExpertBase.InferenceEngine
             ritchBoxOutputChain.AppendText($"Время выполнения: {timeSpan.TotalMilliseconds:F0} мс");
         }
 
+        // метод обновляет списки в комбобоксах
         public void UpdateFacts(Dictionary<int, Fact> facts)
         {
+            if (facts == null) return; // не выполняем метод если нет объекта
+
             // Обновляем комбо бокс
             cmbChooseTarget.Items.Clear(); // очищаем комбобокс
 
             foreach (Fact f in facts.Values)
             {
-                if (f.Type == Fact.enTypeFact.Dinamic_OUT)
+                if ((f.Type == Fact.enTypeFact.Dinamic_OUT) || (f.Type == Fact.enTypeFact.Static))
                 {
                     cmbChooseTarget.Items.Add(f);
                 }
@@ -90,34 +94,14 @@ namespace ExpertBase.InferenceEngine
                 cmbChooseTarget.SelectedIndex = 0;
             }
 
-            // Обновляем ListBox исходных фактов
-            listBoxFactsInit.Items.Clear(); // очищаем
-
-            foreach (Fact f in facts.Values)
-            {
-                if (f.Type == Fact.enTypeFact.Static || f.Type == Fact.enTypeFact.Dinamic_IN)
-                {
-                    listBoxFactsInit.Items.Add(f);
-                }
-            }
-        }
-
-        // Двойной клик по факту в поле Исходные добавляет факт в рабочую память и удаляет из исходных
-        private void listBoxFactsInit_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listBoxFactsInit.SelectedIndex >= 0)
-            {
-                listBoxFactsWork.Items.Add(listBoxFactsInit.Items[listBoxFactsInit.SelectedIndex]); // добавить в рабочую память
-                listBoxFactsInit.Items.Remove(listBoxFactsInit.Items[listBoxFactsInit.SelectedIndex]); // удалить из исходных
-            }
+            this.AutoCompleteFacts(); // обновление comboBox 'ов
         }
 
         // Обратное действие - из рабочей памяти в список исходные
         private void listBoxFactsWork_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if(listBoxFactsWork.SelectedIndex >= 0)
+            if (listBoxFactsWork.SelectedIndex >= 0)
             {
-                listBoxFactsInit.Items.Add(listBoxFactsWork.Items[listBoxFactsWork.SelectedIndex]); // добавить в исходные
                 listBoxFactsWork.Items.Remove(listBoxFactsWork.Items[listBoxFactsWork.SelectedIndex]); // удалить из рабочей памяти
             }
 
@@ -160,6 +144,75 @@ namespace ExpertBase.InferenceEngine
 
                 // Разделитель между советами
                 richBoxRecommend.AppendText("----------------------------------\n");
+            }
+        }
+
+        // метод автозаполнения comboBox' ов
+        public void AutoCompleteFacts()
+        {
+            if (dataBaseThis == null) return;
+
+            var facts = dataBaseThis.dictionaryFacts.Values.ToList();
+
+            // Наполняем комбобоксы уникальными значениями из базы
+            cmbObject.DataSource = facts.Select(f => f.Group).Distinct().ToList();
+            cmbUnit.DataSource = facts.Select(f => f.Unit).Distinct().ToList();
+            cmbAttribute.DataSource = facts.Select(f => f.Atribute).Distinct().ToList();
+            cmbValue.DataSource = facts.Select(f => f.Value).Distinct().ToList();
+
+            // Настраиваем режим автодополнения (как в форме правил)
+            foreach (var cb in new[] { cmbObject, cmbUnit, cmbAttribute, cmbValue })
+            {
+                cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cb.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cb.SelectedIndex = -1; // Чтобы изначально были пустыми
+            }
+        }
+
+        // Метод обновленния обновленния данных базы знаний
+        public void RefreshData()
+        {
+            if (dataBaseThis != null)
+            {
+                UpdateFacts(dataBaseThis.dictionaryFacts); // обновляем списки для ListBox-ов и комбобокса цели
+
+                AutoCompleteFacts(); // обновляем списки автодополнения
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 1. Проверяем, что во всех комбобоксах что-то выбрано
+            if (string.IsNullOrWhiteSpace(cmbObject.Text) || string.IsNullOrWhiteSpace(cmbUnit.Text) ||
+                string.IsNullOrWhiteSpace(cmbAttribute.Text) || string.IsNullOrWhiteSpace(cmbValue.Text))
+            {
+                MessageBox.Show("Пожалуйста, выберите все параметры факта.");
+                return;
+            }
+
+            // 2. Ищем факт в базе (используем ваш проверенный FirstOrDefault)
+            // Важно: сравниваем именно строковые значения из комбобоксов
+            var foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
+                f.Group == cmbObject.Text &&
+                f.Unit == cmbUnit.Text &&
+                f.Atribute == cmbAttribute.Text &&
+                f.Value == cmbValue.Text.Trim());
+
+            // 3. Если нашли - добавляем в рабочую память
+            if (foundFact != null)
+            {
+                // Проверяем на дубликаты в самом списке, чтобы не добавлять одно и то же
+                if (!listBoxFactsWork.Items.Contains(foundFact))
+                {
+                    listBoxFactsWork.Items.Add(foundFact);
+
+                    // СРАЗУ обновляем рекомендации (наш "живой" отклик)
+                    //UpdateLiveRecommendations();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Такой факт не найден в базе знаний! Проверьте правильность выбора.");
             }
         }
     }

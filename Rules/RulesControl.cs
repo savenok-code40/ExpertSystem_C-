@@ -13,7 +13,7 @@ namespace ExpertBase
 {
     public partial class RulesControl : UserControl
     {
-        private DataBase dataBaseRC; // хранит ссылку на базу данных (RC - rule control)
+        private DataBase dataBaseThis; // получает (хранит) ссылку на базу знаний
 
         private BindingList<Rule> rulesList; // список для хранения правил и наполения DataGrid 
         public BindingList<Rule> RulesList => rulesList; // Публичное свойство списка rulesList
@@ -27,14 +27,14 @@ namespace ExpertBase
         //Метод вызываем в MainForm, после создания контрола правил
         public void InitializeData(DataBase db)
         {
-            dataBaseRC = db; //получаем ссылку на базу из MainForm 
+            dataBaseThis = db; //получаем ссылку на базу из MainForm 
             SetupDataGridRules(); // аналогично как для фактов заполняем DataGrid
         }
 
         //Метод заполняет таблицу DataGrid правилами
         private void SetupDataGridRules()
         {            
-            rulesList = new BindingList<Rule>(dataBaseRC.dictionaryRules.Values.ToList()); // Инициализируем BindingList из текущего списка правил в БД (словаре)
+            rulesList = new BindingList<Rule>(dataBaseThis.dictionaryRules.Values.ToList()); // Инициализируем BindingList из текущего списка правил в БД (словаре)
             
             dataGridRules.DataSource = rulesList; // Устанавливает источник данных для DataGridView
         }
@@ -43,15 +43,17 @@ namespace ExpertBase
         public void RefreshDataBinding()
         {
             // Проверка на null для dataBaseThis и rulesList
-            if (dataBaseRC != null && rulesList != null)
+            if (dataBaseThis != null && rulesList != null)
             {                
                 rulesList.Clear(); // Очищаем существующий список
 
                 // Добавляем все актуальные элементы из базы данных в существующий список
-                foreach (var rule in dataBaseRC.dictionaryRules.Values.ToList())
+                foreach (var rule in dataBaseThis.dictionaryRules.Values.ToList())
                 {
                     rulesList.Add(rule);
                 }
+
+                rulesList.ResetBindings(); // перерисовываем таблицу
 
             }    
         }
@@ -60,15 +62,15 @@ namespace ExpertBase
         private void btnAddRules_Click(object sender, EventArgs e)
         {
             // Получаем списки для автозаполнения ComboBox из текущих фактов, хранящихся в базе
-            var objects = dataBaseRC.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
-            var units = dataBaseRC.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
-            var attributes = dataBaseRC.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
-            var values = dataBaseRC.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
+            var objects = dataBaseThis.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
+            var units = dataBaseThis.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
+            var attributes = dataBaseThis.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
+            var values = dataBaseThis.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
 
             // Создаем экземпляр RuleForm с конструктором без параметров
             using (var ruleForm = new RuleForm())
             {
-                ruleForm.InitializeData(dataBaseRC); // передаем базу в форму
+                ruleForm.InitializeData(dataBaseThis); // передаем базу в форму
 
                 // Вызываем новый метод для передачи подсказок
                 ruleForm.LoadSuggestionsForRules(objects, units, attributes, values);
@@ -83,7 +85,7 @@ namespace ExpertBase
                         Truth = ruleForm.RuleTruth
                     };
 
-                    dataBaseRC.AddRule(newRule);
+                    dataBaseThis.AddRule(newRule);
                     rulesList.Add(newRule);
                 }
             }
@@ -98,14 +100,14 @@ namespace ExpertBase
                 return;
             }
 
-            var objects = dataBaseRC.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
-            var units = dataBaseRC.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
-            var attributes = dataBaseRC.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
-            var values = dataBaseRC.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
+            var objects = dataBaseThis.dictionaryFacts.Values.Select(f => f.Group).Distinct().ToList();
+            var units = dataBaseThis.dictionaryFacts.Values.Select(f => f.Unit).Distinct().ToList();
+            var attributes = dataBaseThis.dictionaryFacts.Values.Select(f => f.Atribute).Distinct().ToList();
+            var values = dataBaseThis.dictionaryFacts.Values.Select(f => f.Value).Distinct().ToList();
 
             using (var editForm = new RuleForm())
             {
-                editForm.InitializeData(dataBaseRC); // передаем базу в форму
+                editForm.InitializeData(dataBaseThis); // передаем базу в форму
 
                 editForm.LoadSuggestionsForRules(objects, units, attributes, values);
                 editForm.LoadRuleData(selectedRule); // Загружаем данные в форму для редактирования
@@ -144,7 +146,7 @@ namespace ExpertBase
                 if (ruleToRemove != null)
                 {
                     // Удаляем правило из базовой базы данных (словаря dictionaryRules) по его ID
-                    dataBaseRC.dictionaryRules.Remove(ruleToRemove.Id);
+                    dataBaseThis.dictionaryRules.Remove(ruleToRemove.Id);
 
                     // Удаляем правило из привязанного списка. BindingList обновит UI автоматически.
                     rulesList.Remove(ruleToRemove);
