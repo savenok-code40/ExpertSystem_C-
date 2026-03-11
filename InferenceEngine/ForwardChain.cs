@@ -57,34 +57,28 @@ namespace ExpertBase
                     // 3. Выполнение правила: добавление факта в память
                     foreach (Fact factInConclusion in SelectRuleMaxTruth.listConclusion)
                     {
-                        var existingFact = factsInMemory.FirstOrDefault(f => f.Equals(factInConclusion)); // проверяем нет ли уже факта в памяти
+                        // Проверяем, нет ли этого факта УЖЕ в рабочей памяти (используем Equals)
+                        var existingInWorkMemory = factsInMemory.FirstOrDefault(f => f.Equals(factInConclusion)); // проверяем нет ли уже факта в памяти
 
-                        if (existingFact == null) // если факта нет
-                        {
-                            // создаем клон
-                            var newFact = new Fact(factInConclusion.Group, factInConclusion.Unit, factInConclusion.Atribute,
-                                factInConclusion.Value, factInConclusion.Truth, factInConclusion.Type, factInConclusion.FunModbus, factInConclusion.RegAddr);
+                        if (existingInWorkMemory == null) // если факта нет
+                        {  
+                            factsInMemory.Add(factInConclusion);   
 
-                            factsInMemory.Add(newFact);
+                            sb.AppendLine($"\n Добавлен новый факт: {factInConclusion.ToString()} ");
 
-                            existingFact = newFact; // записываем факт в existingFact
-
-                            sb.AppendLine($"\n Добавлен новый факт: {existingFact.ToString()} ");
+                            // Проверка достижения цели
+                            if (factInConclusion.Equals(targetFact)) // если достигли
+                            {
+                                achievedTarget = true; // то взводим флаг достижения
+                            }
                         }
                         else
                         {
-                            sb.AppendLine($"\n Факт: {existingFact.ToString()} уже был в памяти");
-                        }
-
-                        // Проверка достижения цели
-                        if (existingFact.Equals(targetFact)) // если достигли
-                        {
-                            achievedTarget = true; // то взводим флаг достижения
+                            sb.AppendLine($"\n Факт: {existingInWorkMemory.ToString()} уже был в памяти");
                         }
                     }
 
                     copyRules.Remove(SelectRuleMaxTruth.Id); // Удаляем сработавшее правило из копии правил ,чтобы не зациклиться
-
                     i++;
                 }                
             } 

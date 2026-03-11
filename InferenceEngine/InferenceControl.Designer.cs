@@ -30,13 +30,12 @@
         {
             btnCheckTarget = new Button();
             cmbChooseTarget = new ComboBox();
-            lbFactsWork = new Label();
+            РабочаяПамять = new Label();
             listBoxFactsWork = new ListBox();
             ritchBoxOutputChain = new RichTextBox();
             lbOutputChain = new Label();
             splitContainer1 = new SplitContainer();
             tableLayoutPanel2 = new TableLayoutPanel();
-            flowLayoutPanel4 = new FlowLayoutPanel();
             tableLayoutPanel4 = new TableLayoutPanel();
             btnAddFact = new Button();
             labelObject = new Label();
@@ -48,16 +47,15 @@
             cmbUnit = new ComboBox();
             cmbObject = new ComboBox();
             tableLayoutPanel1 = new TableLayoutPanel();
-            label1 = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
-            button1 = new Button();
+            Рекомендации = new Label();
             richBoxRecommend = new RichTextBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            flowLayoutPanel4.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -85,16 +83,16 @@
             cmbChooseTarget.Size = new Size(317, 28);
             cmbChooseTarget.TabIndex = 1;
             // 
-            // lbFactsWork
+            // РабочаяПамять
             // 
-            lbFactsWork.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            lbFactsWork.AutoSize = true;
-            lbFactsWork.Location = new Point(3, 0);
-            lbFactsWork.MinimumSize = new Size(343, 0);
-            lbFactsWork.Name = "lbFactsWork";
-            lbFactsWork.Size = new Size(343, 20);
-            lbFactsWork.TabIndex = 6;
-            lbFactsWork.Text = "Рабочая памяти:";
+            РабочаяПамять.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            РабочаяПамять.AutoSize = true;
+            РабочаяПамять.Location = new Point(3, 120);
+            РабочаяПамять.MinimumSize = new Size(343, 0);
+            РабочаяПамять.Name = "РабочаяПамять";
+            РабочаяПамять.Size = new Size(343, 40);
+            РабочаяПамять.TabIndex = 6;
+            РабочаяПамять.Text = "Рабочая память:";
             // 
             // listBoxFactsWork
             // 
@@ -153,9 +151,9 @@
             // 
             tableLayoutPanel2.ColumnCount = 1;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Controls.Add(listBoxFactsWork, 0, 5);
-            tableLayoutPanel2.Controls.Add(flowLayoutPanel4, 0, 4);
             tableLayoutPanel2.Controls.Add(tableLayoutPanel4, 0, 3);
+            tableLayoutPanel2.Controls.Add(РабочаяПамять, 0, 4);
+            tableLayoutPanel2.Controls.Add(listBoxFactsWork, 0, 5);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(6, 0);
             tableLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
@@ -169,16 +167,6 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(594, 606);
             tableLayoutPanel2.TabIndex = 7;
-            // 
-            // flowLayoutPanel4
-            // 
-            flowLayoutPanel4.Controls.Add(lbFactsWork);
-            flowLayoutPanel4.Dock = DockStyle.Fill;
-            flowLayoutPanel4.Location = new Point(3, 124);
-            flowLayoutPanel4.Margin = new Padding(3, 4, 3, 4);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(588, 32);
-            flowLayoutPanel4.TabIndex = 9;
             // 
             // tableLayoutPanel4
             // 
@@ -300,11 +288,11 @@
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(label1, 0, 2);
-            tableLayoutPanel1.Controls.Add(ritchBoxOutputChain, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 0);
-            tableLayoutPanel1.Controls.Add(button1, 0, 4);
+            tableLayoutPanel1.Controls.Add(ritchBoxOutputChain, 0, 1);
+            tableLayoutPanel1.Controls.Add(Рекомендации, 0, 2);
             tableLayoutPanel1.Controls.Add(richBoxRecommend, 0, 3);
+            tableLayoutPanel1.Controls.Add(button1, 0, 4);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(0);
@@ -317,16 +305,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.Size = new Size(479, 606);
             tableLayoutPanel1.TabIndex = 9;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 323);
-            label1.Name = "label1";
-            label1.Padding = new Padding(9, 11, 9, 11);
-            label1.Size = new Size(133, 40);
-            label1.TabIndex = 9;
-            label1.Text = "Рекомендации:";
             // 
             // tableLayoutPanel3
             // 
@@ -345,16 +323,15 @@
             tableLayoutPanel3.Size = new Size(473, 114);
             tableLayoutPanel3.TabIndex = 10;
             // 
-            // button1
+            // Рекомендации
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Location = new Point(258, 566);
-            button1.Margin = new Padding(0, 0, 0, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(221, 37);
-            button1.TabIndex = 9;
-            button1.Text = "Обновить рекомендации";
-            button1.UseVisualStyleBackColor = true;
+            Рекомендации.AutoSize = true;
+            Рекомендации.Location = new Point(3, 323);
+            Рекомендации.Name = "Рекомендации";
+            Рекомендации.Padding = new Padding(9, 11, 9, 11);
+            Рекомендации.Size = new Size(133, 40);
+            Рекомендации.TabIndex = 9;
+            Рекомендации.Text = "Рекомендации:";
             // 
             // richBoxRecommend
             // 
@@ -366,6 +343,17 @@
             richBoxRecommend.Size = new Size(473, 195);
             richBoxRecommend.TabIndex = 9;
             richBoxRecommend.Text = "";
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Location = new Point(258, 566);
+            button1.Margin = new Padding(0, 0, 0, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(221, 37);
+            button1.TabIndex = 9;
+            button1.Text = "Обновить рекомендации";
+            button1.UseVisualStyleBackColor = true;
             // 
             // InferenceControl
             // 
@@ -381,8 +369,7 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanel4.ResumeLayout(false);
-            flowLayoutPanel4.PerformLayout();
+            tableLayoutPanel2.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
@@ -396,7 +383,7 @@
 
         private Button btnCheckTarget;
         private ComboBox cmbChooseTarget;
-        private Label lbFactsWork;
+        private Label РабочаяПамять;
         private ListBox listBoxFactsWork;
         private RichTextBox ritchBoxOutputChain;
         private Label lbOutputChain;
@@ -413,10 +400,9 @@
         private ComboBox cmbUnit;
         private ComboBox cmbObject;
         private Button btnAddFact;
-        private FlowLayoutPanel flowLayoutPanel4;
         private TableLayoutPanel tableLayoutPanel4;
         private TableLayoutPanel tableLayoutPanel3;
-        private Label label1;
+        private Label Рекомендации;
         private Button button1;
     }
 }

@@ -14,7 +14,8 @@ namespace ExpertBase.Правила
 {
     public partial class RuleForm : Form
     {
-        private DataBase dataBaseRF; // хранит ссылку на базу данных (RF - rule form)
+        private DataBase dataBaseThis; // хранит ссылку на базу данных (RF - rule form)
+        private bool _isLoading = false; // флаг отключить фильтрацию
 
         // Списки, которые наполняются локально при создании правила или редактировании (т.е. открытии формы)
         public List<Fact> listCurrentPremises { get; set; } = new List<Fact>();
@@ -31,7 +32,7 @@ namespace ExpertBase.Правила
 
         public void InitializeData(DataBase db)
         {
-            dataBaseRF = db; //получаем ссылку на базу        
+            dataBaseThis = db; //получаем ссылку на базу        
         }
 
         // Метод добавления в посылку (теперь это метод формы)
@@ -114,7 +115,7 @@ namespace ExpertBase.Правила
             }
 
             // 2. Ищем реальный факт
-            Fact foundFact = dataBaseRF.dictionaryFacts.Values.FirstOrDefault(f =>
+            Fact foundFact = dataBaseThis.dictionaryFacts.Values.FirstOrDefault(f =>
                 f.Group == cmbObject.Text &&
                 f.Unit == cmbUnit.Text &&
                 f.Atribute == cmbAttribute.Text &&
@@ -233,6 +234,55 @@ namespace ExpertBase.Правила
             AddOperatorToCondition("=="); // вставить в посылку лог. оператор равно
         }
 
-       
+        private void cmbObject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isLoading || dataBaseThis == null) return;
+
+            string selectedGroup = cmbObject.Text;
+            var filteredUnits = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup)
+                .Select(f => f.Unit).Distinct().OrderBy(s => s).ToList();
+
+            _isLoading = true;
+            cmbUnit.DataSource = filteredUnits;
+            _isLoading = false;
+
+            cmbUnit_SelectedIndexChanged(cmbUnit, EventArgs.Empty);
+        }
+
+        private void cmbUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isLoading || dataBaseThis == null) return;
+
+            string selectedGroup = cmbObject.Text;
+            string selectedUnit = cmbUnit.Text;
+
+            var filteredAttributes = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup && f.Unit == selectedUnit)
+                .Select(f => f.Atribute).Distinct().OrderBy(s => s).ToList();
+
+            _isLoading = true;
+            cmbAttribute.DataSource = filteredAttributes;
+            _isLoading = false;
+
+            cmbAttribute_SelectedIndexChanged(cmbAttribute, EventArgs.Empty);
+        }
+
+        private void cmbAttribute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isLoading || dataBaseThis == null) return;
+
+            string selectedGroup = cmbObject.Text;
+            string selectedUnit = cmbUnit.Text;
+            string selectedAttr = cmbAttribute.Text;
+
+            var filteredValues = dataBaseThis.dictionaryFacts.Values
+                .Where(f => f.Group == selectedGroup && f.Unit == selectedUnit && f.Atribute == selectedAttr)
+                .Select(f => f.Value).Distinct().OrderBy(s => s).ToList();
+
+            _isLoading = true;
+            cmbValue.DataSource = filteredValues;
+            _isLoading = false;
+        }
     }
 }
