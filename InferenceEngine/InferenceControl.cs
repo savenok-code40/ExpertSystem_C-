@@ -62,7 +62,7 @@ namespace ExpertBase.InferenceEngine
             ritchBoxOutputChain.AppendText($"Время выполнения: {timeSpan.TotalMilliseconds:F0} мс");
         }
 
-        // Кнопка запуска прямого вывода
+        // Кнопка - проверить цель
         private void btnCheckTarget_Click(object sender, EventArgs e)
         {
             if (cmbChooseTarget.SelectedItem is Fact target)
@@ -75,58 +75,18 @@ namespace ExpertBase.InferenceEngine
                 MessageBox.Show("Пожалуйста, выберите целевой факт.");
             }
         }
-
-        /*
-        private void btnCheckTarget_Click(object sender, EventArgs e)
-        {
-            // 1. Проверка и подготовка данных        
-            Fact targetFact = new Fact(); // цель
-            List<Fact> factsInMemory = new List<Fact>(); // рабочая память
-            StringBuilder sb = new StringBuilder(); // сообщения в рич бокс
-
-            if (cmbChooseTarget.SelectedItem == null) // если не выбрана цель
-            {
-                MessageBox.Show("Пожалуйста, выберите целевой факт.");
-                return;
-            }
-            else
-            {
-                targetFact = (Fact)cmbChooseTarget.SelectedItem;
-                MessageBox.Show($"Проверяем цель: {targetFact.ToString()}");
-            }
-
-            DateTime startTime = DateTime.Now;
-            ritchBoxOutputChain.Clear();
-
-            foreach (object item in listBoxFactsWork.Items)
-            {
-                factsInMemory.Add((Fact)item);
-            }
-
-            // 2. Запуск прямого вывода
-            ForwardChain forwardChain = new ForwardChain(dataBaseThis);
-            forwardChain.ComputeForwardChain(factsInMemory, targetFact, sb);
-
-            // 3. Поиск и вывод рекомендаций
-            var relevantAdvices = dataBaseThis.listRecommendations
-                .Where(rec => factsInMemory.Any(f => f.Equals(rec.TargetFact)))
-                .ToList();
-
-            this.DisplayRecommendations(relevantAdvices); // метод отрисовки советов
-
-            // 4. Расчет времени выполнения и вывод сообщений в рич бокс
-            DateTime endTime = DateTime.Now;
-            TimeSpan timeSpan = endTime - startTime;
-
-            ritchBoxOutputChain.AppendText(sb.ToString());
-            ritchBoxOutputChain.AppendText("\n--- --- ---\n");
-            ritchBoxOutputChain.AppendText($"Время выполнения: {timeSpan.TotalMilliseconds:F0} мс");
-        }
-        */
+      
         // Кнопка - пересчитать правила 
         private void btnRecalcRules_Click(object sender, EventArgs e)
         {
-            // Запускаем ту же логику, но БЕЗ цели
+            // Запускаем машину вывода, но БЕЗ цели
+            RunInference(null);
+        }
+
+        // Кнопка - обновить рекомендации
+        private void btnUpdateRecommend_Click(object sender, EventArgs e)
+        {
+            // Запускаем машину вывода, но БЕЗ цели
             RunInference(null);
         }
 
@@ -331,11 +291,6 @@ namespace ExpertBase.InferenceEngine
                 .ToList();
 
             cmbValue.DataSource = values;
-        }
-
-        private void btnUpdateRecommend_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

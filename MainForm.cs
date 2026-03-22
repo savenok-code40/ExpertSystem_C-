@@ -72,9 +72,10 @@ namespace ExpertBase
         // Обработчик пункта меню - Modbus
         private void modbusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormModbus modbusForm = new FormModbus(); // создаем форму модбас
+            /* Закомментировал пока идет разработка */
+            //FormModbus modbusForm = new FormModbus(); // создаем форму модбас
 
-            modbusForm.ShowDialog(); // отображаем форму как диалог
+            //modbusForm.ShowDialog(); // отображаем форму как диалог
         }
 
         // Обработчик события перехода на вкладку Работа - обновляет базу 
