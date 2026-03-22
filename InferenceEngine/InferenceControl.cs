@@ -203,14 +203,23 @@ namespace ExpertBase.InferenceEngine
             // 3. Если нашли - добавляем в рабочую память
             if (foundFact != null)
             {
-                // Проверяем на дубликаты в самом списке, чтобы не добавлять одно и то же
-                if (!listBoxFactsWork.Items.Contains(foundFact))
-                {
-                    listBoxFactsWork.Items.Add(foundFact);
+                // Защита от дублей. Ищем в списке "собрата" по ключу (Объект + Узел + Атрибут)                
+                var existingInMemory = listBoxFactsWork.Items.Cast<Fact>().FirstOrDefault(f =>  // Cast<Fact>() нужен, так как listBox.Items хранит объекты типа object
+                    f.Group == foundFact.Group &&
+                    f.Unit == foundFact.Unit &&
+                    f.Atribute == foundFact.Atribute);
 
-                    // СРАЗУ обновляем рекомендации (наш "живой" отклик)
-                    //UpdateLiveRecommendations();
+                if (existingInMemory != null)
+                {
+                    // Если значения СОВПАДАЮТ (полный дубль) — ничего не делаем
+                    if (existingInMemory.Value == foundFact.Value) return;
+
+                    // Если значения РАЗНЫЕ (Антифакт) — удаляем старое, чтобы вписать новое
+                    listBoxFactsWork.Items.Remove(existingInMemory);
                 }
+
+                // Добавляем актуальный факт в рабочую память
+                listBoxFactsWork.Items.Add(foundFact);
             }
             else
             {

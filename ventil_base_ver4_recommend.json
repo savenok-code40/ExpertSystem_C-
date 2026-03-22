@@ -425,7 +425,7 @@
       "Atribute": "авария датчиков",
       "Value": "0",
       "Truth": 1,
-      "Type": 1,
+      "Type": 3,
       "FunModbus": 1,
       "RegAddr": 0
     }
@@ -750,7 +750,7 @@
           "Atribute": "авария датчиков",
           "Value": "0",
           "Truth": 1,
-          "Type": 1,
+          "Type": 3,
           "FunModbus": 1,
           "RegAddr": 0
         }
@@ -822,7 +822,7 @@
         "Atribute": "авария датчиков",
         "Value": "0",
         "Truth": 1,
-        "Type": 1,
+        "Type": 3,
         "FunModbus": 1,
         "RegAddr": 0
       },
