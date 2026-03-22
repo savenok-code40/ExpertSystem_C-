@@ -26,7 +26,57 @@ namespace ExpertBase.InferenceEngine
             UpdateFacts(db.dictionaryFacts); // сразу заполняем списки
         }
 
+        // Метод (общий) запуска машины вывода
+        private void RunInference(Fact? targetFact)
+        {
+            // 1. Подготовка данных
+            List<Fact> factsInMemory = listBoxFactsWork.Items.Cast<Fact>().ToList();
+            StringBuilder sb = new StringBuilder();
+            DateTime startTime = DateTime.Now;
+
+            ritchBoxOutputChain.Clear();
+
+            // 2. Запуск прямого вывода (теперь targetFact может быть null)
+            ForwardChain forwardChain = new ForwardChain(dataBaseThis);
+            forwardChain.ComputeForwardChain(factsInMemory, targetFact, sb);
+
+            // 3. ОБНОВЛЕНИЕ UI: Показываем выведенные факты в ListBox
+            listBoxFactsWork.Items.Clear();
+            foreach (var f in factsInMemory)
+            {
+                listBoxFactsWork.Items.Add(f);
+            }
+
+            // 4. Поиск и вывод рекомендаций (уже на основе обновленной памяти)
+            var relevantAdvices = dataBaseThis.listRecommendations
+                .Where(rec => factsInMemory.Any(f => f.Equals(rec.TargetFact)))
+                .ToList();
+            this.DisplayRecommendations(relevantAdvices);
+
+            // 5. Расчет времени и вывод лога
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime - startTime;
+
+            ritchBoxOutputChain.AppendText(sb.ToString());
+            ritchBoxOutputChain.AppendText("\n--- --- ---\n");
+            ritchBoxOutputChain.AppendText($"Время выполнения: {timeSpan.TotalMilliseconds:F0} мс");
+        }
+
         // Кнопка запуска прямого вывода
+        private void btnCheckTarget_Click(object sender, EventArgs e)
+        {
+            if (cmbChooseTarget.SelectedItem is Fact target)
+            {
+                MessageBox.Show($"Проверяем цель: {target.ToString()}");
+                RunInference(target);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите целевой факт.");
+            }
+        }
+
+        /*
         private void btnCheckTarget_Click(object sender, EventArgs e)
         {
             // 1. Проверка и подготовка данных        
@@ -72,6 +122,13 @@ namespace ExpertBase.InferenceEngine
             ritchBoxOutputChain.AppendText("\n--- --- ---\n");
             ritchBoxOutputChain.AppendText($"Время выполнения: {timeSpan.TotalMilliseconds:F0} мс");
         }
+        */
+        // Кнопка - пересчитать правила 
+        private void btnRecalcRules_Click(object sender, EventArgs e)
+        {
+            // Запускаем ту же логику, но БЕЗ цели
+            RunInference(null);
+        }
 
         // метод обновляет списки в комбобоксах
         public void UpdateFacts(Dictionary<int, Fact> facts)
@@ -107,6 +164,7 @@ namespace ExpertBase.InferenceEngine
 
         }
 
+        // Метод вывода рекомендаций на экран 
         public void DisplayRecommendations(List<FactRecommend> foundAdvices)
         {
             richBoxRecommend.Clear(); // Очищаем старые советы
@@ -203,7 +261,7 @@ namespace ExpertBase.InferenceEngine
             // 3. Если нашли - добавляем в рабочую память
             if (foundFact != null)
             {
-                // Защита от дублей. Ищем в списке "собрата" по ключу (Объект + Узел + Атрибут)                
+                // Защита от дублей и анти фактов. Ищем в списке "собрата" по ключу (Объект + Узел + Атрибут)                
                 var existingInMemory = listBoxFactsWork.Items.Cast<Fact>().FirstOrDefault(f =>  // Cast<Fact>() нужен, так как listBox.Items хранит объекты типа object
                     f.Group == foundFact.Group &&
                     f.Unit == foundFact.Unit &&
@@ -275,6 +333,9 @@ namespace ExpertBase.InferenceEngine
             cmbValue.DataSource = values;
         }
 
+        private void btnUpdateRecommend_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

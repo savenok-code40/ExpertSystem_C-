@@ -23,7 +23,8 @@ namespace ExpertBase
 
             sb.AppendLine("--- Начало прямого вывода ---");
 
-            while (!achievedTarget && copyRules.Count > 0)
+            // Работаем, пока (режим мониторинга (targetFact == null) ИЛИ поиск цели) И есть правила для проверки
+            while ((targetFact == null || !achievedTarget) && copyRules.Count > 0)
             {
                 sb.AppendLine($"\n--- Итерация №{i} ---\n");
                 sb.AppendLine("Факты в памяти:");
@@ -52,57 +53,32 @@ namespace ExpertBase
                 {
                     sb.AppendLine($" Сработало правило: {SelectRuleMaxTruth.Description}");
 
-                    // 2. Расчет достоверности, сработавшего правила
-
-                    /* Цикл без защиты от анти фактов
-                    // 3. Выполнение правила: добавление факта в память
-                    foreach (Fact factInConclusion in SelectRuleMaxTruth.listConclusion)
-                    {          
-                        var existingInWorkMemory = factsInMemory.FirstOrDefault(f => f.Equals(factInConclusion)); // проверяем нет ли уже факта в памяти (используем Equals)
-
-                        if (existingInWorkMemory == null) // если факта нет
-                        {  
-                            factsInMemory.Add(factInConclusion);   
-
-                            sb.AppendLine($"\n Добавлен новый факт: {factInConclusion.ToString()} ");
-
-                            // Проверка достижения цели
-                            if (factInConclusion.Equals(targetFact)) // если достигли
-                            {
-                                achievedTarget = true; // то взводим флаг достижения
-                            }
-                        }
-                        else
-                        {
-                            sb.AppendLine($"\n Факт: {existingInWorkMemory.ToString()} уже был в памяти");
-                        }
-                    }
-                    */
+                    // 2. Расчет достоверности, сработавшего правила                 
 
                     // Предложено 22 марта 2026г защита от анти фактов
                     // 3. Добавление факта в память (с защитой от антифактов)
                     foreach (Fact factInConclusion in SelectRuleMaxTruth.listConclusion)
                     {
                         // Ищем в памяти "собрата" (тот же Объект.Узел.Атрибут)
-                        var contradictingFact = factsInMemory.FirstOrDefault(f =>
+                        var foundFact = factsInMemory.FirstOrDefault(f =>
                             f.Group == factInConclusion.Group &&
                             f.Unit == factInConclusion.Unit &&
                             f.Atribute == factInConclusion.Atribute);
 
-                        if (contradictingFact != null)
+                        if (foundFact != null)
                         {
                             // Если значения разные — это АНТИФАКТ. Вытесняем его.
-                            if (contradictingFact.Value != factInConclusion.Value)
+                            if (foundFact.Value != factInConclusion.Value)
                             {
-                                sb.AppendLine($"  ВЫТЕСНЕНИЕ: {contradictingFact.Value} -> заменен на {factInConclusion.Value}");
-                                factsInMemory.Remove(contradictingFact);
+                                sb.AppendLine($"  ВЫТЕСНЕНИЕ: {foundFact.Value} -> заменен на {factInConclusion.Value}");
+                                factsInMemory.Remove(foundFact);
                                 factsInMemory.Add(factInConclusion);
 
                                 if (factInConclusion.Equals(targetFact)) achievedTarget = true;
                             }
                             else
                             {
-                                sb.AppendLine($"  Факт {contradictingFact.ToString()} уже подтвержден в памяти.");
+                                sb.AppendLine($"  Факт {foundFact.ToString()} уже подтвержден в памяти.");
                             }
                         }
                         else
@@ -111,10 +87,9 @@ namespace ExpertBase
                             factsInMemory.Add(factInConclusion);
                             sb.AppendLine($"  Добавлен новый факт: {factInConclusion.ToString()}");
 
-                            if (factInConclusion.Equals(targetFact)) achievedTarget = true;
+                            if (targetFact != null && factInConclusion.Equals(targetFact)) achievedTarget = true;
                         }
-                    }
-                    
+                    }                  
 
                     copyRules.Remove(SelectRuleMaxTruth.Id); // Удаляем сработавшее правило из копии правил ,чтобы не зациклиться
                     i++;
@@ -123,13 +98,22 @@ namespace ExpertBase
 
             sb.AppendLine("\n--- Поиск завершен ---\n");
 
-            if (achievedTarget)
+            // Вывод лога 
+            if (targetFact != null) //Если цель БЫЛА задана (режим калькулятора)
             {
-                sb.AppendLine($"Цель - {targetFact.ToString()} - ** достигнута !** ");
+                if (achievedTarget)
+                {
+                    sb.AppendLine($"Цель - {targetFact.ToString()} - ** достигнута !** ");
+                }
+                else
+                {
+                    sb.AppendLine($"Цель - {targetFact.ToString()} - не достигнута");
+                }
             }
+            // Если цели НЕ БЫЛО (режим мониторинга)
             else
             {
-                sb.AppendLine($"Цель - {targetFact.ToString()} - не достигнута");
+                sb.AppendLine("Актуализация памяти завершена. Выведены все возможные факты.");
             }
         }
     }

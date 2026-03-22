@@ -48,9 +48,10 @@
             cmbObject = new ComboBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
+            btnRecalcRules = new Button();
             Рекомендации = new Label();
             richBoxRecommend = new RichTextBox();
-            button1 = new Button();
+            btnUpdateRecommend = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -292,7 +293,7 @@
             tableLayoutPanel1.Controls.Add(ritchBoxOutputChain, 0, 1);
             tableLayoutPanel1.Controls.Add(Рекомендации, 0, 2);
             tableLayoutPanel1.Controls.Add(richBoxRecommend, 0, 3);
-            tableLayoutPanel1.Controls.Add(button1, 0, 4);
+            tableLayoutPanel1.Controls.Add(btnUpdateRecommend, 0, 4);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(0);
@@ -314,6 +315,7 @@
             tableLayoutPanel3.Controls.Add(btnCheckTarget, 1, 0);
             tableLayoutPanel3.Controls.Add(cmbChooseTarget, 0, 0);
             tableLayoutPanel3.Controls.Add(lbOutputChain, 0, 1);
+            tableLayoutPanel3.Controls.Add(btnRecalcRules, 1, 1);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(3, 2);
             tableLayoutPanel3.Margin = new Padding(3, 2, 3, 2);
@@ -323,6 +325,16 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel3.Size = new Size(414, 86);
             tableLayoutPanel3.TabIndex = 10;
+            // 
+            // btnRecalcRules
+            // 
+            btnRecalcRules.Location = new Point(286, 55);
+            btnRecalcRules.Name = "btnRecalcRules";
+            btnRecalcRules.Size = new Size(125, 28);
+            btnRecalcRules.TabIndex = 9;
+            btnRecalcRules.Text = "Пересчитать";
+            btnRecalcRules.UseVisualStyleBackColor = true;
+            btnRecalcRules.Click += btnRecalcRules_Click;
             // 
             // Рекомендации
             // 
@@ -344,16 +356,17 @@
             richBoxRecommend.TabIndex = 9;
             richBoxRecommend.Text = "";
             // 
-            // button1
+            // btnUpdateRecommend
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Location = new Point(227, 424);
-            button1.Margin = new Padding(0, 0, 0, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(193, 28);
-            button1.TabIndex = 9;
-            button1.Text = "Обновить рекомендации";
-            button1.UseVisualStyleBackColor = true;
+            btnUpdateRecommend.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnUpdateRecommend.Location = new Point(227, 424);
+            btnUpdateRecommend.Margin = new Padding(0, 0, 0, 2);
+            btnUpdateRecommend.Name = "btnUpdateRecommend";
+            btnUpdateRecommend.Size = new Size(193, 28);
+            btnUpdateRecommend.TabIndex = 9;
+            btnUpdateRecommend.Text = "Обновить рекомендации";
+            btnUpdateRecommend.UseVisualStyleBackColor = true;
+            btnUpdateRecommend.Click += btnUpdateRecommend_Click;
             // 
             // InferenceControl
             // 
@@ -402,6 +415,7 @@
         private TableLayoutPanel tableLayoutPanel4;
         private TableLayoutPanel tableLayoutPanel3;
         private Label Рекомендации;
-        private Button button1;
+        private Button btnUpdateRecommend;
+        private Button btnRecalcRules;
     }
 }
