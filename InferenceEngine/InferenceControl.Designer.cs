@@ -86,12 +86,12 @@
             // 
             // РабочаяПамять
             // 
-            РабочаяПамять.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            РабочаяПамять.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             РабочаяПамять.AutoSize = true;
-            РабочаяПамять.Location = new Point(3, 90);
+            РабочаяПамять.Location = new Point(3, 75);
             РабочаяПамять.MinimumSize = new Size(300, 0);
             РабочаяПамять.Name = "РабочаяПамять";
-            РабочаяПамять.Size = new Size(300, 30);
+            РабочаяПамять.Size = new Size(300, 15);
             РабочаяПамять.TabIndex = 6;
             РабочаяПамять.Text = "Рабочая память:";
             // 
@@ -100,7 +100,7 @@
             listBoxFactsWork.Dock = DockStyle.Fill;
             listBoxFactsWork.FormattingEnabled = true;
             listBoxFactsWork.ItemHeight = 15;
-            listBoxFactsWork.Location = new Point(3, 123);
+            listBoxFactsWork.Location = new Point(3, 93);
             listBoxFactsWork.Name = "listBoxFactsWork";
             listBoxFactsWork.Size = new Size(514, 329);
             listBoxFactsWork.TabIndex = 5;
@@ -118,11 +118,11 @@
             // 
             // lbOutputChain
             // 
+            lbOutputChain.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lbOutputChain.AutoSize = true;
-            lbOutputChain.Location = new Point(3, 52);
+            lbOutputChain.Location = new Point(3, 71);
             lbOutputChain.Name = "lbOutputChain";
-            lbOutputChain.Padding = new Padding(8);
-            lbOutputChain.Size = new Size(168, 31);
+            lbOutputChain.Size = new Size(152, 15);
             lbOutputChain.TabIndex = 8;
             lbOutputChain.Text = "Цепочка прямого вывода:";
             // 
@@ -155,13 +155,14 @@
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(5, 0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 6;
+            tableLayoutPanel2.RowCount = 7;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 0F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 0F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 0F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 90F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             tableLayoutPanel2.Size = new Size(520, 455);
             tableLayoutPanel2.TabIndex = 7;
             // 
@@ -189,7 +190,7 @@
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(514, 86);
+            tableLayoutPanel4.Size = new Size(514, 66);
             tableLayoutPanel4.TabIndex = 11;
             // 
             // btnAddFact
@@ -197,9 +198,9 @@
             btnAddFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAddFact.Location = new Point(411, 18);
             btnAddFact.Name = "btnAddFact";
-            btnAddFact.Size = new Size(100, 60);
+            btnAddFact.Size = new Size(100, 45);
             btnAddFact.TabIndex = 46;
-            btnAddFact.Text = "Добавить в рабочую память";
+            btnAddFact.Text = "Добавить в память";
             btnAddFact.UseVisualStyleBackColor = true;
             btnAddFact.Click += btnAddFact_Click;
             // 
@@ -338,11 +339,11 @@
             // 
             // Рекомендации
             // 
+            Рекомендации.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Рекомендации.AutoSize = true;
-            Рекомендации.Location = new Point(3, 242);
+            Рекомендации.Location = new Point(3, 257);
             Рекомендации.Name = "Рекомендации";
-            Рекомендации.Padding = new Padding(8);
-            Рекомендации.Size = new Size(107, 30);
+            Рекомендации.Size = new Size(91, 15);
             Рекомендации.TabIndex = 9;
             Рекомендации.Text = "Рекомендации:";
             // 

@@ -81,14 +81,14 @@
             // сохранитьToolStripMenuItem
             // 
             сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            сохранитьToolStripMenuItem.Size = new Size(162, 22);
+            сохранитьToolStripMenuItem.Size = new Size(180, 22);
             сохранитьToolStripMenuItem.Text = "Сохранить как...";
             сохранитьToolStripMenuItem.Click += сохранитьToolStripMenuItem_Click;
             // 
             // загрузитьToolStripMenuItem
             // 
             загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            загрузитьToolStripMenuItem.Size = new Size(162, 22);
+            загрузитьToolStripMenuItem.Size = new Size(180, 22);
             загрузитьToolStripMenuItem.Text = "Загрузить";
             загрузитьToolStripMenuItem.Click += загрузитьToolStripMenuItem_Click;
             // 
@@ -102,7 +102,7 @@
             // modbusToolStripMenuItem
             // 
             modbusToolStripMenuItem.Name = "modbusToolStripMenuItem";
-            modbusToolStripMenuItem.Size = new Size(118, 22);
+            modbusToolStripMenuItem.Size = new Size(180, 22);
             modbusToolStripMenuItem.Text = "Modbus";
             modbusToolStripMenuItem.Click += modbusToolStripMenuItem_Click;
             // 
@@ -116,8 +116,9 @@
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(149, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(180, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
+            оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // tabControl_General
             // 
@@ -229,7 +230,7 @@
             tabPage2_Work.Location = new Point(4, 24);
             tabPage2_Work.Margin = new Padding(0);
             tabPage2_Work.Name = "tabPage2_Work";
-            tabPage2_Work.Size = new Size(954, 460);
+            tabPage2_Work.Size = new Size(192, 72);
             tabPage2_Work.TabIndex = 1;
             tabPage2_Work.Text = "Работа";
             tabPage2_Work.UseVisualStyleBackColor = true;
@@ -240,7 +241,7 @@
             inferenceControl1.Dock = DockStyle.Fill;
             inferenceControl1.Location = new Point(0, 0);
             inferenceControl1.Name = "inferenceControl1";
-            inferenceControl1.Size = new Size(954, 460);
+            inferenceControl1.Size = new Size(192, 72);
             inferenceControl1.TabIndex = 0;
             // 
             // panel1

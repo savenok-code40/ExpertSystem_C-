@@ -15,10 +15,10 @@ namespace ExpertBase
             InitializeComponent();
 
             // Контролы получают ссылки на актуальную базу
-            factsControl1.InitializeDatabase(dataBase); 
-            rulesControl1.InitializeData(dataBase); 
-            inferenceControl1.InitializeDataBase(dataBase); 
-            recommendControl1.InitializeData(dataBase); 
+            factsControl1.InitializeDatabase(dataBase);
+            rulesControl1.InitializeData(dataBase);
+            inferenceControl1.InitializeDataBase(dataBase);
+            recommendControl1.InitializeData(dataBase);
         }
 
         // Обработчик пункта меню Загрузить
@@ -86,6 +86,13 @@ namespace ExpertBase
             {
                 inferenceControl1.RefreshData(); // обновляем базу знаний в ней
             }
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormProgram programForm = new FormProgram(); // создаем форму "О программе"
+
+            programForm.ShowDialog(); // отображаем форму как диалог
         }
     }
 }
