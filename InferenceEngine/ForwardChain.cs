@@ -54,11 +54,11 @@ namespace ExpertBase
 
                     // 2. Расчет достоверности, сработавшего правила
 
+                    /* Цикл без защиты от анти фактов
                     // 3. Выполнение правила: добавление факта в память
                     foreach (Fact factInConclusion in SelectRuleMaxTruth.listConclusion)
-                    {
-                        // Проверяем, нет ли этого факта УЖЕ в рабочей памяти (используем Equals)
-                        var existingInWorkMemory = factsInMemory.FirstOrDefault(f => f.Equals(factInConclusion)); // проверяем нет ли уже факта в памяти
+                    {          
+                        var existingInWorkMemory = factsInMemory.FirstOrDefault(f => f.Equals(factInConclusion)); // проверяем нет ли уже факта в памяти (используем Equals)
 
                         if (existingInWorkMemory == null) // если факта нет
                         {  
@@ -77,6 +77,44 @@ namespace ExpertBase
                             sb.AppendLine($"\n Факт: {existingInWorkMemory.ToString()} уже был в памяти");
                         }
                     }
+                    */
+
+                    // Предложено 22 марта 2026г защита от анти фактов
+                    // 3. Добавление факта в память (с защитой от антифактов)
+                    foreach (Fact factInConclusion in SelectRuleMaxTruth.listConclusion)
+                    {
+                        // Ищем в памяти "собрата" (тот же Объект.Узел.Атрибут)
+                        var contradictingFact = factsInMemory.FirstOrDefault(f =>
+                            f.Group == factInConclusion.Group &&
+                            f.Unit == factInConclusion.Unit &&
+                            f.Atribute == factInConclusion.Atribute);
+
+                        if (contradictingFact != null)
+                        {
+                            // Если значения разные — это АНТИФАКТ. Вытесняем его.
+                            if (contradictingFact.Value != factInConclusion.Value)
+                            {
+                                sb.AppendLine($"  ВЫТЕСНЕНИЕ: {contradictingFact.Value} -> заменен на {factInConclusion.Value}");
+                                factsInMemory.Remove(contradictingFact);
+                                factsInMemory.Add(factInConclusion);
+
+                                if (factInConclusion.Equals(targetFact)) achievedTarget = true;
+                            }
+                            else
+                            {
+                                sb.AppendLine($"  Факт {contradictingFact.ToString()} уже подтвержден в памяти.");
+                            }
+                        }
+                        else
+                        {
+                            // Если такого параметра еще нет — просто добавляем
+                            factsInMemory.Add(factInConclusion);
+                            sb.AppendLine($"  Добавлен новый факт: {factInConclusion.ToString()}");
+
+                            if (factInConclusion.Equals(targetFact)) achievedTarget = true;
+                        }
+                    }
+                    
 
                     copyRules.Remove(SelectRuleMaxTruth.Id); // Удаляем сработавшее правило из копии правил ,чтобы не зациклиться
                     i++;

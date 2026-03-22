@@ -120,7 +120,7 @@
             lbOutputChain.AutoSize = true;
             lbOutputChain.Location = new Point(3, 52);
             lbOutputChain.Name = "lbOutputChain";
-            lbOutputChain.Padding = new Padding(8, 8, 8, 8);
+            lbOutputChain.Padding = new Padding(8);
             lbOutputChain.Size = new Size(168, 31);
             lbOutputChain.TabIndex = 8;
             lbOutputChain.Text = "Цепочка прямого вывода:";
@@ -329,7 +329,7 @@
             Рекомендации.AutoSize = true;
             Рекомендации.Location = new Point(3, 242);
             Рекомендации.Name = "Рекомендации";
-            Рекомендации.Padding = new Padding(8, 8, 8, 8);
+            Рекомендации.Padding = new Padding(8);
             Рекомендации.Size = new Size(107, 30);
             Рекомендации.TabIndex = 9;
             Рекомендации.Text = "Рекомендации:";
