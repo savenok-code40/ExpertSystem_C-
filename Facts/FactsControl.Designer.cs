@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             btnMoveDownFact = new Button();
             btnMoveUpFact = new Button();
             btnDeleteFact = new Button();
@@ -48,9 +48,10 @@
             // btnMoveDownFact
             // 
             btnMoveDownFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMoveDownFact.Location = new Point(14, 121);
+            btnMoveDownFact.Location = new Point(13, 90);
+            btnMoveDownFact.Margin = new Padding(3, 2, 3, 2);
             btnMoveDownFact.Name = "btnMoveDownFact";
-            btnMoveDownFact.Size = new Size(120, 29);
+            btnMoveDownFact.Size = new Size(105, 22);
             btnMoveDownFact.TabIndex = 7;
             btnMoveDownFact.Text = "Вниз";
             btnMoveDownFact.UseVisualStyleBackColor = true;
@@ -59,9 +60,10 @@
             // btnMoveUpFact
             // 
             btnMoveUpFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMoveUpFact.Location = new Point(14, 86);
+            btnMoveUpFact.Location = new Point(13, 64);
+            btnMoveUpFact.Margin = new Padding(3, 2, 3, 2);
             btnMoveUpFact.Name = "btnMoveUpFact";
-            btnMoveUpFact.Size = new Size(120, 29);
+            btnMoveUpFact.Size = new Size(105, 22);
             btnMoveUpFact.TabIndex = 6;
             btnMoveUpFact.Text = "Вверх";
             btnMoveUpFact.UseVisualStyleBackColor = true;
@@ -71,9 +73,10 @@
             // 
             btnDeleteFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnDeleteFact.BackColor = SystemColors.ButtonFace;
-            btnDeleteFact.Location = new Point(14, 156);
+            btnDeleteFact.Location = new Point(13, 116);
+            btnDeleteFact.Margin = new Padding(3, 2, 3, 2);
             btnDeleteFact.Name = "btnDeleteFact";
-            btnDeleteFact.Size = new Size(120, 29);
+            btnDeleteFact.Size = new Size(105, 22);
             btnDeleteFact.TabIndex = 3;
             btnDeleteFact.Text = "Удалить факт";
             btnDeleteFact.UseVisualStyleBackColor = false;
@@ -83,9 +86,10 @@
             // 
             btnAddFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAddFact.BackColor = SystemColors.ButtonFace;
-            btnAddFact.Location = new Point(14, 16);
+            btnAddFact.Location = new Point(13, 12);
+            btnAddFact.Margin = new Padding(3, 2, 3, 2);
             btnAddFact.Name = "btnAddFact";
-            btnAddFact.Size = new Size(120, 29);
+            btnAddFact.Size = new Size(105, 22);
             btnAddFact.TabIndex = 0;
             btnAddFact.Text = "Добавить факт";
             btnAddFact.UseVisualStyleBackColor = false;
@@ -97,28 +101,30 @@
             dataGridFacts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridFacts.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridFacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridFacts.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridFacts.DefaultCellStyle = dataGridViewCellStyle1;
             dataGridFacts.Dock = DockStyle.Fill;
             dataGridFacts.Location = new Point(0, 0);
+            dataGridFacts.Margin = new Padding(3, 2, 3, 2);
             dataGridFacts.Name = "dataGridFacts";
             dataGridFacts.RowHeadersWidth = 51;
             dataGridFacts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridFacts.Size = new Size(1040, 800);
+            dataGridFacts.Size = new Size(910, 600);
             dataGridFacts.TabIndex = 0;
             // 
             // btnEditFact
             // 
             btnEditFact.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnEditFact.Location = new Point(14, 51);
+            btnEditFact.Location = new Point(13, 38);
+            btnEditFact.Margin = new Padding(3, 2, 3, 2);
             btnEditFact.Name = "btnEditFact";
-            btnEditFact.Size = new Size(120, 29);
+            btnEditFact.Size = new Size(105, 22);
             btnEditFact.TabIndex = 8;
             btnEditFact.Text = "Редактировать";
             btnEditFact.UseVisualStyleBackColor = true;
@@ -129,7 +135,6 @@
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.FixedPanel = FixedPanel.Panel2;
             splitContainer1.Location = new Point(0, 0);
-            splitContainer1.Margin = new Padding(3, 4, 3, 4);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -139,9 +144,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(flowLayoutPanel1);
-            splitContainer1.Size = new Size(1200, 800);
-            splitContainer1.SplitterDistance = 1040;
-            splitContainer1.SplitterWidth = 5;
+            splitContainer1.Size = new Size(1050, 600);
+            splitContainer1.SplitterDistance = 910;
             splitContainer1.TabIndex = 9;
             // 
             // flowLayoutPanel1
@@ -154,21 +158,21 @@
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(11, 13, 11, 13);
-            flowLayoutPanel1.Size = new Size(155, 800);
+            flowLayoutPanel1.Padding = new Padding(10, 10, 10, 10);
+            flowLayoutPanel1.Size = new Size(136, 600);
             flowLayoutPanel1.TabIndex = 9;
             // 
             // FactsControl
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(splitContainer1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FactsControl";
-            Size = new Size(1200, 800);
+            Size = new Size(1050, 600);
             ((System.ComponentModel.ISupportInitialize)dataGridFacts).EndInit();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);

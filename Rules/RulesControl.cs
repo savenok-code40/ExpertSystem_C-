@@ -1,4 +1,5 @@
-﻿using ExpertBase.Правила;
+﻿using ExpertBase.Helpers;
+using ExpertBase.Правила;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +35,7 @@ namespace ExpertBase
         //Метод заполняет таблицу DataGrid правилами
         private void SetupDataGridRules()
         {            
-            rulesList = new BindingList<Rule>(dataBaseThis.dictionaryRules.Values.ToList()); // Инициализируем BindingList из текущего списка правил в БД (словаре)
+            rulesList = new SortableBindingList<Rule>(dataBaseThis.dictionaryRules.Values.ToList()); // Инициализируем BindingList из текущего списка правил в БД (словаре)
             
             dataGridRules.DataSource = rulesList; // Устанавливает источник данных для DataGridView
         }

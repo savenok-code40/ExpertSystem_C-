@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpertBase.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,7 +31,7 @@ namespace ExpertBase
 
         private void SetupDataGrid()
         {
-            recommendsList = new BindingList<FactRecommend>(dataBaseThis.listRecommendations);
+            recommendsList = new SortableBindingList<FactRecommend>(dataBaseThis.listRecommendations);
             dataGridRecommend.DataSource = recommendsList;
 
             // Настраиваем колонку с текстом факта (FactDisplay)

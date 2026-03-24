@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ExpertBase.Helpers;
 
 namespace ExpertBase
 {
@@ -28,7 +29,7 @@ namespace ExpertBase
         public void InitializeDatabase(DataBase db)
         {
             dataBaseThis = db;
-            factsBindingList = new BindingList<Fact>(dataBaseThis.dictionaryFacts.Values.ToList()); // Инициализируем BindingList текущим списком фактов в БД 
+            factsBindingList = new SortableBindingList<Fact>(dataBaseThis.dictionaryFacts.Values.ToList()); // Инициализируем BindingList текущим списком фактов в БД 
             dataGridFacts.DataSource = factsBindingList; // Устанавливаем источник данных для DataGridView             
         }   
 
