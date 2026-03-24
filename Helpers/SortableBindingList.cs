@@ -76,30 +76,35 @@ namespace ExpertBase.Helpers
             {
                 if (x == null || y == null) return 0;
 
-                // Получаем значения конкретного свойства у обоих объектов (например, значение поля "Unit")
+                // 1. Сначала сравниваем по выбранной колонке (на которую кликнули)
                 var xVal = _prop.GetValue(x);
                 var yVal = _prop.GetValue(y);
+                int result = CompareValues(xVal, yVal);
 
-                int result;
-
-                // Если значения поддерживают стандартное сравнение (числа, строки, даты)
-                if (xVal is IComparable comparableX)
+                // 2. ВАЖНО: Если значения одинаковые (result == 0), 
+                // пробуем отсортировать по дополнительному полю (например, "Atribute")
+                if (result == 0)
                 {
-                    result = comparableX.CompareTo(yVal);
-                }
-                // Если значения одинаковые
-                else if (xVal?.Equals(yVal) == true)
-                {
-                    result = 0;
-                }
-                // В крайнем случае сравниваем как обычные строки
-                else
-                {
-                    result = string.Compare(xVal?.ToString(), yVal?.ToString());
+                    // Пытаемся найти свойство "Atribute" у объекта
+                    var secondaryProp = TypeDescriptor.GetProperties(typeof(TItem))["Atribute"];
+                    if (secondaryProp != null)
+                    {
+                        var xSecondary = secondaryProp.GetValue(x);
+                        var ySecondary = secondaryProp.GetValue(y);
+                        result = CompareValues(xSecondary, ySecondary);
+                    }
                 }
 
-                // Возвращаем результат с учетом направления (Ascending или Descending)
                 return _direction == ListSortDirection.Ascending ? result : -result;
+            }
+
+            // Вспомогательный метод для чистоты кода
+            private int CompareValues(object? xVal, object? yVal)
+            {
+                if (xVal is IComparable comparableX)
+                    return comparableX.CompareTo(yVal);
+
+                return string.Compare(xVal?.ToString(), yVal?.ToString());
             }
         }
     }
