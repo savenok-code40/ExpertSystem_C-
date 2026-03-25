@@ -248,7 +248,10 @@
             CancelButton = btnCancel;
             ClientSize = new Size(334, 430);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(3, 2, 3, 2);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FactForm";
             Text = "Добавление факта";
             panel1.ResumeLayout(false);
