@@ -29,25 +29,31 @@ namespace ExpertBase.InferenceEngine
         // Метод (общий) запуска машины вывода
         private void RunInference(Fact? targetFact)
         {
-            // 1. Подготовка данных
-            List<Fact> factsInMemory = listBoxFactsWork.Items.Cast<Fact>().ToList();
+            // 1. Подготовка данных (берем то, что сейчас в списке)
+            var allFacts = listBoxFactsWork.Items.Cast<Fact>().ToList();
+
+            // 1.1. ОЧИСТКА: Оставляем только ВХОДНЫЕ данные (Static и Dinamic_IN)
+            // Все Internal и Dinamic_OUT (результаты прошлых расчетов) удаляются из списка перед стартом
+            List<Fact> factsInMemory = allFacts
+                .Where(f => f.Type == Fact.enTypeFact.Static || f.Type == Fact.enTypeFact.Dinamic_IN)
+                .ToList();
+
             StringBuilder sb = new StringBuilder();
             DateTime startTime = DateTime.Now;
-
             ritchBoxOutputChain.Clear();
 
-            // 2. Запуск прямого вывода (теперь targetFact может быть null)
+            // 2. Запуск прямого вывода (теперь на "чистой" памяти)
             ForwardChain forwardChain = new ForwardChain(dataBaseThis);
             forwardChain.ComputeForwardChain(factsInMemory, targetFact, sb);
 
-            // 3. ОБНОВЛЕНИЕ UI: Показываем выведенные факты в ListBox
+            // 3. ОБНОВЛЕНИЕ UI: Показываем актуальный список в ListBox
             listBoxFactsWork.Items.Clear();
             foreach (var f in factsInMemory)
             {
                 listBoxFactsWork.Items.Add(f);
             }
 
-            // 4. Поиск и вывод рекомендаций (уже на основе обновленной памяти)
+            // 4. Поиск и вывод рекомендаций (уже на основе пересчитанной памяти)
             var relevantAdvices = dataBaseThis.listRecommendations
                 .Where(rec => factsInMemory.Any(f => f.Equals(rec.TargetFact)))
                 .ToList();

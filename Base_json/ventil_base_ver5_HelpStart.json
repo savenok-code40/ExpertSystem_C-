@@ -180,7 +180,7 @@
       "ID": 26,
       "Group": "приточка",
       "Unit": "вентилятор",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим П",
       "Value": "1",
       "Truth": 0.9,
       "Type": 1,
@@ -191,10 +191,10 @@
       "ID": 27,
       "Group": "приточка",
       "Unit": "насос",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим Н",
       "Value": "1",
       "Truth": 0.9,
-      "Type": 1,
+      "Type": 2,
       "FunModbus": 1,
       "RegAddr": 0
     },
@@ -202,7 +202,7 @@
       "ID": 28,
       "Group": "приточка",
       "Unit": "верхний уровень",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим верх.ур.",
       "Value": "1",
       "Truth": 0.9,
       "Type": 1,
@@ -231,22 +231,22 @@
       "FunModbus": 1,
       "RegAddr": 0
     },
-    "31": {
-      "ID": 31,
+    "74": {
+      "ID": 74,
       "Group": "приточка",
       "Unit": "вентилятор",
-      "Atribute": "авария нет перепада давления",
-      "Value": "1",
+      "Atribute": "отказ Err ПЧ",
+      "Value": "0",
       "Truth": 0.9,
       "Type": 1,
       "FunModbus": 1,
       "RegAddr": 0
     },
-    "32": {
-      "ID": 32,
+    "75": {
+      "ID": 75,
       "Group": "приточка",
-      "Unit": "вентилятор",
-      "Atribute": "авария нет сигнала работа",
+      "Unit": "заслонка",
+      "Atribute": "пуск",
       "Value": "1",
       "Truth": 0.9,
       "Type": 1,
@@ -257,7 +257,7 @@
       "ID": 33,
       "Group": "приточка",
       "Unit": "насос",
-      "Atribute": "авария нет сигнала работа",
+      "Atribute": "отказ нет работы Н",
       "Value": "1",
       "Truth": 0.9,
       "Type": 1,
@@ -396,11 +396,11 @@
       "FunModbus": 1,
       "RegAddr": 0
     },
-    "46": {
-      "ID": 46,
+    "76": {
+      "ID": 76,
       "Group": "приточка",
-      "Unit": "вентилятор",
-      "Atribute": "авария ПЧ",
+      "Unit": "заслонка",
+      "Atribute": "пуск",
       "Value": "0",
       "Truth": 0.9,
       "Type": 1,
@@ -422,7 +422,7 @@
       "ID": 48,
       "Group": "приточка",
       "Unit": "вентилятор",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим П",
       "Value": "0",
       "Truth": 0.9,
       "Type": 1,
@@ -433,10 +433,10 @@
       "ID": 49,
       "Group": "приточка",
       "Unit": "насос",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим Н",
       "Value": "0",
       "Truth": 0.9,
-      "Type": 1,
+      "Type": 2,
       "FunModbus": 1,
       "RegAddr": 0
     },
@@ -444,7 +444,7 @@
       "ID": 50,
       "Group": "приточка",
       "Unit": "верхний уровень",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим верх.ур.",
       "Value": "0",
       "Truth": 0.9,
       "Type": 1,
@@ -477,7 +477,7 @@
       "ID": 53,
       "Group": "приточка",
       "Unit": "помощник пуска",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим системы",
       "Value": "0",
       "Truth": 0.9,
       "Type": 2,
@@ -488,7 +488,7 @@
       "ID": 54,
       "Group": "приточка",
       "Unit": "помощник пуска",
-      "Atribute": "АВТ режим",
+      "Atribute": "АВТ режим системы",
       "Value": "1",
       "Truth": 0.9,
       "Type": 2,
@@ -521,7 +521,7 @@
       "ID": 57,
       "Group": "приточка",
       "Unit": "помощник пуска",
-      "Atribute": "пуск заслонки, нет концевика",
+      "Atribute": "пуск заслонки, ждем концевик",
       "Value": "0",
       "Truth": 0.9,
       "Type": 2,
@@ -532,7 +532,117 @@
       "ID": 58,
       "Group": "приточка",
       "Unit": "помощник пуска",
-      "Atribute": "пуск заслонки, нет концевика",
+      "Atribute": "пуск заслонки, ждем концевик",
+      "Value": "1",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "65": {
+      "ID": 65,
+      "Group": "приточка",
+      "Unit": "нагреватель",
+      "Atribute": "прогрев",
+      "Value": "0",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "66": {
+      "ID": 66,
+      "Group": "приточка",
+      "Unit": "насос",
+      "Atribute": "отказ нет работы Н",
+      "Value": "0",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "67": {
+      "ID": 67,
+      "Group": "приточка",
+      "Unit": "общие",
+      "Atribute": "авария питания",
+      "Value": "0",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "68": {
+      "ID": 68,
+      "Group": "приточка",
+      "Unit": "общие",
+      "Atribute": "Пожар!!!",
+      "Value": "0",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "69": {
+      "ID": 69,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "отказ нет dP",
+      "Value": "1",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "70": {
+      "ID": 70,
+      "Group": "приточка",
+      "Unit": "вентилятор",
+      "Atribute": "отказ нет dP",
+      "Value": "0",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "71": {
+      "ID": 71,
+      "Group": "приточка",
+      "Unit": "общие",
+      "Atribute": "сезон лето",
+      "Value": "0",
+      "Truth": 0.9,
+      "Type": 2,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "72": {
+      "ID": 72,
+      "Group": "приточка",
+      "Unit": "насос",
+      "Atribute": "АВТ Н сигнал ",
+      "Value": "1",
+      "Truth": 0.9,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "73": {
+      "ID": 73,
+      "Group": "приточка",
+      "Unit": "насос",
+      "Atribute": "АВТ Н сигнал ",
+      "Value": "0",
+      "Truth": 0.9,
+      "Type": 1,
+      "FunModbus": 1,
+      "RegAddr": 0
+    },
+    "77": {
+      "ID": 77,
+      "Group": "приточка",
+      "Unit": "помощник пуска",
+      "Atribute": "пуск П, ждем работа и dP",
       "Value": "1",
       "Truth": 0.9,
       "Type": 2,
@@ -569,7 +679,7 @@
         }
       ],
       "Id": 6,
-      "Description": "Авария датчиков",
+      "Description": "Авария датчиков (11)",
       "strPremise": "приточка.датчики.отказ Т наружного воздуха.1",
       "strConclusion": "приточка.датчики.авария датчиков.1",
       "Truth": 0.9
@@ -602,7 +712,7 @@
         }
       ],
       "Id": 7,
-      "Description": "Авария датчиков",
+      "Description": "Авария датчиков (11)",
       "strPremise": "приточка.датчики.отказ Т обратной воды.1",
       "strConclusion": "приточка.датчики.авария датчиков.1",
       "Truth": 0.9
@@ -635,7 +745,7 @@
         }
       ],
       "Id": 8,
-      "Description": "Авария датчиков",
+      "Description": "Авария датчиков (11)",
       "strPremise": "приточка.датчики.отказ Т приточного воздуха.1",
       "strConclusion": "приточка.датчики.авария датчиков.1",
       "Truth": 0.9
@@ -690,18 +800,603 @@
         }
       ],
       "Id": 9,
-      "Description": "Авария датчиков",
+      "Description": "Авария датчиков (устранена)",
       "strPremise": "приточка.датчики.отказ Т наружного воздуха.0 \u0026\u0026 приточка.датчики.отказ Т обратной воды.0 \u0026\u0026 приточка.датчики.отказ Т приточного воздуха.0",
       "strConclusion": "приточка.датчики.авария датчиков.0",
       "Truth": 0.9
     },
     "12": {
-      "listPremise": [],
-      "listConclusion": [],
+      "listPremise": [
+        {
+          "ID": 59,
+          "Group": "приточка",
+          "Unit": "заслонка",
+          "Atribute": "отказ НЕ открыта",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 51,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "отказ оборудования",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
       "Id": 12,
-      "Description": "Авария не открыта Y",
-      "strPremise": "",
-      "strConclusion": "",
+      "Description": "Отказ оборудования (31)",
+      "strPremise": "приточка.заслонка.отказ НЕ открыта.1",
+      "strConclusion": "приточка.помощник пуска.отказ оборудования.1",
+      "Truth": 0.9
+    },
+    "13": {
+      "listPremise": [
+        {
+          "ID": 60,
+          "Group": "приточка",
+          "Unit": "заслонка",
+          "Atribute": "отказ НЕ закрыта",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 51,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "отказ оборудования",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 13,
+      "Description": "Отказ оборудования (31)",
+      "strPremise": "приточка.заслонка.отказ НЕ закрыта.1",
+      "strConclusion": "приточка.помощник пуска.отказ оборудования.1",
+      "Truth": 0.9
+    },
+    "14": {
+      "listPremise": [
+        {
+          "ID": 64,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "отказ нет работы П",
+          "Value": "1",
+          "Truth": 0,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 51,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "отказ оборудования",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 14,
+      "Description": "Отказ оборудования (31)",
+      "strPremise": "приточка.вентилятор.отказ нет работы П.1",
+      "strConclusion": "приточка.помощник пуска.отказ оборудования.1",
+      "Truth": 0.9
+    },
+    "15": {
+      "listPremise": [
+        {
+          "ID": 69,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "отказ нет dP",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 51,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "отказ оборудования",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 15,
+      "Description": "Отказ оборудования (31)",
+      "strPremise": "приточка.вентилятор.отказ нет dP.1",
+      "strConclusion": "приточка.помощник пуска.отказ оборудования.1",
+      "Truth": 0.9
+    },
+    "16": {
+      "listPremise": [
+        {
+          "ID": 34,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "отказ Err ПЧ",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 51,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "отказ оборудования",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 16,
+      "Description": "Отказ оборудования (31)",
+      "strPremise": "приточка.вентилятор.отказ Err ПЧ.1",
+      "strConclusion": "приточка.помощник пуска.отказ оборудования.1",
+      "Truth": 0.9
+    },
+    "17": {
+      "listPremise": [
+        {
+          "ID": 33,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "отказ нет работы Н",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 51,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "отказ оборудования",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 17,
+      "Description": "Отказ оборудования (31)",
+      "strPremise": "приточка.насос.отказ нет работы Н.1",
+      "strConclusion": "приточка.помощник пуска.отказ оборудования.1",
+      "Truth": 0.9
+    },
+    "22": {
+      "listPremise": [
+        {
+          "ID": 48,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "АВТ режим П",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 53,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "АВТ режим системы",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 22,
+      "Description": "АВТ режим системы (21)",
+      "strPremise": "приточка.вентилятор.АВТ режим П.0",
+      "strConclusion": "приточка.помощник пуска.АВТ режим системы.0",
+      "Truth": 0.9
+    },
+    "19": {
+      "listPremise": [
+        {
+          "ID": 35,
+          "Group": "приточка",
+          "Unit": "общие",
+          "Atribute": "сезон лето",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 27,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "АВТ режим Н",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 19,
+      "Description": "АВТ режим Н",
+      "strPremise": "приточка.общие.сезон лето.1",
+      "strConclusion": "приточка.насос.АВТ режим Н.1",
+      "Truth": 0.9
+    },
+    "20": {
+      "listPremise": [
+        {
+          "ID": 72,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "АВТ Н сигнал ",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 27,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "АВТ режим Н",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 20,
+      "Description": "АВТ режим Н",
+      "strPremise": "приточка.насос.АВТ Н сигнал .1",
+      "strConclusion": "приточка.насос.АВТ режим Н.1",
+      "Truth": 0.9
+    },
+    "21": {
+      "listPremise": [
+        {
+          "ID": 73,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "АВТ Н сигнал ",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 71,
+          "Group": "приточка",
+          "Unit": "общие",
+          "Atribute": "сезон лето",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 49,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "АВТ режим Н",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 21,
+      "Description": "АВТ режим Н",
+      "strPremise": "приточка.насос.АВТ Н сигнал .0 \u0026\u0026 приточка.общие.сезон лето.0",
+      "strConclusion": "приточка.насос.АВТ режим Н.0",
+      "Truth": 0.9
+    },
+    "23": {
+      "listPremise": [
+        {
+          "ID": 50,
+          "Group": "приточка",
+          "Unit": "верхний уровень",
+          "Atribute": "АВТ режим верх.ур.",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 53,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "АВТ режим системы",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 23,
+      "Description": "АВТ режим системы (21)",
+      "strPremise": "приточка.верхний уровень.АВТ режим верх.ур..0",
+      "strConclusion": "приточка.помощник пуска.АВТ режим системы.0",
+      "Truth": 0.9
+    },
+    "24": {
+      "listPremise": [
+        {
+          "ID": 49,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "АВТ режим Н",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 53,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "АВТ режим системы",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 24,
+      "Description": "АВТ режим системы (21)",
+      "strPremise": "приточка.насос.АВТ режим Н.0",
+      "strConclusion": "приточка.помощник пуска.АВТ режим системы.0",
+      "Truth": 0.9
+    },
+    "25": {
+      "listPremise": [
+        {
+          "ID": 26,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "АВТ режим П",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 28,
+          "Group": "приточка",
+          "Unit": "верхний уровень",
+          "Atribute": "АВТ режим верх.ур.",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 27,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "АВТ режим Н",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 54,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "АВТ режим системы",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 25,
+      "Description": "АВТ режим системы (включен)",
+      "strPremise": "приточка.вентилятор.АВТ режим П.1 \u0026\u0026 приточка.верхний уровень.АВТ режим верх.ур..1 \u0026\u0026 приточка.насос.АВТ режим Н.1",
+      "strConclusion": "приточка.помощник пуска.АВТ режим системы.1",
+      "Truth": 0.9
+    },
+    "26": {
+      "listPremise": [
+        {
+          "ID": 61,
+          "Group": "приточка",
+          "Unit": "заслонка",
+          "Atribute": "отказ НЕ открыта",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 62,
+          "Group": "приточка",
+          "Unit": "заслонка",
+          "Atribute": "отказ НЕ закрыта",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 70,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "отказ нет dP",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 63,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "отказ нет работы П",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 74,
+          "Group": "приточка",
+          "Unit": "вентилятор",
+          "Atribute": "отказ Err ПЧ",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 66,
+          "Group": "приточка",
+          "Unit": "насос",
+          "Atribute": "отказ нет работы Н",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 52,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "отказ оборудования",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 26,
+      "Description": "Отказ оборудования (устранен)",
+      "strPremise": "приточка.заслонка.отказ НЕ открыта.0 \u0026\u0026 приточка.заслонка.отказ НЕ закрыта.0 \u0026\u0026 приточка.вентилятор.отказ нет dP.0 \u0026\u0026 приточка.вентилятор.отказ нет работы П.0 \u0026\u0026 приточка.вентилятор.отказ Err ПЧ.0 \u0026\u0026 приточка.насос.отказ нет работы Н.0",
+      "strConclusion": "приточка.помощник пуска.отказ оборудования.0",
+      "Truth": 0.9
+    },
+    "27": {
+      "listPremise": [
+        {
+          "ID": 75,
+          "Group": "приточка",
+          "Unit": "заслонка",
+          "Atribute": "пуск",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        },
+        {
+          "ID": 20,
+          "Group": "приточка",
+          "Unit": "заслонка",
+          "Atribute": "открыта",
+          "Value": "0",
+          "Truth": 0.9,
+          "Type": 1,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "listConclusion": [
+        {
+          "ID": 58,
+          "Group": "приточка",
+          "Unit": "помощник пуска",
+          "Atribute": "пуск заслонки, ждем концевик",
+          "Value": "1",
+          "Truth": 0.9,
+          "Type": 2,
+          "FunModbus": 1,
+          "RegAddr": 0
+        }
+      ],
+      "Id": 27,
+      "Description": "Есть пуск заслонки, ждем концевой (41)",
+      "strPremise": "приточка.заслонка.пуск.1 \u0026\u0026 приточка.заслонка.открыта.0",
+      "strConclusion": "приточка.помощник пуска.пуск заслонки, ждем концевик.1",
       "Truth": 0.9
     }
   },
@@ -739,6 +1434,23 @@
       "AdviceText": "Отлично: авария датчиков устранена",
       "Priority": 11,
       "TargetFactDisplay": "приточка.датчики.авария датчиков.0"
+    },
+    {
+      "Name": "Есть пуск заслонки, ждем концевой",
+      "TargetFact": {
+        "ID": 58,
+        "Group": "приточка",
+        "Unit": "помощник пуска",
+        "Atribute": "пуск заслонки, ждем концевик",
+        "Value": "1",
+        "Truth": 0.9,
+        "Type": 2,
+        "FunModbus": 1,
+        "RegAddr": 0
+      },
+      "AdviceText": "Есть сигнал пуска заслонки Yп , ждем сигнал от концевого выключателя - \u0022открыта\u0022",
+      "Priority": 41,
+      "TargetFactDisplay": "приточка.помощник пуска.пуск заслонки, ждем концевик.1"
     }
   ]
 }
