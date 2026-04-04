@@ -1,5 +1,4 @@
-﻿using AppModbus;
-using ExpertBase.InferenceEngine;
+﻿using ExpertBase.InferenceEngine;
 using System.ComponentModel;
 using System.Windows.Forms;
 

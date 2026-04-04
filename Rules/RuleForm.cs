@@ -18,7 +18,10 @@ namespace ExpertBase.Правила
         private bool _isLoading = false; // флаг отключить фильтрацию
 
         // Списки, которые наполняются локально при создании правила или редактировании (т.е. открытии формы)
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Добавляем атрибут Hidden — Дизайнер перестанет ругаться
         public List<Fact> listCurrentPremises { get; set; } = new List<Fact>();
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Добавляем атрибут Hidden — Дизайнер перестанет ругаться
         public List<Fact> listCurrentConclusions { get; set; } = new List<Fact>();
 
         // Публичные свойства для простых полей
