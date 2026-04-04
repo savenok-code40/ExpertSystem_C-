@@ -199,43 +199,7 @@ namespace ExpertBase.Правила
             this.listCurrentConclusions.Clear();
             richBoxConclusion.Clear();
 
-        }
-
-        // Кнопка "&&" в посылке
-        private void btnAnd_Click(object sender, EventArgs e)
-        {
-            AddOperatorToCondition("&&"); // стандартный C# символ И
-        }
-
-        // Кнопка "||" в посылке
-        private void btnOr_Click(object sender, EventArgs e)
-        {
-            AddOperatorToCondition("||"); // стандартный C# символ ИЛИ
-        }
-
-        // Кнопка "!" в посылке
-        private void btnNot_Click(object sender, EventArgs e)
-        {
-            richBoxCondition.AppendText("!"); // Оператор НЕ обычно ставится сразу перед фактом
-        }
-
-        // Кнопка ">" вставить в посылку
-        private void btnMore_Click(object sender, EventArgs e)
-        {
-            AddOperatorToCondition(">"); // вставить в посылку лог. оператор больше
-        }
-
-        // Кнопка  "<" вставить в посылку
-        private void btnLess_Click(object sender, EventArgs e)
-        {
-            AddOperatorToCondition("<"); // вставить в посылку лог. оператор меньше
-        }
-
-        //Кнопка - "==" вставить в посылку
-        private void btnEqual_Click(object sender, EventArgs e)
-        {
-            AddOperatorToCondition("=="); // вставить в посылку лог. оператор равно
-        }
+        }    
 
         private void cmbObject_SelectedIndexChanged(object sender, EventArgs e)
         {

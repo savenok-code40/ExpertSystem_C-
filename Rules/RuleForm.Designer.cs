@@ -43,12 +43,6 @@
             labelObject = new Label();
             richBoxConclusion = new RichTextBox();
             labelConclusion = new Label();
-            btnEqual = new Button();
-            btnLess = new Button();
-            btnMore = new Button();
-            btnNot = new Button();
-            btnOr = new Button();
-            btnAnd = new Button();
             panel2 = new Panel();
             btnAddConclusion = new Button();
             btnAddPremises = new Button();
@@ -81,12 +75,6 @@
             panel1.Controls.Add(labelObject);
             panel1.Controls.Add(richBoxConclusion);
             panel1.Controls.Add(labelConclusion);
-            panel1.Controls.Add(btnEqual);
-            panel1.Controls.Add(btnLess);
-            panel1.Controls.Add(btnMore);
-            panel1.Controls.Add(btnNot);
-            panel1.Controls.Add(btnOr);
-            panel1.Controls.Add(btnAnd);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(richBoxCondition);
             panel1.Controls.Add(numTruth);
@@ -104,7 +92,7 @@
             // 
             // btnClearConclusion
             // 
-            btnClearConclusion.Location = new Point(544, 314);
+            btnClearConclusion.Location = new Point(544, 283);
             btnClearConclusion.Margin = new Padding(3, 2, 3, 2);
             btnClearConclusion.Name = "btnClearConclusion";
             btnClearConclusion.Size = new Size(100, 30);
@@ -115,7 +103,7 @@
             // 
             // btnClearPremise
             // 
-            btnClearPremise.Location = new Point(542, 211);
+            btnClearPremise.Location = new Point(544, 112);
             btnClearPremise.Margin = new Padding(3, 2, 3, 2);
             btnClearPremise.Name = "btnClearPremise";
             btnClearPremise.Size = new Size(100, 30);
@@ -238,84 +226,19 @@
             labelConclusion.TabIndex = 26;
             labelConclusion.Text = "Заключение:";
             // 
-            // btnEqual
-            // 
-            btnEqual.Location = new Point(600, 166);
-            btnEqual.Margin = new Padding(3, 2, 3, 2);
-            btnEqual.Name = "btnEqual";
-            btnEqual.Size = new Size(52, 22);
-            btnEqual.TabIndex = 25;
-            btnEqual.Text = "\"==\"";
-            btnEqual.UseVisualStyleBackColor = true;
-            btnEqual.Click += btnEqual_Click;
-            // 
-            // btnLess
-            // 
-            btnLess.Location = new Point(600, 139);
-            btnLess.Margin = new Padding(3, 2, 3, 2);
-            btnLess.Name = "btnLess";
-            btnLess.Size = new Size(52, 22);
-            btnLess.TabIndex = 24;
-            btnLess.Text = "\"<\"";
-            btnLess.UseVisualStyleBackColor = true;
-            btnLess.Click += btnLess_Click;
-            // 
-            // btnMore
-            // 
-            btnMore.Location = new Point(600, 112);
-            btnMore.Margin = new Padding(3, 2, 3, 2);
-            btnMore.Name = "btnMore";
-            btnMore.Size = new Size(52, 22);
-            btnMore.TabIndex = 23;
-            btnMore.Text = "\">\"";
-            btnMore.UseVisualStyleBackColor = true;
-            btnMore.Click += btnMore_Click;
-            // 
-            // btnNot
-            // 
-            btnNot.Location = new Point(542, 166);
-            btnNot.Margin = new Padding(3, 2, 3, 2);
-            btnNot.Name = "btnNot";
-            btnNot.Size = new Size(52, 22);
-            btnNot.TabIndex = 22;
-            btnNot.Text = "\"НЕ\"";
-            btnNot.UseVisualStyleBackColor = true;
-            btnNot.Click += btnNot_Click;
-            // 
-            // btnOr
-            // 
-            btnOr.Location = new Point(542, 139);
-            btnOr.Margin = new Padding(3, 2, 3, 2);
-            btnOr.Name = "btnOr";
-            btnOr.Size = new Size(52, 22);
-            btnOr.TabIndex = 21;
-            btnOr.Text = "\"ИЛИ\"";
-            btnOr.UseVisualStyleBackColor = true;
-            btnOr.Click += btnOr_Click;
-            // 
-            // btnAnd
-            // 
-            btnAnd.Location = new Point(542, 112);
-            btnAnd.Margin = new Padding(3, 2, 3, 2);
-            btnAnd.Name = "btnAnd";
-            btnAnd.Size = new Size(52, 22);
-            btnAnd.TabIndex = 20;
-            btnAnd.Text = "\"И\"";
-            btnAnd.UseVisualStyleBackColor = true;
-            btnAnd.Click += btnAnd_Click;
-            // 
             // panel2
             // 
+            panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(btnAddConclusion);
             panel2.Controls.Add(btnAddPremises);
             panel2.Location = new Point(424, 391);
             panel2.Name = "panel2";
-            panel2.Size = new Size(228, 113);
+            panel2.Size = new Size(228, 68);
             panel2.TabIndex = 39;
             // 
             // btnAddConclusion
             // 
-            btnAddConclusion.Location = new Point(70, 64);
+            btnAddConclusion.Location = new Point(120, 19);
             btnAddConclusion.Margin = new Padding(3, 2, 3, 2);
             btnAddConclusion.Name = "btnAddConclusion";
             btnAddConclusion.Size = new Size(100, 30);
@@ -326,7 +249,7 @@
             // 
             // btnAddPremises
             // 
-            btnAddPremises.Location = new Point(70, 18);
+            btnAddPremises.Location = new Point(8, 19);
             btnAddPremises.Margin = new Padding(3, 2, 3, 2);
             btnAddPremises.Name = "btnAddPremises";
             btnAddPremises.Size = new Size(100, 30);
@@ -438,14 +361,8 @@
         private Label labelDescription;
         private NumericUpDown numTruth;
         private TextBox textBoxDescription;
-        private Button btnAnd;
         private Button btnAddPremises;
         private RichTextBox richBoxCondition;
-        private Button btnEqual;
-        private Button btnLess;
-        private Button btnMore;
-        private Button btnNot;
-        private Button btnOr;
         private RichTextBox richBoxConclusion;
         private Label labelConclusion;
         private Button btnAddConclusion;
